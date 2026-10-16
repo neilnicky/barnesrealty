@@ -1,0 +1,489 @@
+---
+import Base from "@/layouts/Base.astro";
+import Img from "@/components/Img.astro";
+import Button from "@/components/Button.astro";
+import Field from "@/components/Field.astro";
+import FormShell from "@/components/FormShell.astro";
+import {
+  forms,
+  formatPrice,
+  formatSurface,
+  listingDisclaimer,
+  officialListingPath,
+  listings,
+  listingSlug,
+  regionLabel,
+  type Listing,
+} from "@/content/barnes-content";
+
+export function getStaticPaths() {
+  return listings.map((listing, i) => ({
+    params: { slug: listingSlug(listing.ref) },
+    props: { listing, next: listings[(i + 1) % listings.length]! },
+  }));
+}
+
+interface Props {
+  listing: Listing;
+  next: Listing;
+}
+
+const { listing, next } = Astro.props;
+const facts: [string, string][] = (
+  [
+    ["Reference", listing.ref],
+    ["Type", listing.type],
+    ["Surface", formatSurface(listing.surfaceM2)],
+    ["Bedrooms", listing.bedrooms?.toString()],
+    ["Bathrooms", listing.bathrooms?.toString()],
+    ["Rooms", listing.rooms?.toString()],
+    ["Grounds", listing.plot],
+    ["Built", listing.built?.toString()],
+  ] as [string, string | undefined][]
+).filter((f): f is [string, string] => !!f[1]);
+const [lead, ...rest] = listing.gallery;
+---
+
+<Base
+  title={`${listing.place} — ${listing.type} ${listing.ref} | BARNES`}
+  description={`${listing.headline}. ${formatPrice(listing.price)}, ${formatSurface(listing.surfaceM2)}. Presented by ${listing.agency.name}.`}
+  image={listing.cover}
+>
+  <article class="prop">
+    <header class="prop__head wrap">
+      <nav class="prop__crumbs label" aria-label="Breadcrumb">
+        <a href="/destinations/">Destinations</a>
+        <span aria-hidden="true">/</span>
+        <span>{regionLabel(listing.region)}</span>
+      </nav>
+      <div class="prop__title-row">
+        <div>
+          <p class="label prop__place">
+            {listing.place} · {listing.country}
+            {listing.badge && <span class="prop__badge">{listing.badge}</span>}
+          </p>
+          <h1 class="display display-l prop__title">{listing.name}</h1>
+          <p class="prop__headline muted">{listing.headline}</p>
+        </div>
+        <div class="prop__price">
+          <p class="label muted">{listing.status}</p>
+          <p class="prop__amount">{formatPrice(listing.price)}</p>
+          {listing.price.note && <p class="prop__note muted">{listing.price.note}</p>}
+        </div>
+      </div>
+    </header>
+
+    <div class="prop__lead wrap">
+      <button class="prop__shot prop__shot--lead" type="button" data-open-gallery="0" aria-label={`Open photograph 1 of ${listing.gallery.length}: ${lead!.alt}`}>
+        <Img image={lead!} sizes="(max-width: 1920px) 100vw, 1920px" priority />
+      </button>
+    </div>
+
+    <div class="wrap prop__body split">
+      <aside class="prop__aside">
+        <dl class="prop__facts">
+          {facts.map(([k, v]) => (
+            <div><dt class="label muted">{k}</dt><dd>{v}</dd></div>
+          ))}
+        </dl>
+        <div class="prop__agency">
+          <p class="label muted">Presented by</p>
+          <p class="display prop__presenter">{listing.agency.presenter}</p>
+          {listing.agency.role && <p class="muted">{listing.agency.role}</p>}
+          <p class="prop__agency-name">{listing.agency.name}</p>
+          <address>{listing.agency.address.map((l) => <span>{l}</span>)}</address>
+          <a class="prop__tel" href={listing.agency.phone.href}>{listing.agency.phone.display}</a>
+        </div>
+      </aside>
+      <div class="prop__text">
+        <span class="rule"></span>
+        {listing.description.map((p) => <p class="prop__para">{p}</p>)}
+        <p class="prop__source muted">
+          Description as published by {listing.agency.name}.
+        </p>
+        <Button href={officialListingPath(listing)} variant="ink">View the official listing</Button>
+      </div>
+    </div>
+
+    <section class="wrap prop__gallery" aria-label="Photographs">
+      <ul class="prop__grid">
+        {rest.map((image, i) => (
+          <li class:list={["prop__cell", { "prop__cell--wide": i % 3 === 0 }]}>
+            <button class="prop__shot" type="button" data-open-gallery={i + 1} aria-label={`Open photograph ${i + 2} of ${listing.gallery.length}: ${image.alt}`}>
+              <Img image={image} sizes={i % 3 === 0 ? "(max-width: 860px) 100vw, 90vw" : "(max-width: 860px) 100vw, 45vw"} widths={[600, 1000, 1600]} />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="prop__enquire tone-paper section" aria-labelledby="enquire-title">
+      <div class="wrap split">
+        <div>
+          <h2 class="display display-m" id="enquire-title">{forms.enquiry.title} <span class="tail tail-break">{forms.enquiry.titleTail}</span></h2>
+          <p class="muted prop__enquire-note">Reference {listing.ref} · {listing.agency.name}</p>
+        </div>
+        <FormShell kind="enquiry" submitLabel="Send enquiry" fallbackPhone={listing.agency.phone}>
+          <Field name="name" label="Name" required autocomplete="name" />
+          <Field name="email" label="Email" type="email" required autocomplete="email" />
+          <Field name="phone" label="Phone" type="tel" autocomplete="tel" hint="With country code, e.g. +33 6 12 34 56 78" />
+          <input type="hidden" name="ref" value={listing.ref} />
+          <Field name="message" label="Message" type="textarea" required wide value={`I would like more information about ${listing.place}, reference ${listing.ref}.`} />
+        </FormShell>
+      </div>
+    </section>
+
+    <p class="wrap prop__disclaimer muted">{listingDisclaimer} Listing captured on 15 October 2026; the official listing is authoritative.</p>
+
+    <a class="prop__next" href={`/properties/${listingSlug(next.ref)}/`}>
+      <span class="wrap prop__next-inner">
+        <span class="label">Next address</span>
+        <span class="display prop__next-name">{next.place} <span class="tail">— {next.name}</span></span>
+      </span>
+    </a>
+  </article>
+
+  <dialog class="lb" data-gallery aria-label={`${listing.place} photographs`}>
+    <div class="lb__bar">
+      <p class="label" data-gallery-count></p>
+      <button class="lb__close label" type="button" data-gallery-close>Close ✕</button>
+    </div>
+    <ul class="lb__track">
+      {listing.gallery.map((image, i) => (
+        <li class="lb__slide" data-gallery-slide hidden={i !== 0}>
+          <Img image={image} sizes="100vw" widths={[800, 1400, 2000]} />
+          <p class="lb__alt">{image.alt}</p>
+        </li>
+      ))}
+    </ul>
+    <button class="lb__nav lb__nav--prev" type="button" data-gallery-prev aria-label="Previous photograph">←</button>
+    <button class="lb__nav lb__nav--next" type="button" data-gallery-next aria-label="Next photograph">→</button>
+  </dialog>
+</Base>
+
+<style>
+  .prop__head {
+    padding-top: calc(var(--header-h) + 8rem);
+  }
+
+  .prop__crumbs {
+    display: flex;
+    gap: 1.6rem;
+    color: var(--ink-soft);
+  }
+
+  .prop__crumbs a {
+    border-bottom: 1px solid var(--red);
+  }
+
+  .prop__title-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 6rem;
+    margin-top: 7rem;
+    padding-bottom: 7rem;
+  }
+
+  .prop__badge {
+    margin-left: 2rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--ink);
+    color: var(--stone);
+  }
+
+  .prop__title {
+    margin-top: 2.6rem;
+    max-width: 16ch;
+  }
+
+  .prop__headline {
+    margin-top: 3rem;
+    max-width: 60ch;
+  }
+
+  .prop__price {
+    text-align: right;
+  }
+
+  .prop__amount {
+    font-family: var(--display);
+    font-size: 6.4rem;
+    line-height: 1.1;
+    font-variant-numeric: lining-nums;
+  }
+
+  .prop__note {
+    font-size: max(13px, 1.7rem);
+  }
+
+  .prop__shot {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+
+  .prop__shot :global(picture),
+  .prop__shot :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s var(--ease-out);
+  }
+
+  .prop__shot:hover :global(img) {
+    transform: scale(1.03);
+  }
+
+  .prop__shot--lead {
+    aspect-ratio: 16 / 9;
+  }
+
+  .prop__body {
+    padding-block: 14rem;
+  }
+
+  .prop__facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem 3rem;
+    padding-bottom: 7rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .prop__facts dd {
+    margin-top: 0.8rem;
+    font-size: max(16px, 2.4rem);
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .prop__agency {
+    display: grid;
+    gap: 0.8rem;
+    padding-top: 7rem;
+  }
+
+  .prop__presenter {
+    font-size: 4rem;
+    margin-top: 1rem;
+  }
+
+  .prop__agency-name {
+    margin-top: 1.6rem;
+    font-weight: 600;
+  }
+
+  .prop__agency address {
+    display: grid;
+    font-style: normal;
+    color: var(--ink-soft);
+  }
+
+  .prop__tel {
+    justify-self: start;
+    margin-top: 2rem;
+    border-bottom: 1px solid var(--red);
+  }
+
+  .prop__text {
+    max-width: 78ch;
+  }
+
+  .prop__para {
+    margin-top: 4rem;
+    font-size: max(17px, 2.5rem);
+    line-height: 1.65;
+  }
+
+  .prop__para:first-of-type {
+    font-family: var(--display);
+    font-size: 4rem;
+    line-height: 1.3;
+  }
+
+  .prop__source {
+    margin: 6rem 0 5rem;
+    font-size: max(13px, 1.7rem);
+  }
+
+  .prop__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .prop__cell .prop__shot {
+    aspect-ratio: 4 / 5;
+  }
+
+  .prop__cell--wide {
+    grid-column: 1 / -1;
+  }
+
+  .prop__cell--wide .prop__shot {
+    aspect-ratio: 16 / 9;
+  }
+
+  .prop__enquire {
+    margin-top: 14rem;
+  }
+
+  .prop__enquire-note {
+    margin-top: 3rem;
+  }
+
+  .prop__disclaimer {
+    padding-block: 6rem;
+    font-size: max(12px, 1.5rem);
+    max-width: 120rem;
+    margin-inline: 0;
+  }
+
+  .prop__next {
+    display: block;
+    border-top: 1px solid var(--line);
+    padding-block: 12rem;
+  }
+
+  .prop__next-inner {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .prop__next-name {
+    font-size: 9rem;
+    line-height: 1.05;
+  }
+
+  .prop__next:hover .prop__next-name {
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.12em;
+  }
+
+  /* ------------------------------------------------------------- lightbox */
+
+  .lb {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--night);
+    color: var(--stone);
+  }
+
+  .lb::backdrop {
+    background: var(--night);
+  }
+
+  .lb__bar {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem var(--gutter);
+  }
+
+  .lb__close {
+    min-height: 44px;
+  }
+
+  .lb__track,
+  .lb__slide {
+    height: 100%;
+  }
+
+  .lb__slide {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding: 12rem var(--gutter) 4rem;
+  }
+
+  .lb__slide[hidden] {
+    display: none;
+  }
+
+  .lb__slide :global(picture) {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .lb__slide :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .lb__alt {
+    padding-top: 2.4rem;
+    text-align: center;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: max(15px, 2.4rem);
+  }
+
+  .lb__nav {
+    position: absolute;
+    top: 50%;
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--line-night);
+    border-radius: 50%;
+    font-size: 20px;
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+  }
+
+  .lb__nav:hover {
+    background: var(--red);
+    border-color: var(--red);
+  }
+
+  .lb__nav--prev {
+    left: 3rem;
+  }
+
+  .lb__nav--next {
+    right: 3rem;
+  }
+
+  @media (max-width: 860px) {
+    .prop__title-row {
+      grid-template-columns: 1fr;
+    }
+
+    .prop__price {
+      text-align: left;
+    }
+
+    .prop__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .prop__cell .prop__shot,
+    .prop__cell--wide .prop__shot {
+      aspect-ratio: 4 / 3;
+    }
+
+    .prop__para:first-of-type {
+      font-size: 6.4rem;
+    }
+
+    .prop__amount {
+      font-size: 10rem;
+    }
+
+    .lb__nav {
+      top: auto;
+      bottom: 3rem;
+      transform: none;
+    }
+  }
+</style>

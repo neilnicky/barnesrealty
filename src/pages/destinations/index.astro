@@ -1,0 +1,465 @@
+---
+import Base from "@/layouts/Base.astro";
+import Img from "@/components/Img.astro";
+import { formatPrice, formatSurface, listings, listingSlug, listingsCapturedOn, shot, type Listing } from "@/content/barnes-content";
+
+const mosaic = [
+  shot("APM-87353841", 0),
+  shot("APM-87100407", 0),
+  shot("APM-87043121", 1),
+  shot("APM-82420906", 2),
+  shot("APM-86116202", 0),
+  shot("APM-87357422", 0),
+];
+
+/** Verifiable facts only (see docs/brand-identity-verification.md). */
+const stats = [
+  { value: "1995", label: "Founded in Paris" },
+  { value: "26", label: "Countries in the agency directory" },
+  { value: "5", label: "Languages on barnes-international.com" },
+  { value: String(listings.length), label: "Featured addresses" },
+];
+
+const groups: { name: string; id: string; items: Listing[] }[] = [
+  { name: "France", id: "france", items: listings.filter((l) => l.country === "France") },
+  { name: "International", id: "international", items: listings.filter((l) => l.country !== "France") },
+];
+
+const chips = (l: Listing) => [l.type, formatSurface(l.surfaceM2), l.bedrooms ? `${l.bedrooms} bedrooms` : null, formatPrice(l.price)].filter(Boolean) as string[];
+const captured = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(listingsCapturedOn));
+---
+
+<Base title="Destinations | BARNES" description="Places we love to call home: the destinations behind the current BARNES selection, from Paris and Provence to Ibiza and London.">
+  <section class="dp">
+    <div class="wrap">
+      <div class="dp__hero">
+        <header class="dp__intro">
+          <p class="dp__eyebrow">Destinations</p>
+          <h1 class="dp__title">Places we love to call home.</h1>
+          <p class="dp__lede">BARNES agencies live and work in every destination they serve. These are the places behind our current selection — a short list, not a directory.</p>
+          <a class="dp__btn" href="#france">Explore the destinations ↓</a>
+        </header>
+        <div class="dp__mosaic">
+          {mosaic.map((image, i) => (
+            <Img image={image} sizes={i === 0 ? "(max-width: 767px) 100vw, 30vw" : "(max-width: 767px) 33vw, 15vw"} widths={i === 0 ? [600, 900] : [300, 500]} priority={i === 0} class={i === 0 ? "dp__m0" : ""} />
+          ))}
+        </div>
+      </div>
+
+      <dl class="dp__stats">
+        {stats.map((s) => (
+          <div><dt>{s.label}</dt><dd>{s.value}</dd></div>
+        ))}
+      </dl>
+
+      <section class="dp__busiest" id="featured" aria-labelledby="featured-title">
+        <h2 class="dp__section-title" id="featured-title">Featured addresses</h2>
+        <p class="dp__section-lede">Live BARNES listings, as published on {captured}.</p>
+        <ul class="dp__row">
+          {listings.map((l) => (
+            <li>
+              <a class="dp__card" href={`/properties/${listingSlug(l.ref)}/`}>
+                <figure class="dp__photo"><Img image={l.cover} sizes="(max-width: 767px) 80vw, 22vw" widths={[400, 700]} /></figure>
+                <span class="dp__card-text">
+                  <span class="dp__market">{l.country}</span>
+                  <span class="dp__name">{l.place}</span>
+                  <span class="dp__deals">{formatPrice(l.price)} · {l.type}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {groups.map((g) => (
+        <section class="dp__state" id={g.id} aria-labelledby={`${g.id}-title`}>
+          <h2 class="dp__state-name" id={`${g.id}-title`}>{g.name}</h2>
+          <div class="dp__markets">
+            {g.items.map((l) => (
+              <article class="dp__market-card">
+                <figure class="dp__photo"><Img image={l.cover} sizes="(max-width: 767px) 100vw, 30vw" widths={[500, 900]} /></figure>
+                <h3 class="dp__market-name"><a href={`/properties/${listingSlug(l.ref)}/`}>{l.place}</a></h3>
+                <p class="dp__tagline">{l.name}.</p>
+                <ul class="dp__chips">
+                  {chips(l).map((c) => <li>{c}</li>)}
+                </ul>
+                <a class="dp__explore" href={`/properties/${listingSlug(l.ref)}/`}>Explore {l.place} →</a>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .dp {
+    padding: calc(var(--header-h) + 8rem) 0 16rem;
+  }
+
+  .dp__hero {
+    display: grid;
+    grid-template-columns: 79rem 87rem;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .dp__eyebrow {
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .dp__title {
+    margin-top: 1.6rem;
+    font-size: 9.6rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--black);
+  }
+
+  .dp__lede {
+    margin-top: 2.4rem;
+    font-size: 2.4rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .dp__btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    margin-top: 3.2rem;
+    padding: 1.4rem 2.4rem;
+    border-radius: 10rem;
+    background: var(--ink);
+    color: var(--white);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .dp__mosaic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 18rem 18rem 18rem;
+    gap: 1.2rem;
+  }
+
+  .dp__mosaic :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1.2rem;
+    background: var(--paper);
+  }
+
+  .dp__mosaic :global(picture) {
+    min-height: 0;
+  }
+
+  .dp__mosaic :global(picture:first-child) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .dp__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem 1.6rem;
+    margin-top: 8rem;
+    padding: 4.8rem;
+    border-radius: 1.6rem;
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .dp__stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.6rem;
+  }
+
+  .dp__stats dt {
+    font-size: 1.4rem;
+    color: rgb(255 255 255 / 0.65);
+  }
+
+  .dp__stats dd {
+    font-size: 6.4rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .dp__busiest {
+    margin-top: 10rem;
+  }
+
+  .dp__section-title {
+    font-size: 4.4rem;
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+
+  .dp__section-lede {
+    margin-top: 1.2rem;
+    font-size: 1.8rem;
+    color: rgb(21 23 23 / 0.65);
+  }
+
+  .dp__row {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 41.2rem;
+    gap: 2.4rem;
+    margin-top: 3rem;
+    padding-bottom: 1.6rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink) var(--paper);
+  }
+
+  .dp__row li {
+    scroll-snap-align: start;
+  }
+
+  .dp__card,
+  .dp__market-card {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid rgb(21 23 23 / 0.08);
+    border-radius: 1.6rem;
+    background: var(--white);
+    transition: box-shadow 0.3s;
+  }
+
+  .dp__card:hover,
+  .dp__market-card:hover {
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 0.06);
+  }
+
+  .dp__photo {
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    background: var(--paper);
+  }
+
+  .dp__photo :global(picture),
+  .dp__photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s var(--ease-out);
+  }
+
+  .dp__card:hover .dp__photo :global(img),
+  .dp__market-card:hover .dp__photo :global(img) {
+    transform: scale(1.04);
+  }
+
+  .dp__card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 2rem 2.4rem 2.4rem;
+  }
+
+  .dp__market {
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .dp__name {
+    font-size: 2.4rem;
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .dp__deals {
+    margin-top: 0.4rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .dp__state {
+    margin-top: 10rem;
+  }
+
+  .dp__state-name {
+    font-size: 4.8rem;
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+
+  .dp__markets {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.4rem;
+    margin-top: 2.4rem;
+  }
+
+  .dp__market-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0 4rem 4rem;
+  }
+
+  .dp__market-card .dp__photo {
+    margin: 0 -4rem;
+  }
+
+  .dp__market-name {
+    margin-top: 3.2rem;
+    font-size: 3.6rem;
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .dp__tagline {
+    margin-top: 1.2rem;
+    font-size: 1.8rem;
+    line-height: 1.5;
+  }
+
+  .dp__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .dp__chips li {
+    padding: 0.6rem 1.2rem;
+    border-radius: 10rem;
+    background: var(--paper);
+    font-size: 1.4rem;
+  }
+
+  .dp__explore {
+    margin-top: auto;
+    padding-top: 2.4rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .dp__explore:hover,
+  .dp__market-name a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 767px) {
+    .dp {
+      padding-top: calc(var(--header-h) + 3rem);
+    }
+
+    .dp__hero {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .dp__eyebrow {
+      font-size: 1.1rem;
+    }
+
+    .dp__title {
+      font-size: 4.2rem;
+    }
+
+    .dp__lede {
+      font-size: 1.6rem;
+    }
+
+    .dp__btn {
+      font-size: 1.3rem;
+    }
+
+    .dp__mosaic {
+      grid-template-rows: 12rem 12rem 12rem;
+    }
+
+    .dp__stats {
+      grid-template-columns: 1fr 1fr;
+      padding: 2.4rem;
+      margin-top: 4rem;
+    }
+
+    .dp__stats dt {
+      font-size: 1.1rem;
+    }
+
+    .dp__stats dd {
+      font-size: 3.6rem;
+    }
+
+    .dp__busiest,
+    .dp__state {
+      margin-top: 5rem;
+    }
+
+    .dp__section-title,
+    .dp__state-name {
+      font-size: 2.6rem;
+    }
+
+    .dp__section-lede {
+      font-size: 1.3rem;
+    }
+
+    .dp__row {
+      grid-auto-columns: 26rem;
+    }
+
+    .dp__name {
+      font-size: 1.8rem;
+    }
+
+    .dp__market,
+    .dp__deals {
+      font-size: 1.1rem;
+    }
+
+    .dp__markets {
+      grid-template-columns: 1fr;
+    }
+
+    .dp__market-card {
+      padding: 0 2.4rem 2.4rem;
+    }
+
+    .dp__market-card .dp__photo {
+      margin: 0 -2.4rem;
+    }
+
+    .dp__market-name {
+      font-size: 2.4rem;
+      margin-top: 2rem;
+    }
+
+    .dp__tagline {
+      font-size: 1.4rem;
+    }
+
+    .dp__chips li {
+      font-size: 1.1rem;
+    }
+
+    .dp__explore {
+      font-size: 1.3rem;
+    }
+  }
+</style>

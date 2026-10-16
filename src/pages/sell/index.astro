@@ -1,0 +1,111 @@
+---
+import Base from "@/layouts/Base.astro";
+import Field from "@/components/Field.astro";
+import FormShell from "@/components/FormShell.astro";
+import { brand, forms, home, links } from "@/content/barnes-content";
+
+const { valuation } = forms;
+---
+
+<Base
+  title="Request a valuation | BARNES"
+  description="Sell with BARNES: a first meeting, a written valuation and one consultant from mandate to the signing of the deed."
+  image={home.services.items[1]!.image}
+>
+  <section class="val wrap">
+    <div class="val__intro">
+      <p class="label">{valuation.label}</p>
+      <h1 class="display display-l val__title">{valuation.title} <span class="tail tail-break">{valuation.titleTail}</span></h1>
+      <p class="body-l val__lead">{valuation.lead}</p>
+      <ol class="val__steps">
+        {home.steps.items.map((s, i) => (
+          <li>
+            <span class="label val__num">{String(i + 1).padStart(2, "0")}</span>
+            <p><strong>{s.lead}</strong> <span class="muted">{s.tail}</span></p>
+          </li>
+        ))}
+      </ol>
+      <p class="val__alt muted">
+        Prefer the official form? <a href={links.officialValuation}>Get my property valued online</a>.
+      </p>
+    </div>
+
+    <div class="val__form">
+      <FormShell kind="valuation" submitLabel="Request my valuation" fallbackPhone={brand.globalOffice.phone}>
+        <Field name="propertyType" label="Property type" type="select" options={valuation.propertyTypes} required />
+        <Field name="surface" label="Surface (m²)" type="number" />
+        <Field name="city" label="City" required autocomplete="address-level2" />
+        <Field name="country" label="Country" required autocomplete="country-name" />
+        <Field name="bedrooms" label="Bedrooms" type="number" />
+        <div aria-hidden="true"></div>
+        <Field name="name" label="Name" required autocomplete="name" />
+        <Field name="email" label="Email" type="email" required autocomplete="email" />
+        <Field name="phone" label="Phone" type="tel" autocomplete="tel" hint="With country code" wide />
+        <Field name="message" label="Anything we should know" type="textarea" wide />
+      </FormShell>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .val {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 12rem;
+    padding-top: calc(var(--header-h) + 12rem);
+    padding-bottom: var(--section);
+  }
+
+  .val__title {
+    margin-top: 3rem;
+  }
+
+  .val__lead {
+    margin-top: 5rem;
+    max-width: 44ch;
+  }
+
+  .val__steps {
+    margin-top: 8rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .val__steps li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    padding: 3.4rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .val__num {
+    color: var(--red);
+    padding-top: 0.4rem;
+  }
+
+  .val__alt {
+    margin-top: 6rem;
+    font-size: max(14px, 1.8rem);
+  }
+
+  .val__alt a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--red);
+  }
+
+  .val__form {
+    padding: 8rem;
+    background: var(--paper);
+    align-self: start;
+  }
+
+  @media (max-width: 1024px) {
+    .val {
+      grid-template-columns: 1fr;
+    }
+
+    .val__form {
+      padding: 8rem 6rem;
+      margin-inline: calc(var(--gutter) * -1);
+    }
+  }
+</style>
