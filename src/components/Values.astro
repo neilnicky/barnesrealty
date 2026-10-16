@@ -1,0 +1,202 @@
+---
+import Img from "./Img.astro";
+import TwoTone from "./TwoTone.astro";
+import { home } from "@/content/barnes-content";
+
+const { values } = home;
+---
+
+<section class="val section tone-paper" aria-labelledby="val-title" data-carousel>
+  <div class="wrap">
+    <TwoTone text={values.title} class="val__title" id="val-title" />
+    <div class="val__grid">
+      <div class="val__preview">
+        <Img image={values.image} sizes="(max-width: 767px) 100vw, 51vw" widths={[600, 1000, 1500]} />
+      </div>
+      <div class="val__col">
+        <div class="val__divider"></div>
+        <div class="val__carousel">
+          <div class="val__nav" role="tablist" aria-label="Values">
+            {values.items.map((v, i) => (
+              <button class="val__bullet" type="button" role="tab" id={`val-tab-${i}`} aria-controls={`val-slide-${i}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1} data-bullet={i}>
+                <span>{i + 1}</span>
+                <span class="visually-hidden">{v.name}</span>
+              </button>
+            ))}
+          </div>
+          <svg class="val__quote" viewBox="0 0 32 24" aria-hidden="true"><path fill="currentColor" d="M6.3 0h5.6L8.8 11.4V24H0V11.6L6.3 0Zm19.9 0H32l-3.2 11.4V24H20V11.6L26.2 0Z" /></svg>
+          <div class="val__slides">
+            {values.items.map((v, i) => (
+              <figure class="val__slide" id={`val-slide-${i}`} role="tabpanel" aria-labelledby={`val-tab-${i}`} hidden={i !== 0} data-slide={i}>
+                <blockquote class="val__text"><p>{v.line.startsWith("“") ? v.line : `“${v.line}”`}</p></blockquote>
+                <figcaption class="val__info">
+                  <span class="val__author">{v.name}</span>
+                  <span class="val__sep" aria-hidden="true">/</span>
+                  <span class="val__src">BARNES values</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .val {
+    position: relative;
+    z-index: 2;
+  }
+
+  .val__title {
+    font-size: 7.2rem;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: var(--black);
+  }
+
+  .val__grid {
+    display: grid;
+    grid-template-columns: 97.6rem 65.2rem;
+    gap: 9.2rem;
+    margin-top: 10rem;
+  }
+
+  .val__preview {
+    height: 68.8rem;
+    overflow: hidden;
+  }
+
+  .val__preview :global(picture),
+  .val__preview :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .val__divider {
+    height: 1px;
+    background: var(--black);
+  }
+
+  .val__carousel {
+    position: relative;
+    margin-top: 5.2rem;
+  }
+
+  .val__nav {
+    display: flex;
+    gap: 1.3rem;
+  }
+
+  .val__bullet {
+    display: grid;
+    place-items: center;
+    width: 4.67rem;
+    height: 4.67rem;
+    min-width: 32px;
+    min-height: 32px;
+    border: 1px solid var(--ink-muted);
+    border-radius: 50%;
+    font-size: 1.6rem;
+    color: var(--ink-muted);
+    transition:
+      border-color 0.3s,
+      color 0.3s;
+  }
+
+  .val__bullet[aria-selected="true"],
+  .val__bullet:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  .val__quote {
+    position: absolute;
+    right: 0;
+    top: 0.6rem;
+    width: 3.6rem;
+    color: var(--black);
+  }
+
+  .val__slides {
+    padding-top: 10rem;
+  }
+
+  .val__slide[hidden] {
+    display: none;
+  }
+
+  .val__slide {
+    animation: val-in 0.4s ease both;
+  }
+
+  @keyframes val-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  .val__text {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 3.2rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+
+  .val__info {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+    margin-top: 4rem;
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  @media (max-width: 767px) {
+    .val__title {
+      font-size: 3.2rem;
+    }
+
+    .val__grid {
+      grid-template-columns: 1fr;
+      gap: 3.6rem;
+      margin-top: 3.6rem;
+    }
+
+    .val__preview {
+      height: 26rem;
+    }
+
+    .val__col {
+      order: -1;
+    }
+
+    .val__bullet {
+      font-size: 1.2rem;
+    }
+
+    .val__quote {
+      display: none;
+    }
+
+    .val__slides {
+      padding-top: 4rem;
+    }
+
+    .val__text {
+      font-size: 2.2rem;
+    }
+
+    .val__info {
+      font-size: 1.2rem;
+    }
+  }
+</style>

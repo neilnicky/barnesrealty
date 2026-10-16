@@ -1,0 +1,106 @@
+---
+import { home } from "@/content/barnes-content";
+
+const { destinations: d } = home;
+---
+
+<section class="dst" aria-labelledby="dst-title">
+  <div class="wrap">
+    <div class="dst__head">
+      <h2 class="dst__title" id="dst-title">{d.title}</h2>
+      <a class="dst__more" href={d.more.href}>{d.more.label}</a>
+    </div>
+    <div class="dst__groups">
+      {d.groups.map((g) => (
+        <div>
+          <h3 class="dst__name">{g.name}</h3>
+          <ul class="dst__list">
+            {g.links.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .dst {
+    position: relative;
+    z-index: 2;
+    background: var(--white);
+    padding: 4rem 0 6rem;
+  }
+
+  .dst__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.6rem;
+  }
+
+  .dst__title {
+    font-size: 4rem;
+    line-height: 1.15;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .dst__more,
+  .dst__list a {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    color: var(--ink);
+  }
+
+  .dst__groups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3.2rem;
+    margin-top: 2rem;
+  }
+
+  .dst__name {
+    font-size: 2rem;
+    line-height: 1.15;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .dst__list {
+    display: grid;
+    gap: 1.2rem;
+    margin-top: 1.6rem;
+  }
+
+  @media (max-width: 767px) {
+    .dst {
+      padding: 4rem 0;
+    }
+
+    .dst__head {
+      flex-direction: column;
+    }
+
+    .dst__title {
+      font-size: 2.2rem;
+    }
+
+    .dst__more,
+    .dst__list a {
+      font-size: 1.4rem;
+    }
+
+    .dst__groups {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+    }
+
+    .dst__name {
+      font-size: 1.7rem;
+    }
+  }
+</style>

@@ -1,0 +1,370 @@
+---
+import Wordmark from "./Wordmark.astro";
+import { headerCta, navigation, type NavGroup, type NavItem } from "@/content/barnes-content";
+
+interface Props {
+  overHero?: boolean;
+}
+
+const { overHero = false } = Astro.props;
+const isGroup = (n: NavItem | NavGroup): n is NavGroup => "items" in n;
+const chevron = `<svg viewBox="0 0 15 15" aria-hidden="true"><path d="M4 6l3.5 3.5L11 6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>`;
+---
+
+<header class="hdr" data-header data-over-hero={overHero ? "" : undefined}>
+  <div class="wrap hdr__bar">
+    <a class="hdr__logo" href="/" aria-label="BARNES — home">
+      <Wordmark class="hdr__mark" />
+    </a>
+
+    <nav class="hdr__nav" aria-label="Primary">
+      {navigation.map((n, i) =>
+        isGroup(n) ? (
+          <div class="hdr__group" data-dropdown>
+            <button class="hdr__item" type="button" aria-expanded="false" aria-controls={`dd-${i}`}>
+              <span>{n.label}</span>
+              <span class="hdr__arrow" set:html={chevron} />
+            </button>
+            <ul class="hdr__dd" id={`dd-${i}`}>
+              {n.items.map((it) => (
+                <li><a href={it.href}>{it.label}</a></li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <a class="hdr__item" href={n.href}><span>{n.label}</span></a>
+        ),
+      )}
+    </nav>
+
+    <div class="hdr__actions">
+      <a class="hdr__cta" href={headerCta.href}>{headerCta.label}</a>
+      <button class="hdr__burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu" data-menu-toggle>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-menu hidden>
+  <nav class="menu__nav" aria-label="Menu">
+    {navigation.map((n) =>
+      isGroup(n) ? (
+        <details class="menu__group">
+          <summary class="menu__item">
+            <span>{n.label}</span>
+            <span class="menu__arrow" set:html={chevron} />
+          </summary>
+          <ul>
+            {n.items.map((it) => (
+              <li><a href={it.href} data-menu-link>{it.label}</a></li>
+            ))}
+          </ul>
+        </details>
+      ) : (
+        <a class="menu__item" href={n.href} data-menu-link>{n.label}</a>
+      ),
+    )}
+  </nav>
+  <div class="menu__actions">
+    <a class="menu__cta" href={headerCta.href}>{headerCta.label}</a>
+  </div>
+</div>
+
+<style>
+  .hdr {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    background: var(--white);
+    color: var(--ink);
+    transition:
+      background-color 0.3s,
+      transform 0.3s ease-in-out;
+  }
+
+  .hdr[data-tone="clear"] {
+    background: transparent;
+  }
+
+  .hdr.is-hidden {
+    transform: translateY(-100%);
+  }
+
+  .hdr__bar {
+    display: grid;
+    grid-template-columns: 25rem 1fr 25rem;
+    align-items: center;
+    height: var(--header-h);
+  }
+
+  .hdr__logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .hdr__logo :global(.hdr__mark) {
+    width: auto;
+    height: 2.4rem;
+    min-height: 14px;
+  }
+
+  .hdr__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .hdr__group {
+    position: relative;
+  }
+
+  .hdr__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    height: var(--header-h);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+
+  .hdr__item > span:first-child {
+    position: relative;
+  }
+
+  .hdr__item > span:first-child::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.3rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s;
+  }
+
+  .hdr__item:hover > span:first-child::after,
+  .hdr__item[aria-current="page"] > span:first-child::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .hdr__arrow {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    transition: transform 0.3s;
+  }
+
+  .hdr__arrow :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hdr__group.is-open .hdr__arrow {
+    transform: rotate(180deg);
+  }
+
+  .hdr__dd {
+    position: absolute;
+    top: calc(100% - 0.8rem);
+    left: -2.4rem;
+    min-width: 28rem;
+    padding: 1.6rem 2.4rem;
+    background: var(--white);
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 0.08);
+    display: grid;
+    gap: 1.6rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.8rem);
+    transition:
+      opacity 0.2s,
+      transform 0.3s,
+      visibility 0s 0.3s;
+  }
+
+  .hdr__group.is-open .hdr__dd {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 0.3s,
+      transform 0.3s;
+  }
+
+  .hdr__dd a {
+    font-size: 1.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .hdr__dd a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .hdr__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hdr__cta {
+    display: inline-flex;
+    align-items: center;
+    height: 5.87rem;
+    min-height: 34px;
+    padding: 0 3rem;
+    border-radius: 100px;
+    background: var(--ink);
+    color: var(--white);
+    font-size: 2rem;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+
+  .hdr__cta:hover {
+    background: #2c2f2f;
+  }
+
+  .hdr__burger {
+    display: none;
+  }
+
+  /* --------------------------------------------------------- mobile menu */
+
+  .menu {
+    position: fixed;
+    inset: var(--header-h) 0 0;
+    z-index: 49;
+    overflow-y: auto;
+    background: var(--white);
+    padding: 2.2rem 2.9rem;
+  }
+
+  .menu[hidden] {
+    display: none;
+  }
+
+  .menu__nav {
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  .menu__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.9rem;
+    font-weight: 500;
+    line-height: 1.3;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .menu__item::-webkit-details-marker {
+    display: none;
+  }
+
+  .menu__arrow {
+    display: flex;
+    width: 1.8rem;
+    height: 1.8rem;
+    transition: transform 0.3s;
+  }
+
+  .menu__group[open] .menu__arrow {
+    transform: rotate(180deg);
+  }
+
+  .menu__group ul {
+    display: grid;
+    gap: 1.2rem;
+    padding: 1.4rem 0 0.4rem 1.6rem;
+  }
+
+  .menu__group a {
+    font-size: 1.6rem;
+    color: var(--ink-soft);
+  }
+
+  .menu__actions {
+    margin-top: 4rem;
+  }
+
+  .menu__cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px;
+    border-radius: 100px;
+    background: var(--ink);
+    color: var(--white);
+    font-size: 1.44rem;
+    font-weight: 500;
+  }
+
+  :global(.js-motion) .menu.is-open .menu__nav > * {
+    animation: menu-in 0.6s var(--ease-out) both;
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+  }
+
+  @media (max-width: 1024px) and (min-width: 768px) {
+    .hdr__nav {
+      gap: 2.4rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hdr__bar {
+      grid-template-columns: 1fr auto;
+    }
+
+    .hdr__logo :global(.hdr__mark) {
+      height: 2.4rem;
+    }
+
+    .hdr__nav,
+    .hdr__cta {
+      display: none;
+    }
+
+    .hdr__burger {
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      width: 44px;
+      height: 44px;
+      justify-items: end;
+    }
+
+    .hdr__burger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      border-radius: 9999px;
+      background: var(--ink);
+      transition: transform 0.3s;
+    }
+
+    .hdr__burger[aria-expanded="true"] span:first-child {
+      transform: translateY(3.75px) rotate(45deg);
+    }
+
+    .hdr__burger[aria-expanded="true"] span:last-child {
+      transform: translateY(-3.75px) rotate(-45deg);
+    }
+  }
+</style>

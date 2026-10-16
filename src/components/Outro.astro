@@ -1,0 +1,88 @@
+---
+import Img from "./Img.astro";
+import Button from "./Button.astro";
+import { home } from "@/content/barnes-content";
+
+const { outro } = home;
+---
+
+<section class="outro" aria-labelledby="outro-title">
+  <div class="outro__bg" data-parallax-img>
+    <Img image={outro.image} sizes="100vw" widths={[800, 1400, 2000]} decorative />
+  </div>
+  <div class="wrap outro__content">
+    <h2 class="outro__title" id="outro-title">{outro.title.lead} <span class="em">{outro.title.tail}</span></h2>
+    <div class="outro__actions"><Button variant="white" modal>{outro.cta}</Button></div>
+  </div>
+</section>
+
+<style>
+  .outro {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90rem;
+    overflow: hidden;
+    isolation: isolate;
+    text-align: center;
+    color: var(--white);
+  }
+
+  .outro__bg {
+    position: absolute;
+    inset: -5% -5%;
+    z-index: -1;
+  }
+
+  .outro__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgb(21 23 23 / 0.45);
+  }
+
+  .outro__bg :global(picture),
+  .outro__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .outro__content {
+    width: auto;
+    max-width: 133.9rem;
+  }
+
+  .outro__title {
+    white-space: nowrap;
+    font-size: 7.2rem;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .outro__title .em {
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  .outro__actions {
+    margin-top: 4rem;
+  }
+
+  @media (max-width: 767px) {
+    .outro {
+      height: 52rem;
+    }
+
+    .outro__title {
+      white-space: normal;
+      font-size: 3.4rem;
+    }
+
+    .outro__actions {
+      margin-top: 2.4rem;
+    }
+  }
+</style>

@@ -1,0 +1,109 @@
+---
+import Img from "./Img.astro";
+import TwoTone from "./TwoTone.astro";
+import { home } from "@/content/barnes-content";
+
+const { arrows } = home;
+---
+
+<section class="arw section" aria-labelledby="arw-title">
+  <div class="wrap">
+    <TwoTone text={arrows.title} class="arw__title" id="arw-title" />
+    <div class="arw__row" data-inview>
+      {arrows.images.map((image, i) => (
+        <div class="arw__arrow" style={`--i:${i}`}>
+          <Img image={image} sizes="(max-width: 767px) 30vw, 18vw" widths={[300, 520, 800]} />
+        </div>
+      ))}
+    </div>
+    <TwoTone text={arrows.text} as="p" class="arw__text" />
+  </div>
+</section>
+
+<style>
+  .arw {
+    position: relative;
+    z-index: 2;
+    background: var(--white);
+  }
+
+  .arw__title {
+    text-align: center;
+    font-size: 7.2rem;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: var(--black);
+  }
+
+  .arw__row {
+    display: flex;
+    justify-content: center;
+    margin-top: 8rem;
+    padding-left: 6.7rem;
+  }
+
+  /* Chevrons nest into one another, 260×330 with a 50px overlap at 1440. */
+  .arw__arrow {
+    width: 34.67rem;
+    height: 44rem;
+    margin-left: -6.7rem;
+    clip-path: polygon(0 0, 60% 0, 100% 50%, 60% 100%, 0 100%, 38% 50%);
+    overflow: hidden;
+  }
+
+  .arw__arrow :global(picture),
+  .arw__arrow :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  :global(.js-motion) .arw__arrow {
+    opacity: 0;
+    transform: translateX(-6rem);
+    transition:
+      opacity 0.9s var(--ease-out),
+      transform 0.9s var(--ease-out);
+    transition-delay: calc(var(--i) * 140ms);
+  }
+
+  :global(.js-motion) .arw__row:global(.is-in) .arw__arrow {
+    opacity: 1;
+    transform: none;
+  }
+
+  .arw__text {
+    width: 81.2rem;
+    margin: 8rem auto 0;
+    text-align: center;
+    font-size: 3.2rem;
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--black);
+  }
+
+  @media (max-width: 767px) {
+    .arw__title {
+      font-size: 3rem;
+    }
+
+    .arw__row {
+      margin-top: 3.6rem;
+      padding-left: 2.6rem;
+    }
+
+    .arw__arrow {
+      width: 9.4rem;
+      height: 12rem;
+      margin-left: -2.6rem;
+    }
+
+    .arw__text {
+      width: auto;
+      margin-top: 3.6rem;
+      font-size: 1.7rem;
+    }
+  }
+</style>

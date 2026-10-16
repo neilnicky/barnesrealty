@@ -1,0 +1,410 @@
+---
+import Img from "./Img.astro";
+import Button from "./Button.astro";
+import { home, type ImageAsset } from "@/content/barnes-content";
+import lockupRaw from "../../public/brand/barnes-lockup.svg?raw";
+
+const { hero } = home;
+const art = (file: string, alt: string): ImageAsset => ({ file, alt, source: "AI-generated for this site (illustrative)" });
+const sky = art(hero.art.sky, "");
+const house = art(hero.art.house, "Illustration of a Parisian penthouse with a planted roof terrace rising above the clouds");
+const cloud = art(hero.art.cloud, "");
+const fog = art(hero.art.fog, "");
+
+// Outline layer: the lockup drawn as a 2px white stroke (FIND hero_logo).
+const outline = lockupRaw
+  .replace("<svg ", '<svg aria-hidden="true" focusable="false" ')
+  .replaceAll('fill="#000"', 'fill="none" stroke="#fff"')
+  .replaceAll("<path ", '<path pathLength="1" vector-effect="non-scaling-stroke" ');
+---
+
+<section class="hero" data-hero aria-labelledby="hero-title">
+  <div class="hero__top">
+    <div class="hero__bg">
+      <div class="hero__back">
+        <Img image={sky} sizes="100vw" widths={[960, 1600, 2400]} priority decorative />
+      </div>
+
+      <div class="hero__house">
+        <Img image={house} sizes="(max-width: 767px) 92vw, 64vw" widths={[600, 900, 1227]} priority />
+      </div>
+
+      <div class="hero__composite" aria-hidden="true">
+        <div class="hero__house">
+          <Img image={house} sizes="(max-width: 767px) 92vw, 64vw" widths={[600, 900, 1227]} priority decorative />
+        </div>
+      </div>
+
+      <div class="hero__clouds" aria-hidden="true">
+        <div class="hero__cloud hero__cloud--l"><Img image={cloud} sizes="60vw" widths={[600, 1000, 1429]} decorative /></div>
+        <div class="hero__cloud hero__cloud--r"><Img image={cloud} sizes="50vw" widths={[600, 1000, 1429]} decorative /></div>
+      </div>
+
+      <div class="hero__logo" set:html={outline} />
+
+      <div class="hero__smoke" aria-hidden="true">
+        <Img image={fog} sizes="100vw" widths={[800, 1536]} decorative />
+      </div>
+    </div>
+
+    <div class="hero__content">
+      <div class="wrap hero__inner">
+        <h1 class="hero__title" id="hero-title">
+          {hero.title.map((w, i) => (
+            <span class="hero__w"><span class="hero__wi" style={`--i:${i}`}>{w}</span></span>
+          ))}
+        </h1>
+        <p class="hero__text">{hero.text.lead} <span class="em">{hero.text.tail}</span></p>
+        <div class="hero__actions">
+          <Button modal>{hero.cta}</Button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__end" aria-hidden="true">
+    <div class="hero__end-smoke"><Img image={fog} sizes="100vw" widths={[800, 1536]} decorative /></div>
+    <div class="hero__end-overlay"></div>
+  </div>
+  <span class="visually-hidden">{hero.lockupLabel}</span>
+</section>
+
+<style>
+  /* Geometry from findrealestate.com at 1440 (1rem = 7.5px); see docs/find-replica-spec.md. */
+  .hero {
+    --e: 0;
+    --copy: 1;
+    --logo: 0;
+    --mix: 0;
+    --draw: 1;
+    position: relative;
+    z-index: 0;
+    height: 100vh;
+    min-height: 560px;
+  }
+
+  :global(.js-motion) .hero {
+    height: 600rem;
+    margin-bottom: calc(-100vh - 2rem);
+  }
+
+  .hero__top {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 560px;
+    overflow: hidden;
+  }
+
+  .hero__bg,
+  .hero__back,
+  .hero__composite,
+  .hero__clouds {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero__back :global(img),
+  .hero__back :global(picture) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Building: bottom-centre origin, scales 1→1.3 and rises as the page scrolls. */
+  .hero__house {
+    position: absolute;
+    z-index: 1;
+    left: calc(50% - 61.35rem);
+    top: 70.7rem;
+    width: 122.7rem;
+    transform-origin: 50% 100%;
+    transform: translate3d(0, calc(var(--e) * -68.3rem), 0) scale(calc(1 + var(--e) * 0.3));
+    opacity: calc(1 - var(--mix));
+    will-change: transform;
+  }
+
+  .hero__composite .hero__house {
+    opacity: 1;
+    filter: contrast(1.3) saturate(1.25) brightness(0.9);
+  }
+
+  .hero__house :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero__composite {
+    z-index: 1;
+    display: none;
+    opacity: var(--mix);
+    -webkit-mask: url("/brand/barnes-lockup.svg") 50% 50% / 110rem 36.47rem no-repeat;
+    mask: url("/brand/barnes-lockup.svg") 50% 50% / 110rem 36.47rem no-repeat;
+  }
+
+  .hero__clouds {
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero__cloud {
+    position: absolute;
+  }
+
+  .hero__cloud :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero__cloud--l {
+    left: -33.7rem;
+    top: 30rem;
+    width: 112.4rem;
+    transform: translate3d(calc(var(--e) * -15%), 0, 0);
+  }
+
+  .hero__cloud--r {
+    left: 132.1rem;
+    top: 24rem;
+    width: 93.6rem;
+    transform: translate3d(calc(var(--e) * 15%), 0, 0) scaleX(-1);
+  }
+
+  .hero__logo {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    width: 110rem;
+    transform: translate(-50%, -50%);
+    opacity: var(--logo);
+    display: none;
+  }
+
+  .hero__logo :global(path) {
+    stroke-width: 2px;
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: var(--draw);
+  }
+
+  .hero__smoke {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    top: 58rem;
+    height: 62rem;
+    transform: translate3d(0, calc((1 - var(--e)) * 43.2rem), 0);
+  }
+
+  .hero__smoke :global(img),
+  .hero__smoke :global(picture),
+  .hero__end-smoke :global(img),
+  .hero__end-smoke :global(picture) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 100%;
+  }
+
+  /* ---------------------------------------------------------------- copy */
+
+  .hero__content {
+    position: relative;
+    z-index: 4;
+    height: 100%;
+    opacity: var(--copy);
+    transform: translate3d(0, calc(var(--e) * 24rem), 0) scale(calc(1 - var(--e) * 0.1));
+  }
+
+  .hero__inner {
+    display: grid;
+    justify-items: center;
+    padding-top: 33.7rem;
+    text-align: center;
+  }
+
+  .hero__title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 14rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+
+  .hero__w {
+    display: inline-block;
+    overflow: hidden;
+    padding: 2rem;
+    margin: -2rem -0.4rem;
+  }
+
+  .hero__wi {
+    display: inline-block;
+  }
+
+  .hero__text {
+    margin-top: 2rem;
+    font-size: 3.2rem;
+    line-height: 1.3;
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .hero__text .em {
+    color: rgb(21 23 23 / 0.5);
+  }
+
+  .hero__actions {
+    margin-top: 4rem;
+  }
+
+  /* Intro: words rise in their masks, then the line and button follow. */
+  :global(.js-motion) .hero__wi {
+    transform: translateY(110%);
+    transition: transform 1.1s var(--ease-out);
+    transition-delay: calc(var(--i) * 90ms + 150ms);
+  }
+
+  :global(.js-motion) .hero__text,
+  :global(.js-motion) .hero__actions {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+      opacity 0.9s var(--ease-out),
+      transform 0.9s var(--ease-out);
+    transition-delay: 0.55s;
+  }
+
+  :global(.js-motion) .hero__actions {
+    transition-delay: 0.7s;
+  }
+
+  :global(.js-motion) .hero__house {
+    animation: hero-rise 1.6s var(--ease-out) both;
+  }
+
+  :global(.js-motion) .hero.is-ready .hero__wi,
+  :global(.js-motion) .hero.is-ready .hero__text,
+  :global(.js-motion) .hero.is-ready .hero__actions {
+    opacity: 1;
+    transform: none;
+  }
+
+  @keyframes hero-rise {
+    from {
+      translate: 0 8rem;
+      opacity: 0;
+    }
+  }
+
+  :global(.js-motion) .hero__composite,
+  :global(.js-motion) .hero__logo {
+    display: block;
+  }
+
+  /* ---------------------------------------------- hand-off to next section */
+
+  .hero__end {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    bottom: calc(100vh + 2rem);
+    height: 62rem;
+    pointer-events: none;
+  }
+
+  :global(.js-motion) .hero__end {
+    display: block;
+  }
+
+  .hero__end-smoke {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero__end-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 31rem;
+    background: linear-gradient(rgb(255 255 255 / 0), #fff);
+  }
+
+  @media (max-width: 767px) {
+    :global(.js-motion) .hero {
+      height: 284rem;
+    }
+
+    .hero__house {
+      left: calc(50% - 13rem);
+      top: 57rem;
+      width: 26rem;
+      transform: translate3d(0, calc(var(--e) * -20rem), 0) scale(calc(1 + var(--e) * 0.9));
+    }
+
+    .hero__composite {
+      -webkit-mask-size: 30rem 9.95rem;
+      mask-size: 30rem 9.95rem;
+    }
+
+    .hero__logo {
+      width: 30rem;
+    }
+
+    .hero__cloud--l {
+      left: -16rem;
+      top: 40rem;
+      width: 42rem;
+    }
+
+    .hero__cloud--r {
+      left: 20rem;
+      top: 33rem;
+      width: 36rem;
+    }
+
+    .hero__smoke {
+      top: 49rem;
+      height: 36rem;
+      transform: translate3d(0, calc((1 - var(--e)) * 8rem), 0);
+    }
+
+    .hero__inner {
+      padding-top: 17rem;
+    }
+
+    .hero__title {
+      font-size: 5.4rem;
+      max-width: 30rem;
+    }
+
+    .hero__w {
+      padding: 0.6rem;
+      margin: -0.6rem -0.1rem;
+    }
+
+    .hero__text {
+      font-size: 1.6rem;
+      max-width: 30rem;
+    }
+
+    .hero__actions {
+      margin-top: 2.4rem;
+    }
+
+    .hero__end {
+      height: 26rem;
+    }
+
+    .hero__end-overlay {
+      height: 13rem;
+    }
+  }
+</style>

@@ -1,0 +1,144 @@
+---
+import Img from "./Img.astro";
+import Button from "./Button.astro";
+import TwoTone from "./TwoTone.astro";
+import { home } from "@/content/barnes-content";
+
+const { network } = home;
+---
+
+<section class="net section" aria-labelledby="net-title">
+  <div class="wrap net__row">
+    <div class="net__left">
+      <p class="net__label">{network.label}</p>
+      <div class="net__small" data-parallax="-0.12">
+        <Img image={network.smallImage} sizes="(max-width: 767px) 40vw, 20vw" widths={[300, 600]} />
+      </div>
+    </div>
+    <div class="net__right">
+      <TwoTone text={network.title} class="net__title" id="net-title" />
+      <div class="net__image" data-parallax-img>
+        <Img image={network.image} sizes="(max-width: 767px) 100vw, 51vw" widths={[600, 1000, 1500]} />
+      </div>
+      <div class="net__below">
+        <TwoTone text={network.text} as="p" class="net__text" />
+        <div class="net__controls">
+          <Button href={network.cta.href}>{network.cta.label}</Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .net {
+    position: relative;
+    z-index: 2;
+    background: var(--white);
+  }
+
+  .net__row {
+    display: flex;
+    gap: 4rem;
+  }
+
+  .net__left {
+    width: 70.4rem;
+  }
+
+  .net__label {
+    font-size: 2rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--black);
+  }
+
+  .net__small {
+    width: 36.4rem;
+    height: 43.07rem;
+    margin-top: 48.5rem;
+    overflow: hidden;
+  }
+
+  .net__right {
+    width: 97.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+  }
+
+  .net__title {
+    font-size: 7.2rem;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: var(--black);
+  }
+
+  .net__image {
+    height: 68.8rem;
+    overflow: hidden;
+  }
+
+  .net__small :global(picture),
+  .net__small :global(img),
+  .net__image :global(picture),
+  .net__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .net__text {
+    font-size: 3.2rem;
+    line-height: 1.3;
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .net__controls {
+    margin-top: 4rem;
+  }
+
+  @media (max-width: 767px) {
+    .net__row {
+      flex-direction: column-reverse;
+      gap: 3rem;
+    }
+
+    .net__left,
+    .net__right {
+      width: auto;
+    }
+
+    .net__right {
+      gap: 3rem;
+    }
+
+    .net__label {
+      display: none;
+    }
+
+    .net__small {
+      width: 16rem;
+      height: 19rem;
+      margin-top: 0;
+    }
+
+    .net__title {
+      font-size: 3.2rem;
+    }
+
+    .net__image {
+      height: 26rem;
+    }
+
+    .net__text {
+      font-size: 1.7rem;
+    }
+
+    .net__controls {
+      margin-top: 2.4rem;
+    }
+  }
+</style>

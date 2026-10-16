@@ -1,0 +1,292 @@
+---
+import Wordmark from "./Wordmark.astro";
+import { brand, footer, forms, links } from "@/content/barnes-content";
+
+const endpoint = import.meta.env.PUBLIC_ENQUIRY_ENDPOINT ?? "";
+---
+
+<footer class="ftr tone-night">
+  <div class="wrap ftr__top">
+    <div class="ftr__left">
+      <form
+        class="ftr__news"
+        data-form="newsletter"
+        data-endpoint={endpoint}
+        data-msg-sent={forms.sent}
+        data-msg-failed={forms.failed}
+        data-msg-not-connected={`Newsletter sign-up is not connected yet, so your address has not been saved. You can subscribe on barnes-international.com.`}
+        method="post"
+        novalidate
+      >
+        <label class="ftr__news-title" for="f-news-email">{footer.newsletter}</label>
+        <div class="ftr__news-row">
+          <input id="f-news-email" name="email" type="email" autocomplete="email" placeholder="Enter address" aria-describedby="f-news-email-error" />
+          <button type="submit" aria-label="Subscribe">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.315 10.996h16.623l-.884.707-8.084-8.135h2.526l8.261 8.337-8.286 8.337h-2.526l8.11-8.135.883.708H3.315z" /></svg>
+          </button>
+        </div>
+        <p class="ftr__news-error" id="f-news-email-error" data-error-for="email" hidden></p>
+        <p class="ftr__news-status" role="status" data-form-status hidden></p>
+      </form>
+
+      <dl class="ftr__contacts">
+        <div>
+          <dt>Head Office</dt>
+          <dd>{brand.globalOffice.address[0]},<br />{brand.globalOffice.address[1]}</dd>
+        </div>
+        <div>
+          <dt>Agencies</dt>
+          <dd><a href={links.findAgency}>Find an agency</a></dd>
+        </div>
+        <div>
+          <dt>Call Us</dt>
+          <dd><a href={brand.globalOffice.phone.href}>{brand.globalOffice.phone.display}</a></dd>
+        </div>
+      </dl>
+    </div>
+
+    <nav class="ftr__nav" aria-label="Footer">
+      {footer.nav.map((l) => (
+        <a href={l.href}>{l.label}</a>
+      ))}
+    </nav>
+
+    <nav class="ftr__social" aria-label="Social">
+      {footer.social.map((s) => (
+        <a href={s.href}>{s.label}</a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="wrap ftr__mark" data-inview>
+    <Wordmark class="ftr__wordmark" />
+  </div>
+
+  <div class="wrap ftr__legal">
+    {footer.legal.map((l) => (
+      <a href={l.href}>{l.label}</a>
+    ))}
+    <span>{footer.note}</span>
+    <span>{footer.copyright}</span>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    position: relative;
+    z-index: 2;
+    padding-top: 16.7rem;
+    overflow: hidden;
+  }
+
+  .ftr__top {
+    display: grid;
+    grid-template-columns: 1fr 39rem auto;
+    align-items: start;
+  }
+
+  .ftr__news {
+    width: 86rem;
+  }
+
+  .ftr__news-title {
+    display: block;
+    font-size: 3.47rem;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .ftr__news-row {
+    display: flex;
+    align-items: center;
+    margin-top: 3.5rem;
+    border-bottom: 1px solid rgb(255 255 255 / 0.25);
+  }
+
+  .ftr__news-row input {
+    flex: 1;
+    min-height: 44px;
+    padding: 1.2rem 0;
+    border: 0;
+    background: transparent;
+    color: var(--white);
+    font-size: 1.8rem;
+  }
+
+  .ftr__news-row input::placeholder {
+    color: rgb(255 255 255 / 0.4);
+  }
+
+  .ftr__news-row input:focus {
+    outline: none;
+  }
+
+  .ftr__news-row:focus-within {
+    border-bottom-color: var(--white);
+  }
+
+  .ftr__news-row button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    color: var(--white);
+  }
+
+  .ftr__news-row svg {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  .ftr__news-error,
+  .ftr__news-status {
+    margin-top: 1.6rem;
+    font-size: 1.8rem;
+    color: rgb(255 255 255 / 0.8);
+  }
+
+  .ftr__contacts {
+    display: grid;
+    grid-template-columns: 37.6rem 33.6rem auto;
+    margin-top: 11rem;
+  }
+
+  .ftr__contacts dt {
+    font-size: 1.73rem;
+    color: rgb(255 255 255 / 0.4);
+  }
+
+  .ftr__contacts dd {
+    margin-top: 2.4rem;
+    font-size: 2.13rem;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .ftr__nav {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .ftr__nav a {
+    font-size: 3.55rem;
+    line-height: 1.12;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .ftr__social {
+    display: grid;
+    gap: 1.6rem;
+    justify-items: end;
+  }
+
+  .ftr__social a {
+    font-size: 2.4rem;
+    line-height: 1.12;
+    font-weight: 500;
+  }
+
+  .ftr a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .ftr__mark {
+    margin-top: 12rem;
+  }
+
+  .ftr__mark :global(.ftr__wordmark) {
+    width: 120rem;
+    height: auto;
+    color: var(--white);
+  }
+
+  :global(.js-motion) .ftr__mark :global(.ftr__wordmark) {
+    color: rgb(255 255 255 / 0.25);
+    transform: translateY(20%);
+    transition:
+      transform 1.2s var(--ease-out),
+      color 1.2s var(--ease-out);
+  }
+
+  :global(.js-motion) .ftr__mark:global(.is-in) :global(.ftr__wordmark) {
+    color: var(--white);
+    transform: none;
+  }
+
+  .ftr__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.2rem 4rem;
+    padding-top: 2.4rem;
+    padding-bottom: 4rem;
+    font-size: 1.73rem;
+    color: rgb(255 255 255 / 0.4);
+  }
+
+  @media (max-width: 767px) {
+    .ftr {
+      padding-top: 6rem;
+    }
+
+    .ftr__top {
+      grid-template-columns: 1fr auto;
+      row-gap: 4rem;
+    }
+
+    .ftr__left {
+      grid-column: 1 / -1;
+    }
+
+    .ftr__news {
+      width: auto;
+    }
+
+    .ftr__news-title {
+      font-size: 2rem;
+    }
+
+    .ftr__news-row input {
+      font-size: 1.5rem;
+    }
+
+    .ftr__contacts {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+      margin-top: 4rem;
+    }
+
+    .ftr__contacts dt {
+      font-size: 1.2rem;
+    }
+
+    .ftr__contacts dd {
+      margin-top: 0.6rem;
+      font-size: 1.5rem;
+    }
+
+    .ftr__nav a {
+      font-size: 2.2rem;
+    }
+
+    .ftr__social a {
+      font-size: 1.5rem;
+    }
+
+    .ftr__mark {
+      margin-top: 5rem;
+    }
+
+    .ftr__mark :global(.ftr__wordmark) {
+      width: 100%;
+    }
+
+    .ftr__legal {
+      justify-content: flex-start;
+      font-size: 1.2rem;
+    }
+  }
+</style>

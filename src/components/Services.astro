@@ -1,0 +1,311 @@
+---
+import Img from "./Img.astro";
+import Button from "./Button.astro";
+import TwoTone from "./TwoTone.astro";
+import { home } from "@/content/barnes-content";
+
+const { services } = home;
+---
+
+<section class="svc tone-night" id="services" aria-labelledby="svc-title">
+  <div class="wrap svc__head">
+    <p class="svc__caption">{services.caption}</p>
+    <TwoTone text={services.title} class="svc__title" id="svc-title" stack />
+  </div>
+
+  <div class="svc__items">
+    {services.items.map((item, i) => (
+      <button class="svc__item" type="button" data-open-modal={item.deal} aria-label={`${item.word}: ${item.text} Open the enquiry form.`}>
+        <span class="svc__bg" aria-hidden="true">
+          <Img image={item.image} sizes="100vw" widths={[800, 1400, 2000]} decorative />
+        </span>
+        <span class="wrap svc__inner">
+          <span class="svc__num" aria-hidden="true">{i + 1}</span>
+          <span class="svc__text">{item.text}</span>
+          <span class="svc__more" aria-hidden="true">
+            <span class="svc__word">{item.word}</span>
+            <svg class="svc__arrow" viewBox="0 0 24 24"><path fill="currentColor" d="M3.315 10.996h16.623l-.884.707-8.084-8.135h2.526l8.261 8.337-8.286 8.337h-2.526l8.11-8.135.883.708H3.315z" /></svg>
+          </span>
+        </span>
+      </button>
+    ))}
+  </div>
+
+  <div class="wrap svc__foot">
+    <TwoTone text={services.brief} as="p" class="svc__brief" />
+    <div class="svc__action">
+      <Button variant="ghost" modal>{services.cta}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .svc {
+    position: relative;
+    z-index: 2;
+    padding-block: 15rem;
+  }
+
+  .svc__head {
+    display: grid;
+    grid-template-columns: 74.4rem 97.6rem;
+  }
+
+  .svc__caption {
+    font-size: 2rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .svc__title {
+    font-size: 7.2rem;
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .svc__items {
+    margin-top: 10rem;
+    border-bottom: 1px solid rgb(56 58 58);
+  }
+
+  .svc__item {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 40rem;
+    text-align: left;
+    color: var(--white);
+    border-top: 1px solid rgb(56 58 58);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .svc__bg {
+    position: absolute;
+    inset: -1rem -5rem;
+    z-index: -1;
+    background: rgb(26 28 28);
+    clip-path: inset(100% 0 0);
+    transition:
+      opacity 0.4s,
+      clip-path 1s var(--ease-out);
+  }
+
+  .svc__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgb(21 23 23 / 0.45);
+  }
+
+  .svc__bg :global(picture),
+  .svc__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .svc__bg :global(img) {
+    transform: scale(1.12);
+    transition: transform 4s var(--ease-settle);
+  }
+
+  .svc__item:hover .svc__bg,
+  .svc__item:focus-visible .svc__bg {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .svc__item:hover .svc__bg :global(img),
+  .svc__item:focus-visible .svc__bg :global(img) {
+    transform: none;
+  }
+
+  .svc__inner {
+    display: grid;
+    grid-template-columns: 4.6rem 56.2rem 97.6rem;
+    column-gap: 6rem;
+    height: 100%;
+    padding-top: 6rem;
+    padding-bottom: 5.2rem;
+  }
+
+  .svc__num {
+    display: grid;
+    place-items: center;
+    width: 4.67rem;
+    height: 4.67rem;
+    border: 1px solid var(--white);
+    border-radius: 50%;
+    font-size: 1.6rem;
+  }
+
+  .svc__text {
+    width: 40rem;
+    font-size: 2.4rem;
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .svc__more {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .svc__word {
+    position: relative;
+    font-size: 24rem;
+    line-height: 0.95;
+    font-weight: 400;
+    letter-spacing: -0.05em;
+  }
+
+  .svc__word::after {
+    content: "";
+    position: absolute;
+    left: 0.04em;
+    right: 0.06em;
+    bottom: -0.02em;
+    height: 0.6rem;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .svc__item:hover .svc__word::after,
+  .svc__item:focus-visible .svc__word::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .svc__arrow {
+    width: 12rem;
+    height: 12rem;
+    margin-top: 5rem;
+    opacity: 0;
+    transform: translateX(-4rem);
+    transition:
+      opacity 0.4s,
+      transform 0.6s var(--ease-out);
+  }
+
+  .svc__item:hover .svc__arrow,
+  .svc__item:focus-visible .svc__arrow {
+    opacity: 1;
+    transform: none;
+  }
+
+  .svc__item:focus-visible {
+    outline-offset: -4px;
+  }
+
+  .svc__foot {
+    margin-top: 6rem;
+  }
+
+  .svc__brief {
+    width: 77.6rem;
+    font-size: 4.4rem;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .svc__action {
+    margin-top: 3.9rem;
+  }
+
+  @media (hover: none) {
+    .svc__bg {
+      clip-path: inset(0 0 0 0);
+      opacity: 0.55;
+    }
+
+    .svc__arrow {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .svc {
+      padding-block: 6rem;
+    }
+
+    .svc__head {
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+    }
+
+    .svc__caption {
+      font-size: 1.44rem;
+    }
+
+    .svc__title {
+      font-size: 3.4rem;
+    }
+
+    .svc__items {
+      margin-top: 4rem;
+    }
+
+    .svc__item {
+      height: auto;
+    }
+
+    .svc__bg {
+      clip-path: inset(0 0 0 0);
+      opacity: 0.55;
+    }
+
+    .svc__inner {
+      grid-template-columns: 1fr;
+      row-gap: 1.6rem;
+      padding-block: 2.4rem 3rem;
+    }
+
+    .svc__num {
+      width: 3rem;
+      height: 3rem;
+      font-size: 1.2rem;
+    }
+
+    .svc__text {
+      width: auto;
+      font-size: 1.5rem;
+    }
+
+    .svc__more {
+      order: 3;
+      align-items: center;
+    }
+
+    .svc__word {
+      font-size: 8.4rem;
+    }
+
+    .svc__arrow {
+      width: 6rem;
+      height: 6rem;
+      margin-top: 0;
+      opacity: 1;
+      transform: none;
+    }
+
+    .svc__foot {
+      margin-top: 4rem;
+    }
+
+    .svc__brief {
+      width: auto;
+      font-size: 2.2rem;
+    }
+
+    .svc__action {
+      margin-top: 2.4rem;
+    }
+  }
+</style>

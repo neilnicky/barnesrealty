@@ -1,0 +1,347 @@
+---
+import { brand, forms, leadModal } from "@/content/barnes-content";
+
+const endpoint = import.meta.env.PUBLIC_ENQUIRY_ENDPOINT ?? "";
+const notConnected = `${forms.notConnected} Telephone: ${brand.globalOffice.phone.display}.`;
+const field = (name: string, label: string, opts: { type?: "text" | "email" | "tel"; required?: boolean; placeholder?: string; autocomplete?: string } = {}) => ({ name, label, ...opts });
+const step1 = [field("email", "Email Address", { type: "email", required: true, placeholder: "Enter your email", autocomplete: "email" }), field("phone", "Phone Number", { type: "tel", required: true, placeholder: "Enter your phone", autocomplete: "tel" })];
+const step2 = [field("name", "Name", { required: true, placeholder: "Enter your name", autocomplete: "name" }), field("destination", "Destination", { placeholder: "City, region or country" })];
+---
+
+<dialog class="lead" data-lead aria-labelledby="lead-title">
+  <form
+    class="lead__form"
+    data-lead-form
+    data-endpoint={endpoint}
+    data-msg-sent={forms.sent}
+    data-msg-failed={forms.failed}
+    data-msg-not-connected={notConnected}
+    method="post"
+    novalidate
+  >
+    <button class="lead__close" type="button" data-lead-close aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.5" /></svg>
+    </button>
+    <h2 class="lead__title" id="lead-title">{leadModal.title}</h2>
+    <p class="lead__text">{leadModal.text}</p>
+
+    <fieldset class="lead__step" data-step="1">
+      <legend class="visually-hidden">Contact details and search</legend>
+      <div class="lead__grid">
+        {step1.map((f) => (
+          <div class="lead__field">
+            <label for={`lead-${f.name}`}>{f.label}{f.required && "*"}</label>
+            <input id={`lead-${f.name}`} name={f.name} type={f.type ?? "text"} placeholder={f.placeholder} autocomplete={f.autocomplete} aria-describedby={`lead-${f.name}-err`} />
+            <p class="lead__err" id={`lead-${f.name}-err`} data-error-for={f.name} hidden></p>
+          </div>
+        ))}
+        <div class="lead__field">
+          <span class="lead__label" id="lead-price-label">Price</span>
+          <div class="lead__pair">
+            <input name="minPrice" inputmode="numeric" placeholder="Min price" aria-labelledby="lead-price-label" aria-describedby="lead-minPrice-err" />
+            <input name="maxPrice" inputmode="numeric" placeholder="Max price" aria-labelledby="lead-price-label" aria-describedby="lead-maxPrice-err" />
+          </div>
+          <p class="lead__err" id="lead-minPrice-err" data-error-for="minPrice" hidden></p>
+          <p class="lead__err" id="lead-maxPrice-err" data-error-for="maxPrice" hidden></p>
+        </div>
+        <div class="lead__field">
+          <label for="lead-deal">Deal Type*</label>
+          <select id="lead-deal" name="deal" aria-describedby="lead-deal-err">
+            <option value="">Choose your deal type</option>
+            {leadModal.deals.map((d) => <option value={d}>{d}</option>)}
+          </select>
+          <p class="lead__err" id="lead-deal-err" data-error-for="deal" hidden></p>
+        </div>
+      </div>
+      <button class="lead__btn" type="button" data-lead-next>
+        {leadModal.next}
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.315 10.996h16.623l-.884.707-8.084-8.135h2.526l8.261 8.337-8.286 8.337h-2.526l8.11-8.135.883.708H3.315z" /></svg>
+      </button>
+    </fieldset>
+
+    <fieldset class="lead__step" data-step="2" hidden>
+      <legend class="lead__legend">{leadModal.stepTwo}</legend>
+      <div class="lead__grid">
+        {step2.map((f) => (
+          <div class="lead__field">
+            <label for={`lead-${f.name}`}>{f.label}{f.required && "*"}</label>
+            <input id={`lead-${f.name}`} name={f.name} type="text" placeholder={f.placeholder} autocomplete={f.autocomplete} aria-describedby={`lead-${f.name}-err`} />
+            <p class="lead__err" id={`lead-${f.name}-err`} data-error-for={f.name} hidden></p>
+          </div>
+        ))}
+        <div class="lead__field lead__field--wide">
+          <label for="lead-message">Message</label>
+          <textarea id="lead-message" name="message" rows="3" placeholder="What are you looking for?" aria-describedby="lead-message-err"></textarea>
+          <p class="lead__err" id="lead-message-err" data-error-for="message" hidden></p>
+        </div>
+      </div>
+      <div class="lead__actions">
+        <button class="lead__back" type="button" data-lead-back>Back</button>
+        <button class="lead__btn" type="submit">
+          {leadModal.submit}
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.315 10.996h16.623l-.884.707-8.084-8.135h2.526l8.261 8.337-8.286 8.337h-2.526l8.11-8.135.883.708H3.315z" /></svg>
+        </button>
+      </div>
+    </fieldset>
+
+    <p class="lead__status" role="status" data-form-status hidden></p>
+    <p class="lead__privacy">{forms.privacy}</p>
+  </form>
+</dialog>
+
+<style>
+  .lead {
+    width: 90rem;
+    max-width: calc(100vw - 32px);
+    max-height: calc(100dvh - 32px);
+    padding: 0;
+    border: 0;
+    background: var(--white);
+    color: var(--ink);
+    overflow: auto;
+  }
+
+  .lead::backdrop {
+    background: rgb(21 23 23 / 0.55);
+  }
+
+  .lead[open] {
+    animation: lead-in 0.5s var(--ease-out);
+  }
+
+  @keyframes lead-in {
+    from {
+      opacity: 0;
+      transform: translateY(3rem);
+    }
+  }
+
+  .lead__form {
+    position: relative;
+    padding: 8.1rem;
+  }
+
+  .lead__close {
+    position: absolute;
+    top: 4.4rem;
+    right: 4.4rem;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+  }
+
+  .lead__close svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .lead__title {
+    font-size: 4.8rem;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .lead__text {
+    margin-top: 2rem;
+    font-size: 2.27rem;
+    font-weight: 500;
+  }
+
+  .lead__step {
+    margin: 5rem 0 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  .lead__step[hidden] {
+    display: none;
+  }
+
+  .lead__legend {
+    margin-bottom: 3rem;
+    font-size: 2.27rem;
+    font-weight: 500;
+  }
+
+  .lead__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem 2rem;
+  }
+
+  .lead__field {
+    display: grid;
+    align-content: start;
+  }
+
+  .lead__field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .lead__field label,
+  .lead__label {
+    font-size: 1.47rem;
+    color: rgb(21 23 23 / 0.45);
+  }
+
+  .lead__pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .lead input,
+  .lead select,
+  .lead textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 1.6rem 0;
+    border: 0;
+    border-bottom: 1px solid rgb(21 23 23 / 0.15);
+    border-radius: 0;
+    background: transparent;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .lead input::placeholder,
+  .lead textarea::placeholder {
+    color: var(--ink);
+  }
+
+  .lead select {
+    appearance: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23151717' stroke-width='1.4'/%3E%3C/svg%3E") right 2px center / 11px no-repeat;
+  }
+
+  .lead textarea {
+    resize: vertical;
+  }
+
+  .lead input:focus,
+  .lead select:focus,
+  .lead textarea:focus {
+    outline: none;
+    border-bottom-color: var(--ink);
+  }
+
+  .lead [aria-invalid="true"] {
+    border-bottom-color: #b00020;
+  }
+
+  .lead__err {
+    margin-top: 0.8rem;
+    font-size: 1.6rem;
+    color: #b00020;
+  }
+
+  .lead__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+    width: 100%;
+    min-height: 44px;
+    height: 6.67rem;
+    margin-top: 5rem;
+    border-radius: 100px;
+    background: var(--ink);
+    color: var(--white);
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .lead__btn svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .lead__btn:disabled {
+    opacity: 0.6;
+  }
+
+  .lead__actions {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .lead__back {
+    margin-top: 5rem;
+    min-height: 44px;
+    font-size: 2rem;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+
+  .lead__status {
+    margin-top: 3rem;
+    padding: 2rem 2.4rem;
+    background: var(--paper);
+    font-size: 1.9rem;
+  }
+
+  .lead__privacy {
+    margin-top: 2.4rem;
+    font-size: 1.47rem;
+    color: rgb(21 23 23 / 0.45);
+  }
+
+  @media (max-width: 767px) {
+    .lead__form {
+      padding: 4rem 2.4rem 3rem;
+    }
+
+    .lead__close {
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .lead__title {
+      font-size: 2.8rem;
+    }
+
+    .lead__text,
+    .lead__legend {
+      font-size: 1.5rem;
+    }
+
+    .lead__grid {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+    }
+
+    .lead__field label,
+    .lead__label {
+      font-size: 1.2rem;
+    }
+
+    .lead input,
+    .lead select,
+    .lead textarea {
+      font-size: 16px;
+      padding: 1rem 0;
+    }
+
+    .lead__btn {
+      height: auto;
+      padding: 1.2rem;
+      margin-top: 3rem;
+      font-size: 1.5rem;
+    }
+
+    .lead__back {
+      margin-top: 3rem;
+      font-size: 1.5rem;
+    }
+
+    .lead__err,
+    .lead__status {
+      font-size: 1.3rem;
+    }
+  }
+</style>

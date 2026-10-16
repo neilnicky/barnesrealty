@@ -1,0 +1,62 @@
+---
+import "@fontsource-variable/instrument-sans/wght.css";
+import "@fontsource-variable/lora/wght.css";
+import "@/styles/global.css";
+import { getImage } from "astro:assets";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import LeadModal from "@/components/LeadModal.astro";
+import { seo, type ImageAsset } from "@/content/barnes-content";
+import { resolveImage } from "@/lib/images";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: ImageAsset;
+  /** Home: the header starts light over the hero photograph. */
+  overHero?: boolean;
+}
+
+const { title = seo.title, description = seo.description, image = seo.ogImage, overHero = false } = Astro.props;
+const og = await getImage({ src: resolveImage(image.file), width: 1200, height: 630, format: "jpg", fit: "cover" });
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={seo.siteName} />
+    <meta property="og:locale" content={seo.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(og.src, Astro.site)} />
+    <meta property="og:image:alt" content={image.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>
+      document.documentElement.classList.add(
+        "js",
+        matchMedia("(prefers-reduced-motion: reduce)").matches ? "js-reduced" : "js-motion",
+      );
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header overHero={overHero} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <LeadModal />
+    <script>
+      import "@/motion/main";
+    </script>
+  </body>
+</html>

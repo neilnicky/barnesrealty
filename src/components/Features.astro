@@ -1,0 +1,218 @@
+---
+import Img from "./Img.astro";
+import Button from "./Button.astro";
+import TwoTone from "./TwoTone.astro";
+import { home } from "@/content/barnes-content";
+
+const { features } = home;
+---
+
+<section class="ftr-s section tone-night" aria-labelledby="feat-title">
+  <div class="wrap">
+    <div class="feat__grid">
+      <TwoTone text={features.title} class="feat__title" id="feat-title" />
+      <div>
+        <TwoTone text={features.text} as="p" class="feat__text" />
+        <div class="feat__actions">
+          <Button href={features.cta.href} variant="white">{features.cta.label}</Button>
+        </div>
+      </div>
+    </div>
+    <ul class="feat__items">
+      {features.items.map((item) => (
+        <li class="feat__item">
+          <a href={item.href} class="feat__link">
+            <span class="feat__bg" aria-hidden="true">
+              <Img image={item.image} sizes="(max-width: 767px) 100vw, 30vw" widths={[500, 900]} decorative />
+            </span>
+            <span class="feat__item-title">{item.title}</span>
+            <span class="feat__item-text">{item.text}</span>
+            <span class="feat__more">
+              Learn More
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.315 10.996h16.623l-.884.707-8.084-8.135h2.526l8.261 8.337-8.286 8.337h-2.526l8.11-8.135.883.708H3.315z" /></svg>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .ftr-s {
+    position: relative;
+    z-index: 2;
+  }
+
+  .feat__grid {
+    display: grid;
+    grid-template-columns: 70.4rem 97.6rem;
+    column-gap: 4rem;
+  }
+
+  .feat__title {
+    max-width: 48rem;
+    font-size: 7.2rem;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+  }
+
+  .feat__text {
+    font-size: 3.2rem;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .feat__actions {
+    margin-top: 4rem;
+  }
+
+  .feat__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 10rem;
+  }
+
+  .feat__link {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 1.5rem;
+    height: 47.07rem;
+    padding: 5rem;
+    overflow: hidden;
+    isolation: isolate;
+    color: var(--white);
+  }
+
+  .feat__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .feat__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.15) 50%, rgb(0 0 0 / 0.4));
+  }
+
+  .feat__bg :global(picture),
+  .feat__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease-out);
+  }
+
+  .feat__link:hover .feat__bg :global(img) {
+    transform: scale(1.05);
+  }
+
+  .feat__item-title {
+    max-width: 34.5rem;
+    font-size: 4.4rem;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .feat__item-text {
+    max-width: 34.5rem;
+    font-size: 2rem;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition:
+      opacity 0.4s,
+      transform 0.6s var(--ease-out);
+  }
+
+  .feat__link:hover .feat__item-text,
+  .feat__link:focus-visible .feat__item-text {
+    opacity: 1;
+    transform: none;
+  }
+
+  .feat__more {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 1.4rem;
+    height: 5.87rem;
+    min-height: 40px;
+    padding: 0 3rem;
+    border: 1px solid rgb(255 255 255 / 0.5);
+    border-radius: 100px;
+    font-size: 1.8rem;
+    font-weight: 500;
+    transition: border-color 0.3s;
+  }
+
+  .feat__more svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .feat__link:hover .feat__more {
+    border-color: var(--white);
+  }
+
+  @media (hover: none) {
+    .feat__item-text {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .feat__grid,
+    .feat__items {
+      grid-template-columns: 1fr;
+    }
+
+    .feat__grid {
+      row-gap: 2rem;
+    }
+
+    .feat__title {
+      font-size: 3.4rem;
+    }
+
+    .feat__text {
+      font-size: 1.8rem;
+    }
+
+    .feat__actions {
+      margin-top: 2.4rem;
+    }
+
+    .feat__items {
+      margin-top: 4rem;
+      gap: 1.6rem;
+    }
+
+    .feat__link {
+      height: 34rem;
+      padding: 2.6rem;
+    }
+
+    .feat__item-title {
+      font-size: 2.6rem;
+    }
+
+    .feat__item-text {
+      font-size: 1.5rem;
+      opacity: 1;
+      transform: none;
+    }
+
+    .feat__more {
+      font-size: 1.44rem;
+    }
+  }
+</style>

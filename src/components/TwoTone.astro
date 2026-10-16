@@ -1,0 +1,22 @@
+---
+/**
+ * FIND two-tone text: lead in ink, continuation muted ("em"). With motion on,
+ * lines are revealed by a shrinking veil as they scroll in (motion/lines.ts).
+ */
+import type { TwoTone } from "@/content/barnes-content";
+
+interface Props {
+  text: TwoTone;
+  as?: "h1" | "h2" | "h3" | "p" | "div";
+  class?: string;
+  id?: string;
+  /** Put the muted part on its own line (e.g. "Real Estate," / "Personal."). */
+  stack?: boolean;
+}
+
+const { text, as: Tag = "h2", class: className, id, stack = false } = Astro.props;
+---
+
+<Tag class={className} id={id} data-lines>
+  {text.lead}{text.tail && (stack ? <br /> : " ")}{text.tail && <span class="em">{text.tail}</span>}
+</Tag>

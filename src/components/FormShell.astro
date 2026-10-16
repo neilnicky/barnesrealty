@@ -1,0 +1,113 @@
+---
+import { forms } from "@/content/barnes-content";
+import type { FormKind } from "@/lib/forms";
+
+interface Props {
+  kind: FormKind;
+  submitLabel: string;
+  /** Phone shown with the "not connected" message (agency or Global Office). */
+  fallbackPhone: { display: string; href: string };
+}
+
+const { kind, submitLabel, fallbackPhone } = Astro.props;
+const endpoint = import.meta.env.PUBLIC_ENQUIRY_ENDPOINT ?? "";
+const notConnected = `${forms.notConnected} Telephone: ${fallbackPhone.display}.`;
+---
+
+<form
+  class="form"
+  data-form={kind}
+  data-endpoint={endpoint}
+  data-msg-sent={forms.sent}
+  data-msg-failed={forms.failed}
+  data-msg-not-connected={notConnected}
+  method="post"
+  novalidate
+>
+  <div class="form__grid">
+    <slot />
+  </div>
+  <p class="form__privacy muted">{forms.privacy}</p>
+  <div class="form__actions">
+    <button class="form__submit" type="submit">
+      {submitLabel}
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4" /></svg>
+    </button>
+    <a class="form__phone label" href={fallbackPhone.href}>Or call {fallbackPhone.display}</a>
+  </div>
+  <p class="form__status" role="status" data-form-status hidden></p>
+  <noscript><p class="form__status" data-state="info">{notConnected}</p></noscript>
+</form>
+
+<style>
+  .form__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem 4rem;
+  }
+
+  .form__privacy {
+    margin-top: 5rem;
+    font-size: max(13px, 1.7rem);
+  }
+
+  .form__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3rem 5rem;
+    margin-top: 4rem;
+  }
+
+  .form__submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.4rem;
+    min-height: 48px;
+    padding: 1.6rem 3.6rem;
+    border-radius: 100px;
+    background: var(--ink);
+    color: var(--stone);
+    font-weight: 600;
+    font-size: max(14px, 1.9rem);
+    letter-spacing: 0.04em;
+    transition: background-color 0.3s;
+  }
+
+  .form__submit svg {
+    width: 1.1em;
+    height: 1.1em;
+  }
+
+  .form__submit:hover {
+    background: var(--red);
+  }
+
+  .form__submit:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .form__phone {
+    border-bottom: 1px solid var(--red);
+    padding-bottom: 0.4rem;
+  }
+
+  .form__status {
+    margin-top: 4rem;
+    padding: 2.6rem 3rem;
+    border-left: max(3px, 0.6rem) solid var(--ink);
+    background: rgb(255 255 255 / 0.5);
+  }
+
+  .form__status[data-state="error"] {
+    border-left-color: var(--red);
+  }
+
+  @media (max-width: 640px) {
+    .form__grid {
+      grid-template-columns: 1fr;
+      gap: 7rem;
+    }
+  }
+</style>
