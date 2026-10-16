@@ -1,0 +1,495 @@
+header.header_wrapper [0,13074 1440x59] bg=rgb(255, 255, 255) STICKY top=0px 
+  div.container_container [0,13074 1440x59] pad=0px 75px 
+    div.header_content [75,13074 1290x59] grid=187.5px 915px 187.5px gap=normal 
+      div.header_logo [75,13093 188x20] flex gap=normal jc=normal 
+        a. [75,13093 68x20]  
+      nav.header_nav [371,13093 698x19] flex gap=30px jc=normal 
+        div.header_nav-item [371,13093 49x19] flex gap=7.5px jc=normal 
+          a. [371,13093 49x19]  
+            span. [371,13093 49x19]  font=15px/18.75px w500 ls=normal c=rgb(21, 23, 23) «Search»
+        div.header_nav-item [450,13093 109x19] flex gap=7.5px jc=normal 
+          a. [450,13093 109x19]  
+            span. [450,13093 109x19]  font=15px/18.75px w500 ls=normal c=rgb(21, 23, 23) «Neighborhoods»
+        div.header_nav-item [588,13093 50x19] flex gap=7.5px jc=normal 
+          a. [588,13093 50x19]  
+            span. [588,13093 50x19]  font=15px/18.75px w500 ls=normal c=rgb(21, 23, 23) «Agents»
+        div. [669,13093 51x19]  
+          div.header_nav-item [669,13093 51x19] flex gap=7.5px jc=normal 
+            span. [669,13093 28x19]  font=15px/18.75px w500 ls=normal c=rgb(21, 23, 23) «Join»
+            div.header_nav-arrow [704,13096 15x15] flex gap=normal jc=normal 
+        div. [749,13093 98x19]  
+          div.header_nav-item [749,13093 98x19] flex gap=7.5px jc=normal 
+            span. [749,13093 76x19]  font=15px/18.75px w500 ls=normal c=rgb(21, 23, 23) «Paperwork»
+            div.header_nav-arrow [832,13096 15x15] flex gap=normal jc=normal 
+        div. [877,13093 95x19]  
+          div.header_nav-item [877,13093 95x19] flex gap=7.5px jc=normal 
+            span. [877,13093 73x19]  font=15px/18.75px w500 ls=normal c=rgb(21, 23, 23) «Resources»
+            div.header_nav-arrow [958,13096 15x15] flex gap=normal jc=normal 
+        div. [1003,13093 66x19]  
+          div.header_nav-item [1003,13093 66x19] flex gap=7.5px jc=normal 
+            span. [1003,13093 44x19]  font=15px/18.75px w500 ls=normal c=rgb(21, 23, 23) «About»
+            div.header_nav-arrow [1054,13096 15x15] flex gap=normal jc=normal 
+      div.header_actions [1178,13081 188x44] flex gap=normal jc=flex-end 
+        a.button_button-round [1271,13081 94x44] bg=rgb(21, 23, 23) rad=100px flex gap=normal jc=normal pad=11.55px 22.5px bt=1px rgba(0, 0, 0, 0) bb=1px rgba(0, 0, 0, 0) 
+          div.button_content [1294,13093 47x19] flex gap=10.5px jc=center 
+            div.button_button-round-text [1294,13093 47x19]  
+              span. [1294,13093 47x19]  font=15px/18.75px w500 ls=normal c=rgb(255, 255, 255) «Sign In»
+      button.burger-btn_btn [0,13132 0x0] bt=1px rgba(0, 0, 0, 0) bb=1px rgba(0, 0, 0, 0) 
+        span. [0,13132 0x0] bg=rgb(21, 23, 23) rad=9999px 
+        span. [0,13132 0x0] bg=rgb(21, 23, 23) rad=9999px 
+  div.burger-menu_wrapper [0,13074 1440x59] flex gap=normal jc=normal pad=59px 0px 0px 
+    div.burger-menu_backdrop [0,13074 1440x59] bg=rgb(255, 255, 255) 
+    div.burger-menu_content [0,13133 1440x0]  
+      nav.burger-menu_nav [0,13133 1440x45] flex gap=18.75px jc=normal pad=22.5px 30px 
+        div.burger-menu_nav-item [30,13155 1380x20] flex gap=normal jc=space-between 
+          a. [30,13155 63x20]  
+            div. [27,13152 69x25] pad=2.925px 
+              div. [30,13177 63x20]  font=19.5px/19.5px w500 ls=normal c=rgb(0, 0, 0) «Search»
+        div.burger-menu_nav-item [30,13193 1380x20] flex gap=normal jc=space-between 
+          a. [30,13193 141x20]  
+            div. [27,13190 147x25] pad=2.925px 
+              div. [30,13216 141x20]  font=19.5px/19.5px w500 ls=normal c=rgb(0, 0, 0) «Neighborhoods»
+        div.burger-menu_nav-item [30,13232 1380x20] flex gap=normal jc=space-between 
+          a. [30,13232 65x20]  
+            div. [27,13229 71x25] pad=2.925px 
+              div. [30,13254 65x20]  font=19.5px/19.5px w500 ls=normal c=rgb(0, 0, 0) «Agents»
+        div. [30,13270 1380x20]  
+          div.burger-menu_nav-item [30,13270 1380x20] flex gap=normal jc=space-between 
+            div. [27,13267 43x26] pad=2.925px 
+              div. [30,13292 37x20]  font=19.5px/19.5px w500 ls=normal c=rgb(0, 0, 0) «Join»
+            div. [1392,13270 18x20]  
+          div.burger-menu_nav-item-content [0,13132 0x0]  
+        div. [30,13309 1380x20]  
+          div.burger-menu_nav-item [30,13309 1380x20] flex gap=normal jc=space-between 
+            div. [27,13306 104x26] pad=2.925px 
+              div. [30,13331 98x20]  font=19.5px/19.5px w500 ls=normal c=rgb(0, 0, 0) «Paperwork»
+            div. [1392,13309 18x20]  
+          div.burger-menu_nav-item-content [0,13132 0x0]  
+        div. [30,13347 1380x20]  
+          div.burger-menu_nav-item [30,13347 1380x20] flex gap=normal jc=space-between 
+            div. [27,13344 100x26] pad=2.925px 
+              div. [30,13370 95x20]  font=19.5px/19.5px w500 ls=normal c=rgb(0, 0, 0) «Resources»
+            div. [1392,13347 18x20]  
+          div.burger-menu_nav-item-content [0,13132 0x0]  
+        div. [30,13386 1380x20]  
+          div.burger-menu_nav-item [30,13386 1380x20] flex gap=normal jc=space-between 
+            div. [27,13383 63x26] pad=2.925px 
+              div. [30,13409 57x20]  font=19.5px/19.5px w500 ls=normal c=rgb(0, 0, 0) «About»
+            div. [1392,13386 18x20]  
+          div.burger-menu_nav-item-content [0,13132 0x0]  
+    div.burger-menu_actions [0,13133 1440x89] flex gap=normal jc=normal pad=22.5px 30px 
+      a.button_button-round [30,13155 1380x44] bg=rgb(21, 23, 23) rad=100px pad=11.55px 22.5px bt=1px rgba(0, 0, 0, 0) bb=1px rgba(0, 0, 0, 0) 
+        div.button_content [54,13168 1333x19] flex gap=10.5px jc=center 
+          div.button_button-round-text [699,13168 42x19]  
+            span. [699,13168 42x19]  font=13.5px/18.9px w500 ls=normal c=rgb(255, 255, 255) «Sign In»
+
+section.why-us_root [0,3585 1440x1225] bg=rgb(255, 255, 255) pad=112.5px 0px 
+  div.container_container [0,3698 1440x1000] pad=0px 75px 
+    div.why-us_grid [75,3698 1290x193] grid=558px 732px gap=normal 
+      div.why-us_title [75,3698 558x193]  
+        h2. [75,3698 558x21]  font=15px/21px w600 ls=normal c=rgb(0, 0, 0) «Why FIND»
+      div.why-us_text [633,3698 732x193]  
+        div. [633,3698 646x48]  
+          div. [1285,3702 0x48] bg=rgba(255, 255, 255, 0.8) 
+        div. [633,3746 677x48]  
+          span.em [1083,3744 227x52]  font=42px/48.3px w500 ls=-1.26px c=rgb(179, 179, 179) «We help you»
+          div. [1316,3751 0x48] bg=rgba(255, 255, 255, 0.8) 
+        div. [633,3794 688x48]  
+          span.em [633,3792 688x52]  font=42px/48.3px w500 ls=-1.26px c=rgb(179, 179, 179) «move forward with clarity, confidence,»
+          div. [1328,3799 0x48] bg=rgba(255, 255, 255, 0.8) 
+        div. [633,3842 579x48]  
+          span.em [633,3840 579x52]  font=42px/48.3px w500 ls=-1.26px c=rgb(179, 179, 179) «and the right agent by your side.»
+          div. [1218,3847 0x48] bg=rgba(255, 255, 255, 0.8) 
+    div.why-us_preview [75,3966 1290x732]  
+      video. [75,3966 1290x732] MEDIA why-us.mp4 fit=cover 
+
+section.arrows-section_root [0,4810 1440x823] pad=112.5px 0px 
+  div.container_container [0,4923 1440x598] pad=0px 75px 
+    div.arrows-section_title [75,4923 1290x54] flex gap=normal jc=center 
+      div. [374,4923 691x54]  
+        h2. [374,4923 691x54]  
+          span.em [673,4917 393x66]  font=54px/54px w500 ls=-2.16px c=rgb(179, 179, 179) «about real estate.»
+        div. [1073,4928 0x54] bg=rgba(255, 255, 255, 0.8) 
+    div.arrows-section_arrows [125,5037 1240x330] flex gap=normal jc=center 
+      div.arrows-section_arrow [276,5037 260x330] MASK 
+        img. [276,5037 260x330] MEDIA image fit=cover 
+      div.arrows-section_arrow [486,5037 260x330] MASK 
+        img. [486,5037 260x330] MEDIA image fit=cover 
+      div.arrows-section_arrow [695,5037 260x330] MASK 
+        img. [695,5037 260x330] MEDIA image fit=cover 
+      div.arrows-section_arrow [904,5037 260x330] MASK 
+        img. [904,5037 260x330] MEDIA image fit=cover 
+    div.arrows-section_text [416,5427 609x94]  
+      p. [416,5427 609x94]  
+        span.em [486,5459 494x60]  font=24px/31.2px w500 ls=-0.24px c=rgb(179, 179, 179) «You’re looking for alignment. That’s what we help »
+
+section. [0,5633 1440x645]  
+  div.rewired_wrapper [0,5633 1440x645] pad=112.5px 0px 
+    div.container_container [0,5745 1440x420] pad=0px 75px 
+      div.assymetric-cols_row [75,5745 1290x420] flex gap=30px jc=normal 
+        div.assymetric-cols_col [75,5745 528x420]  
+          div.rewired_left-col [75,5745 528x182] flex gap=30px jc=normal 
+            div. [75,5745 263x108]  
+              div. [75,5745 263x108]  
+                h2.rewired_title [75,5745 263x108]  
+                  div. [75,5745 263x54]  font=54px/54px w500 ls=-2.16px c=rgb(0, 0, 0) «Real Estate,»
+                  div.em [75,5799 263x54]  font=54px/54px w500 ls=-2.16px c=rgb(179, 179, 179) «Rewired.»
+                div. [341,5756 0x108] bg=rgba(255, 255, 255, 0.8) 
+            button.button_button-round [75,5883 185x44] bg=rgb(21, 23, 23) rad=100px pad=11.55px 22.5px bt=1px rgba(0, 0, 0, 0) bb=1px rgba(0, 0, 0, 0) 
+              div.button_content [99,5896 138x19] flex gap=10.5px jc=center 
+                div.button_button-round-text [99,5896 110x19]  
+                  span. [99,5896 110x19]  font=13.5px/18.9px w500 ls=normal c=rgb(255, 255, 255) «Start Your Search»
+                span.button_icon-after [219,5896 18x18] flex gap=normal jc=center 
+        div.assymetric-cols_col [633,5745 732x420] flex gap=60px jc=normal 
+          div. [633,5745 732x420]  
+            div.rewired_label [633,5745 732x31]  font=24px/31.2px w500 ls=-0.24px c=rgb(0, 0, 0) «Steps:»
+            div. [633,5799 732x367]  
+              div.rewired_list-item [633,5799 732x123] flex gap=37.5px jc=normal pad=22.5px 0px bt=1px rgba(21, 23, 23, 0.07) bb=1px rgba(21, 23, 23, 0.07) 
+                span. [684,5822 681x76]  
+                  span.em [684,5820 626x78]  font=33px/37.95px w500 ls=-0.99px c=rgb(179, 179, 179) «We match you with an expert who actually listens.»
+              div.rewired_list-item [633,5922 732x122] flex gap=37.5px jc=normal pad=22.5px 0px bb=1px rgba(21, 23, 23, 0.07) 
+                span. [687,5944 678x76]  
+                  span.em [687,5942 672x78]  font=33px/37.95px w500 ls=-0.99px c=rgb(179, 179, 179) «We define what you really need, not just what’s av»
+              div.rewired_list-item [633,6044 732x122] flex gap=37.5px jc=normal pad=22.5px 0px bb=1px rgba(21, 23, 23, 0.07) 
+                span. [687,6066 678x76]  
+                  span.em [687,6064 664x78]  font=33px/37.95px w500 ls=-0.99px c=rgb(179, 179, 179) «We find what fits — and make it happen.»
+
+section. [0,6278 1440x1247]  
+  div.for-agents_wrapper [0,6278 1440x1247] pad=112.5px 0px 
+    div.container_container [0,6391 1440x1022] pad=0px 75px 
+      div.assymetric-cols_row [75,6391 1290x1022] flex gap=30px jc=normal 
+        div.assymetric-cols_col [75,6391 528x1022]  
+          div.assymetric-image-split_label [75,6391 528x21]  font=15px/21px w600 ls=normal c=rgb(0, 0, 0) «For Agents»
+          div.assymetric-image-split_small-img [75,6776 273x323]  
+            img. [75,6776 273x323] MEDIA image fit=cover 
+        div.assymetric-cols_col [633,6391 732x1022] flex gap=60px jc=normal 
+          div.assymetric-image-split_right-col [633,6391 732x1022] flex gap=60px jc=normal 
+            div.for-agents_above-text [633,6391 732x62]  
+              div. [633,6391 700x62]  
+                span.em [1172,6389 0x66]  
+                span.em [1172,6389 161x66]  font=54px/62.1px w500 ls=-2.16px c=rgb(179, 179, 179) «Own It.»
+                div. [1340,6397 0x62] bg=rgba(255, 255, 255, 0.8) 
+            div.assymetric-image-split_image [633,6513 732x516]  
+              img. [633,6513 732x516] MEDIA image fit=cover 
+            div. [633,7089 732x323]  
+              div.for-agents_below-text [633,7089 732x250]  
+                span.em [633,7121 730x216]  font=24px/31.2px w500 ls=-0.075px c=rgb(179, 179, 179) «We give top performers real equity, so they’re inv»
+              div.for-agents_controls [633,7368 732x44] flex gap=9px jc=normal 
+                a.button_button-round [633,7368 199x44] bg=rgb(21, 23, 23) rad=100px pad=11.55px 22.5px bt=1px rgba(0, 0, 0, 0) bb=1px rgba(0, 0, 0, 0) 
+                  div.button_content [657,7381 152x19] flex gap=10.5px jc=center 
+
+section.testimonials_root [0,7525 1440x870] bg=rgb(241, 241, 241) pad=112.5px 0px 
+  div.container_container [0,7637 1440x645] pad=0px 75px 
+    div.testimonials_title [75,7637 1290x54]  
+      div. [75,7637 602x54]  
+        h2. [75,7637 602x54]  
+          span.em [324,7631 0x66]  
+          span.em [324,7631 352x66]  font=54px/54px w500 ls=-2.16px c=rgb(179, 179, 179) «Our Word for It.»
+        div. [683,7643 0x54] bg=rgba(241, 241, 241, 0.8) 
+    div.testimonials_grid [75,7766 1290x516] grid=732px 489px gap=69px 
+      div.testimonials_grid-col [876,7766 489x516]  
+        div.testimonials_divider [876,7766 489x1] bt=1px rgb(0, 0, 0) 
+        div.testimonials_carousel [876,7805 489x376]  
+          div.swiper [876,7805 489x376]  
+            div.swiper-wrapper [876,7805 489x376] flex gap=normal jc=normal pad=75px 0px 0px 
+              div.swiper-slide [876,7880 489x218]  
+                div.testimonials_quote [876,7880 489x166]  
+                  p. [876,7880 489x166]  font=24px/27.6px w400 ls=-0.48px c=rgb(0, 0, 0) «"Michael was a great realtor. Such a hard worker, »
+                div.testimonials_info [876,8083 489x15]  
+                  div.testimonials_author [876,8083 143x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «Bernadette Hogan»
+                  div.testimonials_separator [1041,8081 9x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «/»
+                  div.testimonials_rating [1073,8083 75x15]  
+              div.swiper-slide [1365,7880 489x273]  
+                div.testimonials_quote [1365,7880 489x221]  
+                  p. [1365,7880 489x221]  font=24px/27.6px w400 ls=-0.48px c=rgb(0, 0, 0) «"Shirin was truly a blessing to work with. She hel»
+                div.testimonials_info [1365,8138 489x15]  
+                  div.testimonials_author [1365,8138 53x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «Tyleen»
+                  div.testimonials_separator [1440,8136 9x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «/»
+                  div.testimonials_rating [1472,8138 75x15]  
+              div.swiper-slide [1854,7880 489x273]  
+                div.testimonials_quote [1854,7880 489x221]  
+                  p. [1854,7880 489x221]  font=24px/27.6px w400 ls=-0.48px c=rgb(0, 0, 0) «"Working with Mathew was an absolute pleasure, and»
+                div.testimonials_info [1854,8138 489x15]  
+                  div.testimonials_author [1854,8138 111x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «Johanna Nieto»
+                  div.testimonials_separator [1987,8136 9x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «/»
+                  div.testimonials_rating [2019,8138 75x15]  
+              div.swiper-slide [2343,7880 489x301]  
+                div.testimonials_quote [2343,7880 489x248]  
+                  p. [2343,7880 489x248]  font=24px/27.6px w400 ls=-0.48px c=rgb(0, 0, 0) «"Shirin was an invaluable resource, consultant, an»
+                div.testimonials_info [2343,8166 489x15]  
+                  div.testimonials_author [2343,8166 108x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «mattmpowers»
+                  div.testimonials_separator [2474,8164 9x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «/»
+                  div.testimonials_rating [2505,8166 75x15]  
+              div.swiper-slide [2832,7880 489x273]  
+                div.testimonials_quote [2832,7880 489x221]  
+                  p. [2832,7880 489x221]  font=24px/27.6px w400 ls=-0.48px c=rgb(0, 0, 0) «"After 12 years in NYC, I have had my best broker »
+                div.testimonials_info [2832,8138 489x15]  
+                  div.testimonials_author [2832,8138 148x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «Giavridis Theodore»
+                  div.testimonials_separator [3002,8136 9x15]  font=13.5px/14.85px w500 ls=normal c=rgb(0, 0, 0) «/»
+                  div.testimonials_rating [3034,8138 75x15]  
+            div.swiper-pagination [876,7805 489x35] flex gap=9.75px jc=normal 
+              span.swiper-pagination-bullet [876,7805 35x35] rad=50% flex gap=normal jc=center bt=1px rgb(21, 23, 23) bb=1px rgb(21, 23, 23) 
+              span.swiper-pagination-bullet [920,7805 35x35] rad=50% flex gap=normal jc=center bt=1px rgb(179, 179, 179) bb=1px rgb(179, 179, 179) 
+              span.swiper-pagination-bullet [964,7805 35x35] rad=50% flex gap=normal jc=center bt=1px rgb(179, 179, 179) bb=1px rgb(179, 179, 179) 
+              span.swiper-pagination-bullet [1009,7805 35x35] rad=50% flex gap=normal jc=center bt=1px rgb(179, 179, 179) bb=1px rgb(179, 179, 179) 
+              span.swiper-pagination-bullet [1053,7805 35x35] rad=50% flex gap=normal jc=center bt=1px rgb(179, 179, 179) bb=1px rgb(179, 179, 179) 
+      div.testimonials_grid-col [75,7766 732x516]  
+        div.testimonials_preview [75,7766 732x516]  
+          img. [75,7766 732x516] MEDIA image fit=cover 
+
+section.services_root [0,8395 1440x1547] bg=rgb(21, 23, 23) pad=112.5px 0px 
+  div.container_container [0,8507 1440x113] pad=0px 75px 
+    div.services_hgrid [75,8507 1290x113] grid=558px 732px gap=normal 
+      div.services_hgrid-col [75,8507 558x113]  
+        div.services_caption [75,8507 558x21]  font=15px/21px w600 ls=normal c=rgb(255, 255, 255) «Services»
+      div.services_hgrid-col [633,8507 732x113]  
+        div.services_title [633,8507 732x113]  
+          h2. [633,8507 732x113]  
+            div.services_title [633,8507 732x113]  
+              div. [633,8507 237x57]  
+                div. [872,8513 0x57] bg=rgba(21, 23, 23, 0.8) 
+              div. [633,8564 316x57]  
+                span.em [633,8559 0x66]  
+                span.em [633,8559 316x66]  font=54px/56.7px w500 ls=-1.62px c=rgb(179, 179, 179) «Can Help You»
+                div. [952,8570 0x57] bg=rgba(21, 23, 23, 0.8) 
+  div.services_items [0,8696 1440x901] bb=1px rgb(56, 58, 58) 
+    button.services_item [0,8696 1440x300] pad=1px 6px bt=1px rgb(56, 58, 58) 
+      div.container_container [6,8698 1428x297] grid=34.5px 421.5px 732px gap=45px pad=45px 75px 39px 
+        div.services_item-bg [-36,8689 1512x314] bg=rgb(26, 28, 28) clip=inset(100% 0px 0px) 
+          img. [-36,8689 1512x314] MEDIA image fit=cover 
+        div.services_item-num [81,8743 35x35] rad=50% grid=4.67188px gap=normal bt=1px rgb(255, 255, 255) bb=1px rgb(255, 255, 255) 
+        div.services_item-text [161,8743 300x213]  
+          h3. [161,8743 300x162]  font=18px/27px w500 ls=-0.18px c=rgb(255, 255, 255) «Buy smarter with expert agents backed by mortgage,»
+        div.services_item-more [627,8743 732x180] flex gap=normal jc=space-between 
+          span. [627,8747 287x171]  font=180px/171px w400 ls=-9px c=rgb(255, 255, 255) «Buy»
+    button.services_item [0,8996 1440x300] pad=1px 6px bt=1px rgb(56, 58, 58) 
+      div.container_container [6,8998 1428x297] grid=34.5px 421.5px 732px gap=45px pad=45px 75px 39px 
+        div.services_item-bg [-36,8989 1512x314] bg=rgb(26, 28, 28) clip=inset(100% 0px 0px) 
+          img. [-36,8989 1512x314] MEDIA image fit=cover 
+        div.services_item-num [81,9043 35x35] rad=50% grid=6.625px gap=normal bt=1px rgb(255, 255, 255) bb=1px rgb(255, 255, 255) 
+        div.services_item-text [161,9043 300x213]  
+          h3. [161,9043 300x135]  font=18px/27px w500 ls=-0.18px c=rgb(255, 255, 255) «Sell fast, sell high. Your listing gets pro stagin»
+        div.services_item-more [627,9043 732x180] flex gap=normal jc=space-between 
+          span. [627,9047 261x171]  font=180px/171px w400 ls=-9px c=rgb(255, 255, 255) «Sell»
+    button.services_item [0,9296 1440x300] pad=1px 6px bt=1px rgb(56, 58, 58) 
+      div.container_container [6,9298 1428x297] grid=34.5px 421.5px 732px gap=45px pad=45px 75px 39px 
+        div.services_item-bg [-36,9289 1512x314] bg=rgb(26, 28, 28) clip=inset(100% 0px 0px) 
+          img. [-36,9289 1512x314] MEDIA image fit=cover 
+        div.services_item-num [81,9343 35x35] rad=50% grid=6.92188px gap=normal bt=1px rgb(255, 255, 255) bb=1px rgb(255, 255, 255) 
+        div.services_item-text [161,9343 300x213]  
+          h3. [161,9343 300x162]  font=18px/27px w500 ls=-0.18px c=rgb(255, 255, 255) «Access hidden rentals before they hit the market t»
+        div.services_item-more [627,9343 732x180] flex gap=normal jc=space-between 
+          span. [627,9347 351x171]  font=180px/171px w400 ls=-9px c=rgb(255, 255, 255) «Rent»
+  div.container_container [0,9642 1440x188] pad=0px 75px 
+    div.services_brief [75,9642 582x114]  
+      div. [75,9642 582x114]  
+        div. [75,9642 568x38]  
+          div. [649,9645 0x38] bg=rgba(21, 23, 23, 0.8) 
+        div. [75,9680 536x38]  
+          span.em [444,9678 167x40]  font=33px/37.95px w500 ls=-0.66px c=rgba(255, 255, 255, 0.4) «with expert»
+          div. [616,9683 0x38] bg=rgba(21, 23, 23, 0.8) 
+        div. [75,9718 469x38]  
+          span.em [75,9716 469x40]  font=33px/37.95px w500 ls=-0.66px c=rgba(255, 255, 255, 0.4) «knowledge and reliable support.»
+          div. [549,9721 0x38] bg=rgba(21, 23, 23, 0.8) 
+    div. [75,9785 1290x44]  
+      div.services_action [75,9785 1290x44]  
+        button.button_button-round [75,9785 213x44] rad=100px pad=11.55px 22.5px bt=1px rgba(255, 255, 255, 0.5) bb=1px rgba(255, 255, 255, 0.5) 
+          div.button_content [99,9798 166x19] flex gap=10.5px jc=center 
+            div.button_button-round-text [99,9798 137x19]  
+              span. [99,9798 137x19]  font=13.5px/18.9px w500 ls=normal c=rgb(255, 255, 255) «Get Started with FIND»
+            span.button_icon-after [246,9798 18x18] flex gap=normal jc=center 
+
+section.features_root [0,9942 1440x815] bg=rgb(21, 23, 23) pad=112.5px 0px 
+  div.container_container [0,10054 1440x590] pad=0px 75px 
+    div.features_grid [75,10054 1290x162] grid=528px 732px gap=30px 
+      div. [75,10054 528x162]  
+        div.features_title [75,10054 528x162]  
+          h2. [75,10054 528x162]  
+            div. [75,10054 528x162]  
+              div. [75,10054 191x54]  
+                div. [268,10060 0x54] bg=rgba(21, 23, 23, 0.8) 
+              div. [75,10108 346x54]  
+                span.em [261,10102 0x66]  
+                span.em [261,10102 161x66]  font=54px/54px w500 ls=-2.16px c=rgba(255, 255, 255, 0.4) «Buying»
+                div. [425,10114 0x54] bg=rgba(21, 23, 23, 0.8) 
+              div. [75,10162 253x54]  
+                span.em [75,10156 0x66]  
+                span.em [75,10156 253x66]  font=54px/54px w500 ls=-2.16px c=rgba(255, 255, 255, 0.4) «and Selling»
+                div. [330,10168 0x54] bg=rgba(21, 23, 23, 0.8) 
+      div. [633,10054 732x162]  
+        div.features_text [633,10054 732x83]  
+          p. [633,10054 732x83]  
+            span.em [633,10053 674x84]  font=24px/27.6px w500 ls=-0.72px c=rgba(255, 255, 255, 0.4) «Our experts offer continued support beyond the sal»
+        div.features_actions [633,10167 732x44]  
+          div. [633,10167 732x44]  
+            a.button_button-round [633,10167 213x44] bg=rgb(255, 255, 255) rad=100px pad=11.55px 22.5px bt=1px rgba(0, 0, 0, 0) bb=1px rgba(0, 0, 0, 0) 
+              div.button_content [657,10180 166x19] flex gap=10.5px jc=center 
+                div.button_button-round-text [657,10180 137x19]  
+                  span. [657,10180 137x19]  font=13.5px/18.9px w500 ls=normal c=rgb(21, 23, 23) «Discover Our Services»
+                span.button_icon-after [804,10180 18x18] flex gap=normal jc=center 
+    div.features_items [75,10291 1290x353] grid=415px 415px 415px gap=22.5px 
+      div.features_item [75,10291 415x353] grid=340px gap=11.25px pad=37.5px 
+        div.features_item-bg [75,10291 415x353]  
+          img. [73,10290 419x356] MEDIA image fit=cover 
+        div.features_item-title [113,10329 259x106]  
+          h3. [113,10329 259x76]  font=33px/37.95px w500 ls=-0.66px c=rgb(255, 255, 255) «Mortgage Services»
+        div.features_item-text [113,10446 259x75]  
+          p. [113,10446 259x45]  font=15px/22.5px w400 ls=normal c=rgb(255, 255, 255) «Helping you secure your dream home with flexible m»
+        div.features_item-more [113,10562 340x44]  
+          button.button_button-round [113,10562 147x44] rad=100px pad=11.55px 22.5px bt=1px rgba(255, 255, 255, 0.5) bb=1px rgba(255, 255, 255, 0.5) 
+            div.button_content [136,10575 100x19] flex gap=10.5px jc=center 
+              div.button_button-round-text [136,10575 71x19]  
+                span. [136,10575 71x19]  font=13.5px/18.9px w500 ls=normal c=rgb(255, 255, 255) «Learn More»
+              span.button_icon-after [218,10575 18x18] flex gap=normal jc=center 
+      div.features_item [513,10291 415x353] grid=340px gap=11.25px pad=37.5px 
+        div.features_item-bg [513,10291 415x353]  
+          img. [510,10290 419x356] MEDIA image fit=cover 
+        div.features_item-title [550,10329 259x106]  
+          h3. [550,10329 259x76]  font=33px/37.95px w500 ls=-0.66px c=rgb(255, 255, 255) «Property Management»
+        div.features_item-text [550,10446 259x75]  
+          p. [550,10446 259x45]  font=15px/22.5px w400 ls=normal c=rgb(255, 255, 255) «Let us handle the details so you can enjoy the rew»
+        div.features_item-more [550,10562 340x44]  
+          button.button_button-round [550,10562 147x44] rad=100px pad=11.55px 22.5px bt=1px rgba(255, 255, 255, 0.5) bb=1px rgba(255, 255, 255, 0.5) 
+            div.button_content [574,10575 100x19] flex gap=10.5px jc=center 
+              div.button_button-round-text [574,10575 71x19]  
+                span. [574,10575 71x19]  font=13.5px/18.9px w500 ls=normal c=rgb(255, 255, 255) «Learn More»
+              span.button_icon-after [655,10575 18x18] flex gap=normal jc=center 
+      div.features_item [950,10291 415x353] grid=340px gap=11.25px pad=37.5px 
+        div.features_item-bg [950,10291 415x353]  
+          img. [948,10290 419x356] MEDIA image fit=cover 
+        div.features_item-title [988,10329 259x124]  
+          h3. [988,10329 259x114]  font=33px/37.95px w500 ls=-0.66px c=rgb(255, 255, 255) «Construction and Real Estate Development»
+        div.features_item-text [988,10464 259x77]  
+          p. [988,10464 259x68]  font=15px/22.5px w400 ls=normal c=rgb(255, 255, 255) «Guiding you through the intricacies of building an»
+        div.features_item-more [988,10562 340x44]  
+          button.button_button-round [988,10562 147x44] rad=100px pad=11.55px 22.5px bt=1px rgba(255, 255, 255, 0.5) bb=1px rgba(255, 255, 255, 0.5) 
+            div.button_content [1011,10575 100x19] flex gap=10.5px jc=center 
+              div.button_button-round-text [1011,10575 71x19]  
+                span. [1011,10575 71x19]  font=13.5px/18.9px w500 ls=normal c=rgb(255, 255, 255) «Learn More»
+              span.button_icon-after [1093,10575 18x18] flex gap=normal jc=center 
+
+section.latest-posts_root [0,10756 1440x1588] bg=rgb(241, 241, 241) pad=112.5px 0px 
+  div.container_container [0,10869 1440x1363] pad=0px 75px 
+    div.latest-posts_grid [75,10869 1290x136] grid=528px 732px gap=30px 
+      div. [75,10869 528x136]  
+        div.latest-posts_title [75,10869 528x120]  
+          h2. [75,10869 528x120]  
+            div. [75,10869 528x120]  
+              div. [75,10869 169x60]  
+                span.em [201,10862 0x73]  
+                span.em [201,10862 43x73]  font=60px/60px w500 ls=-2.4px c=rgb(179, 179, 179) «&»
+                div. [246,10875 0x60] bg=rgba(241, 241, 241, 0.8) 
+              div. [75,10929 269x60]  
+                span.em [75,10922 0x73]  
+                span.em [75,10922 269x73]  font=60px/60px w500 ls=-2.4px c=rgb(179, 179, 179) «Resources»
+                div. [347,10935 0x60] bg=rgba(241, 241, 241, 0.8) 
+      div. [633,10869 732x136]  
+        div.latest-posts_text [633,10869 732x62]  
+          p. [633,10869 732x62]  font=24px/31.2px w500 ls=-0.24px c=rgb(0, 0, 0) «See how we’ve helped clients achieve their real es»
+        div.latest-posts_actions [633,10961 732x44]  
+          div. [633,10961 732x44]  
+            a.button_button-round [633,10961 161x44] bg=rgb(21, 23, 23) rad=100px pad=11.55px 22.5px bt=1px rgba(0, 0, 0, 0) bb=1px rgba(0, 0, 0, 0) 
+              div.button_content [657,10974 114x19] flex gap=10.5px jc=center 
+                div.button_button-round-text [657,10974 86x19]  
+                  span. [657,10974 86x19]  font=13.5px/18.9px w500 ls=normal c=rgb(255, 255, 255) «Visit Our Blog»
+                span.button_icon-after [753,10974 18x18] flex gap=normal jc=center 
+    div.latest-posts_items [75,11080 1290x1152] grid=1290px gap=0px bb=1px rgba(21, 23, 23, 0.1) 
+      div.latest-posts_item [75,11080 1290x384] pad=22.5px 0px bt=1px rgba(21, 23, 23, 0.1) 
+        div.post-entry_root [75,11104 1290x338]  
+          div.post-entry_grid [75,11104 1290x338] grid=535.5px 732px gap=22.5px 
+            div.post-entry_grid-col [633,11104 732x338]  
+              a.post-entry_thumbnail [633,11104 732x338]  
+                div.image_container [633,11104 732x338] flex gap=normal jc=normal 
+                  img.image_image [633,11104 732x338] MEDIA Untitled_design_2026_09_02_T035929_341_6ca6e73a0f. fit=cover 
+            div.post-entry_grid-col [75,11104 536x338] flex gap=normal jc=space-between 
+              div.post-entry_date [75,11104 536x23]  font=15px/22.5px w500 ls=normal c=rgb(0, 0, 0) «2026-09-02»
+              div. [75,11192 536x168]  
+                a.post-entry_title [75,11192 536x114]  font=33px/37.95px w500 ls=-0.66px c=rgb(0, 0, 0) «FIND Real Estate Featured in Redfin: What It Reall»
+                div.post-entry_text [75,11324 536x36]  
+                  p. [75,11324 536x36]  font=12px/18px w500 ls=normal c=rgb(0, 0, 0) «A look at the housing prices, everyday expenses, a»
+              div.post-entry_action [75,11397 536x44]  
+                a. [75,11417 143x9]  
+                  button.button_button-round [75,11397 143x44] bg=rgb(255, 255, 255) rad=100px pad=11.55px 22.5px bt=1px rgba(21, 23, 23, 0.3) bb=1px rgba(21, 23, 23, 0.3) 
+      div.latest-posts_item [75,11464 1290x384] pad=22.5px 0px bt=1px rgba(21, 23, 23, 0.1) 
+        div.post-entry_root [75,11487 1290x338]  
+          div.post-entry_grid [75,11487 1290x338] grid=535.5px 732px gap=22.5px 
+            div.post-entry_grid-col [633,11487 732x338]  
+              a.post-entry_thumbnail [633,11487 732x338]  
+                div.image_container [633,11487 732x338] flex gap=normal jc=normal 
+                  img.image_image [633,11487 732x338] MEDIA jonathan_gong_tl3jdt_Z_u_YM_unsplash_5f055e7e75.jp fit=cover 
+            div.post-entry_grid-col [75,11487 536x338] flex gap=normal jc=space-between 
+              div.post-entry_date [75,11487 536x23]  font=15px/22.5px w500 ls=normal c=rgb(0, 0, 0) «2026-04-01»
+              div. [75,11604 536x112]  
+                a.post-entry_title [75,11604 536x76]  font=33px/37.95px w500 ls=-0.66px c=rgb(0, 0, 0) «Philly Real Estate: A Winter Chill or a Spring Opp»
+                div.post-entry_text [75,11698 536x18]  
+                  p. [75,11698 536x18]  font=12px/18px w500 ls=normal c=rgb(0, 0, 0) «Record-low listings and steady price growth define»
+              div.post-entry_action [75,11781 536x44]  
+                a. [75,11800 143x9]  
+                  button.button_button-round [75,11781 143x44] bg=rgb(255, 255, 255) rad=100px pad=11.55px 22.5px bt=1px rgba(21, 23, 23, 0.3) bb=1px rgba(21, 23, 23, 0.3) 
+      div.latest-posts_item [75,11847 1290x384] pad=22.5px 0px bt=1px rgba(21, 23, 23, 0.1) 
+        div.post-entry_root [75,11871 1290x338]  
+          div.post-entry_grid [75,11871 1290x338] grid=535.5px 732px gap=22.5px 
+            div.post-entry_grid-col [633,11871 732x338]  
+              a.post-entry_thumbnail [633,11871 732x338]  
+                div.image_container [633,11871 732x338] flex gap=normal jc=normal 
+                  img.image_image [633,11871 732x338] MEDIA photo_1766546718103_da6823613fb0_5fbf6d061b.avif fit=cover 
+            div.post-entry_grid-col [75,11871 536x338] flex gap=normal jc=space-between 
+              div.post-entry_date [75,11871 536x23]  font=15px/22.5px w500 ls=normal c=rgb(0, 0, 0) «2025-12-25»
+              div. [75,11978 536x130]  
+                a.post-entry_title [75,11978 536x76]  font=33px/37.95px w500 ls=-0.66px c=rgb(0, 0, 0) «The New Year's Key: Why January is a Smart Time to»
+                div.post-entry_text [75,12072 536x36]  
+                  p. [75,12072 536x36]  font=12px/18px w500 ls=normal c=rgb(0, 0, 0) «Forget the spring market. The holidays clear the w»
+              div.post-entry_action [75,12164 536x44]  
+                a. [75,12184 143x9]  
+                  button.button_button-round [75,12164 143x44] bg=rgb(255, 255, 255) rad=100px pad=11.55px 22.5px bt=1px rgba(21, 23, 23, 0.3) bb=1px rgba(21, 23, 23, 0.3) 
+
+section.outro_root [0,12344 1440x675] flex gap=normal jc=center 
+  div.outro_bg [0,12344 1440x675]  
+    img. [-72,12311 1584x743] MEDIA image fit=cover 
+  div.container_container [218,12614 1004x136] pad=0px 75px 
+    div.outro_title [293,12614 854x62]  
+      h2. [293,12614 854x62]  
+        span.em [528,12612 619x66]  font=54px/62.1px w500 ls=-0.54px c=rgba(255, 255, 255, 0.7) «We’ll Help You Get There.»
+    div.outro_actions [293,12706 854x44]  
+      div. [293,12706 854x44]  
+        button.button_button-round [630,12706 180x44] bg=rgb(255, 255, 255) rad=100px pad=11.55px 22.5px bt=1px rgba(0, 0, 0, 0) bb=1px rgba(0, 0, 0, 0) 
+          div.button_content [653,12718 133x19] flex gap=10.5px jc=center 
+            div.button_button-round-text [653,12718 105x19]  
+              span. [653,12718 105x19]  font=13.5px/18.9px w500 ls=normal c=rgb(21, 23, 23) «Let’s Get Started»
+            span.button_icon-after [769,12719 18x18] flex gap=normal jc=center 
+
+section.listing-discovery_home [0,13019 1440x253] bg=rgb(255, 255, 255) pad=30px 0px 45px 
+  div.container_container [0,13049 1440x178] pad=0px 75px 
+    div.listing-discovery_heading [75,13049 1290x35] flex gap=12px jc=space-between 
+      h2. [75,13049 690x35]  font=30px/34.5px w600 ls=normal c=rgb(21, 23, 23) «Featured neighborhoods across the tri-state area»
+      a. [1207,13065 158x14]  font=12px/13.8px w400 ls=normal c=rgb(21, 23, 23) «Explore all neighborhoods →»
+    div.listing-discovery_neighborhoodGroups [75,13099 1290x128] grid=414px 414px 414px gap=24px 
+      div. [75,13099 414x128]  
+        h3. [75,13099 414x17]  font=15px/17.25px w600 ls=normal c=rgb(21, 23, 23) «New York»
+        ul. [75,13128 414x99] grid=414px gap=9px 
+          li. [75,13128 414x18]  
+            a. [75,13129 73x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «Williamsburg»
+          li. [75,13155 414x18]  
+            a. [75,13156 39x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «Astoria»
+          li. [75,13182 414x18]  
+            a. [75,13183 45x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «Chelsea»
+          li. [75,13209 414x18]  
+            a. [75,13210 93x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «Upper West Side»
+      div. [513,13099 414x128]  
+        h3. [513,13099 414x17]  font=15px/17.25px w600 ls=normal c=rgb(21, 23, 23) «New Jersey»
+        ul. [513,13128 414x72] grid=414px gap=9px 
+          li. [513,13128 414x18]  
+            a. [513,13129 50x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «Hoboken»
+          li. [513,13155 414x18]  
+            a. [513,13156 122x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «Downtown Jersey City»
+          li. [513,13182 414x18]  
+            a. [513,13183 68x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «Weehawken»
+      div. [951,13099 414x128]  
+        h3. [951,13099 414x17]  font=15px/17.25px w600 ls=normal c=rgb(21, 23, 23) «Connecticut»
+        ul. [951,13128 414x72] grid=414px gap=9px 
+          li. [951,13128 414x18]  
+            a. [951,13129 79x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «West Hartford»
+          li. [951,13155 414x18]  
+            a. [951,13156 111x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «Hartford's West End»
+          li. [951,13182 414x18]  
+            a. [951,13183 68x15]  font=12px/18px w400 ls=normal c=rgb(21, 23, 23) «Glastonbury»

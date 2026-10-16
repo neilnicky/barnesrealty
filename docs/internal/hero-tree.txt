@@ -1,0 +1,62 @@
+section.hero_root__N0Loz [0,-15 1440x4500] pos=relative z=auto op=1 tf=-     txt=
+  div.hero_top__WegWw [0,0 1440x900] pos=sticky z=auto op=1 tf=-     txt=
+    div.hero_bg__S_r_n [0,0 1440x900] pos=absolute z=auto op=1 tf=-     txt=
+      div.hero_back__8ReFI [0,0 1440x900] pos=absolute z=auto op=1 tf=matrix(1, 0, 0, 1, 0, 0)     txt=
+        img [0,0 1440x900] pos=static z=auto op=1 tf=- src=%2F_next%2Fstatic%2Fmedia%2Fback.f53e9773.jpg    txt=
+      div.hero_house__aJy7p [-1,534 1443x1284] pos=absolute z=1 op=1 tf=matrix(1.002, 0, 0, 1.002, 0, -3.41002)     txt=
+        img [-1,534 1443x1284] pos=static z=auto op=1 tf=matrix(1, 0, 0, 1, 0, 0) src=%2F_next%2Fstatic%2Fmedia%2Fhouse.8ed9b3db.png    txt=
+      div.hero_composite__3blHB [0,0 1440x900] pos=absolute z=1 op=0 tf=-  MASK=url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0    txt=
+        div.hero_house__aJy7p [-1,534 1443x1284] pos=absolute z=1 op=1 tf=matrix(1.002, 0, 0, 1.002, 0, -3.41002)     txt=
+          img [-1,534 1443x1284] pos=static z=auto op=1 tf=matrix(1, 0, 0, 1, 0, 0) src=%2F_next%2Fstatic%2Fmedia%2Fhouse.8ed9b3db.png    txt=
+      div.hero_clouds__bC7V4 [0,0 1440x900] pos=absolute z=2 op=1 tf=-     txt=
+        div.hero_cloud__TvA3o [-254,225 843x358] pos=absolute z=2 op=1 tf=matrix(1, 0, 0, 1, -0.841314, 0)     txt=
+          img [-254,225 843x358] pos=static z=auto op=1 tf=- src=%2F_next%2Fstatic%2Fmedia%2Fcloud.c8800fa9.png    txt=
+        div.hero_cloud__TvA3o [992,180 702x298] pos=absolute z=2 op=1 tf=matrix(1, 0, 0, 1, 0.700596, 0)     txt=
+          img [992,180 702x298] pos=static z=auto op=1 tf=- src=%2F_next%2Fstatic%2Fmedia%2Fcloud.c8800fa9.png    txt=
+      div.hero_logo__FxgRj [354,291 733x317] pos=absolute z=1 op=0 tf=-     txt=
+        svg [354,291 733x317] pos=static z=auto op=1 tf=-     txt=
+          g [354,292 731x315] pos=static z=auto op=1 tf=-     txt=
+            path [881,292 205x210] pos=static z=auto op=1 tf=-     txt=
+            path [656,292 204x210] pos=static z=auto op=1 tf=-     txt=
+            path [530,292 106x210] pos=static z=auto op=1 tf=-     txt=
+            path [354,292 183x210] pos=static z=auto op=1 tf=-     txt=
+            path [788,537 38x71] pos=static z=auto op=1 tf=-     txt=
+            path [879,537 38x71] pos=static z=auto op=1 tf=-     txt=
+            path [739,553 48x54] pos=static z=auto op=1 tf=-     txt=
+            path [681,532 55x74] pos=static z=auto op=1 tf=-     txt=
+            path [643,532 14x74] pos=static z=auto op=1 tf=-     txt=
+            path [587,553 292x54] pos=static z=auto op=1 tf=-     txt=
+            path [528,553 55x54] pos=static z=auto op=1 tf=-     txt=
+            path [918,553 55x54] pos=static z=auto op=1 tf=-     txt=
+            path [468,532 62x74] pos=static z=auto op=1 tf=-     txt=
+      div.hero_smoke__8za_R [0,758 1440x465] pos=absolute z=3 op=1 tf=matrix(1, 0, 0, 1, 0, 323.334)     txt=
+        img [0,758 1440x465] pos=static z=auto op=1 tf=- src=%2F_next%2Fstatic%2Fmedia%2Fsmoke.9f683cb4.png    txt=
+    div.hero_content__DK_Ny [1,2 1439x899] pos=relative z=auto op=0.9669 tf=matrix(0.9993, 0, 0, 0.9993, 0, 1.1979)     txt=
+      div.container_container__v5gtR [128,253 1183x225] pos=static z=auto op=1 tf=-     txt=
+        div.hero_title__JpmHS [203,253 1033x105] pos=static z=auto op=1 tf=-     txt=
+          h1 [203,253 1033x105] pos=static z=auto op=1 tf=-     txt=
+            div [188,238 244x136] pos=relative z=auto op=1 tf=-     txt=
+              div [203,253 212x105] pos=relative z=auto op=1 tf=matrix(1, 0, 0, 1, 0, 0)     txt=Find
+            div [418,238 301x136] pos=relative z=auto op=1 tf=-     txt=
+              div [433,253 270x105] pos=relative z=auto op=1 tf=matrix(1, 0, 0, 1, 0, 0)     txt=What
+            div [705,238 345x136] pos=relative z=auto op=1 tf=-     txt=
+              div [721,253 314x105] pos=relative z=auto op=1 tf=matrix(1, 0, 0, 1, 0, 0)     txt=Moves
+            div [1037,238 216x136] pos=relative z=auto op=1 tf=-     txt=
+              div [1053,253 184x105] pos=relative z=auto op=1 tf=matrix(1, 0, 0, 1, 0, 0)     txt=You
+        div.hero_text__R6LQ5 [203,373 1033x31] pos=static z=auto op=1 tf=matrix(1, 0, 0, 1, 0, 0)     txt=
+          p [203,373 1033x31] pos=static z=auto op=1 tf=-     txt=
+            span.em [714,374 337x29] pos=static z=auto op=1 tf=-     txt=A clear path to find what’s next.
+        div.hero_actions__RlphJ [203,434 1033x44] pos=static z=auto op=1 tf=matrix(1, 0, 0, 1, 0, 0)     txt=
+          div [634,434 172x44] pos=static z=auto op=1 tf=-     txt=
+            button.button_button-round__TFjlU.button_color-primary__JJ7Hh [634,434 172x44] pos=relative z=auto op=1 tf=-     txt=
+              div.button_content__6Zh3n [658,447 125x19] pos=static z=auto op=1 tf=-     txt=
+                div.button_button-round-text__IEwW5 [658,447 96x19] pos=static z=auto op=1 tf=-     txt=
+                  span [658,447 96x19] pos=relative z=auto op=1 tf=-     txt=Find Properties
+                span.button_icon-after__vljdM [764,447 18x18] pos=static z=auto op=1 tf=-     txt=
+                  svg [764,447 18x18] pos=static z=auto op=1 tf=-     txt=
+                    path [767,451 13x11] pos=static z=auto op=1 tf=-     txt=
+  div [0,885 1440x0] pos=static z=auto op=1 tf=-     txt=
+    div.hero_overlap__d3EJV [0,-15 1440x3600] pos=absolute z=auto op=1 tf=-     txt=
+      div.hero_smoke__8za_R [0,3120 1440x465] pos=absolute z=3 op=1 tf=-     txt=
+        img [0,3120 1440x465] pos=static z=auto op=1 tf=- src=%2F_next%2Fstatic%2Fmedia%2Fsmoke.9f683cb4.png    txt=
+      div.hero_overlay__7ubgG [0,3353 1440x232] pos=absolute z=3 op=1 tf=-     txt=
