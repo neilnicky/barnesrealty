@@ -1,0 +1,21 @@
+import { startRuntime } from "./runtime";
+import { initHeader } from "./header";
+import { initHero } from "./hero";
+import { initLines } from "./lines";
+import { initReveal } from "./reveal";
+import { initParallax } from "./parallax";
+import { initForms } from "@/scripts/forms";
+import { initGallery } from "@/scripts/gallery";
+import { initLead } from "@/scripts/lead";
+import { initCarousel } from "@/scripts/carousel";
+
+startRuntime();
+initHeader();
+initHero();
+initLines();
+initReveal();
+initParallax();
+initForms();
+initGallery();
+initLead();
+initCarousel();

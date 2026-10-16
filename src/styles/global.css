@@ -1,0 +1,318 @@
+/*
+ * Design tokens mirror findrealestate.com (measured 15 Oct 2026, see
+ * docs/find-replica-spec.md). 1rem = 100vw/192 on desktop (7.5px at 1440),
+ * 100vw/37.5 on phones (10.4px at 390).
+ */
+
+:root {
+  --ink: #151717;
+  --black: #000;
+  --ink-muted: #b3b3b3;
+  --ink-soft: rgb(21 23 23 / 0.6);
+  --white: #fff;
+  --paper: #f1f1f1;
+  --night: #151717;
+  --line: rgb(21 23 23 / 0.1);
+  --veil: rgb(255 255 255 / 0.8);
+
+  --sans: "Instrument Sans Variable", "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Lora Variable", Lora, Georgia, serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-settle: cubic-bezier(0.5, 1, 0.89, 1);
+
+  --gutter: 10rem;
+  --section: 15rem;
+  --max: 1920px;
+  --header-h: 58.5px;
+
+  /* Legacy aliases used by the property and valuation pages. */
+  --stone: var(--white);
+  --red: var(--ink);
+  --display: var(--sans);
+  --line-night: rgb(255 255 255 / 0.15);
+  --night-muted: rgb(255 255 255 / 0.4);
+}
+
+html {
+  font-size: calc(100vw / 192);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--white);
+}
+
+@media (max-width: 767px) {
+  html {
+    font-size: calc(100vw / 37.5);
+  }
+
+  :root {
+    --gutter: 2.5rem;
+    --section: 6rem;
+    --header-h: 64px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img,
+svg,
+video,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.tone-night :focus-visible,
+.on-dark :focus-visible {
+  outline-color: var(--white);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 18px;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ layout */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section);
+}
+
+/* FIND's asymmetric split: 528 | 30 | 732 at 1440. */
+.split {
+  display: grid;
+  grid-template-columns: 70.4rem 97.6rem;
+  column-gap: 4rem;
+  justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+  .split {
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+  }
+}
+
+.tone-paper {
+  background: var(--paper);
+  --veil: rgb(241 241 241 / 0.8);
+}
+
+.tone-night {
+  background: var(--night);
+  color: var(--white);
+  --ink-muted: rgb(255 255 255 / 0.4);
+  --ink-soft: rgb(255 255 255 / 0.7);
+  --line: rgb(56 58 58);
+  --veil: rgb(21 23 23 / 0.8);
+}
+
+/* -------------------------------------------------------------- typography */
+
+.label {
+  font-size: 2rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.display {
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.display-xl {
+  font-size: 14rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.display-l {
+  font-size: 7.2rem;
+}
+
+.display-m {
+  font-size: 5.6rem;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.display-s {
+  font-size: 4.4rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.body-l {
+  font-size: 3.2rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 767px) {
+  .label {
+    font-size: 1.44rem;
+  }
+
+  .display-l {
+    font-size: 3.6rem;
+  }
+
+  .display-m {
+    font-size: 2.8rem;
+  }
+
+  .display-s {
+    font-size: 2.2rem;
+  }
+
+  .body-l {
+    font-size: 1.8rem;
+  }
+}
+
+.tail,
+.em {
+  color: var(--ink-muted);
+}
+
+.tail-break {
+  display: block;
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+
+.rule {
+  display: block;
+  width: 6rem;
+  height: 1px;
+  background: currentColor;
+}
+
+/* Line-by-line veil reveal (lines.ts). Each line gets a veil in the
+   section's background colour that shrinks from full width to zero. */
+.ln {
+  position: relative;
+  display: block;
+}
+
+.ln__veil {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--w, 100%);
+  background: var(--veil);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------- reveals */
+
+.js-motion [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 4rem, 0);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+  transition-delay: var(--delay, 0ms);
+}
+
+.js-motion [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
