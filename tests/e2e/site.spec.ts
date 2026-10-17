@@ -31,6 +31,16 @@ test("home renders the FIND section sequence without errors or overflow", async 
   expect(errors).toEqual([]);
 });
 
+test("responsive images ship as WebP only (AVIF encoding stalls host builds)", async ({ page }) => {
+  await page.goto("/");
+  const sources = await page.locator("picture source, picture img").evaluateAll((els) =>
+    els.map((e) => `${e.getAttribute("type") ?? ""} ${e.getAttribute("srcset") ?? ""} ${e.getAttribute("src") ?? ""}`),
+  );
+  expect(sources.length).toBeGreaterThan(0);
+  for (const s of sources) expect(s).not.toMatch(/avif/i);
+  expect(sources.some((s) => /webp/.test(s))).toBe(true);
+});
+
 test("hero is pinned and resolves into the BARNES lockup while scrolling", async ({ page }, info) => {
   test.skip(info.project.name !== "desktop", "measured at 1440");
   await page.goto("/");
