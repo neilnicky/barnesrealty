@@ -1,10 +1,17 @@
-# BARNES — website concept
+# Dubai luxury real estate — website template
 
-A pitch build for **BARNES International Realty**, the client behind instagram.com/barnesrealty. It is a faithful recreation of findrealestate.com (layout, typography, scroll choreography, and the pinned building-into-clouds hero), with only the content swapped for BARNES. See `docs/find-replica-spec.md`.
+A faithful recreation of findrealestate.com (layout, typography, scroll choreography and the pinned building-into-clouds hero), with content for a **Dubai luxury real estate agency**. The client brand will be added later. See `docs/find-replica-spec.md`.
 
-The hero scene (penthouse, sky, clouds, fog) is **AI-generated and illustrative**. It is not a BARNES listing.
+## Rebranding
 
-Every property, price, agency and phone number shown here is real. Each was captured from barnes-international.com on 15 Oct 2026.
+- **Name:** change `BRAND` in `src/content/barnes-content.ts` (currently the placeholder `"BARNES"`). Every title, label, meta tag and footer line reads from it.
+- **Logo:** replace `public/brand/barnes-wordmark.svg` (header and footer) and `public/brand/barnes-lockup.svg` (the hero mask: wordmark over "Dubai Real Estate"). If the new lockup has a different aspect ratio, update the two `mask-size` values in `src/components/Hero.astro`.
+- **Contact details:** the phone (`+971 4 000 0000`) and "Office address" are placeholders in the same file.
+
+## Template content (replace before launch)
+
+- **Residences:** the 7 Dubai residences (communities, prices in AED, sq ft areas, descriptions), the advisor, the insight articles and the values are sample copy.
+- **Photos:** residence and editorial photos in `src/assets/properties/` are interim imagery of non-Dubai homes. They must be replaced with the agency's own photography. The hero scene is AI-generated and illustrative.
 
 ## Run
 

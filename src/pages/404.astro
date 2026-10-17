@@ -1,12 +1,13 @@
 ---
 import Base from "@/layouts/Base.astro";
 import Button from "@/components/Button.astro";
+import { BRAND } from "@/content/barnes-content";
 ---
 
-<Base title="Page not found | BARNES" description="This page does not exist.">
+<Base title={`Page not found | ${BRAND}`} description="This page does not exist.">
   <section class="nf wrap">
     <p class="label">404</p>
-    <h1 class="display display-l">This address <span class="tail">is not in our selection.</span></h1>
+    <h1 class="display display-l">This address <span class="tail">is not in our collection.</span></h1>
     <span class="rule"></span>
     <div class="nf__ctas">
       <Button href="/">Back to the home page</Button>

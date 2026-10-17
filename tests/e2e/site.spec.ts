@@ -23,7 +23,7 @@ const noHorizontalOverflow = async (page: Page) =>
 test("home renders the FIND section sequence without errors or overflow", async ({ page }) => {
   const errors = errorsOf(page);
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Find\s*Yours,\s*Worldwide/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Find\s*Yours\s*in\s*Dubai/);
   for (const id of ["why-label", "arw-title", "stp-title", "net-title", "val-title", "svc-title", "feat-title", "nws-title", "outro-title", "dst-title"]) {
     await expect(page.locator(`#${id}`)).toBeAttached();
   }
@@ -67,7 +67,7 @@ test("lead modal: triggers preset the deal type, step one validates, nothing is 
   await expect(dialog.locator("#lead-email")).toBeFocused();
 
   await dialog.locator("#lead-email").fill("visitor@example.com");
-  await dialog.locator("#lead-phone").fill("+33 6 12 34 56 78");
+  await dialog.locator("#lead-phone").fill("+971 50 000 0000");
   await dialog.locator('[name="minPrice"]').fill("3000000");
   await dialog.locator('[name="maxPrice"]').fill("1000000");
   await dialog.getByRole("button", { name: /Next/ }).click();
@@ -89,7 +89,7 @@ test("values carousel switches with bullets and arrow keys", async ({ page }) =>
   await expect(slides.nth(0)).toBeVisible();
   await page.locator('[data-bullet="2"]').click();
   await expect(slides.nth(2)).toBeVisible();
-  await expect(slides.nth(2)).toContainText("Without the elegance of the heart");
+  await expect(slides.nth(2)).toContainText("Private viewings");
   await page.keyboard.press("ArrowRight");
   await expect(slides.nth(3)).toBeVisible();
   await expect(page.locator('[data-bullet="3"]')).toBeFocused();
@@ -117,7 +117,7 @@ test("mobile menu traps the page and closes with Escape", async ({ page }, info)
   await expect(toggle).toHaveAttribute("aria-expanded", "false");
   await expect(toggle).toBeFocused();
   await toggle.click();
-  await page.locator("#menu").getByRole("link", { name: "Destinations" }).click();
+  await page.locator("#menu").getByRole("link", { name: "Communities" }).click();
   await expect(page).toHaveURL(/\/destinations\/$/);
 });
 
@@ -125,15 +125,15 @@ test("destinations lists every listing and links to detail pages that survive a 
   await page.goto("/destinations/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Places we love to call home.");
   await expect(page.locator("#featured li")).toHaveCount(7);
-  await page.locator('#france a[href="/properties/apm-87067773/"]').first().click();
-  await expect(page).toHaveURL(/\/properties\/apm-87067773\/$/);
+  await page.locator('#villas a[href="/properties/al-barari-private-estate/"]').first().click();
+  await expect(page).toHaveURL(/\/properties\/al-barari-private-estate\/$/);
   await page.reload();
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("A château between forest and Seine");
-  await expect(page.getByText("€8,900,000")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("A private estate among the gardens");
+  await expect(page.getByText("AED 46,000,000")).toBeVisible();
 });
 
 test("property gallery opens, steps with the keyboard and returns focus", async ({ page }) => {
-  await page.goto("/properties/apm-87353841/");
+  await page.goto("/properties/emirates-hills-mansion/");
   const opener = page.locator('[data-open-gallery="0"]');
   await opener.click();
   const dialog = page.locator("[data-gallery]");
@@ -147,14 +147,14 @@ test("property gallery opens, steps with the keyboard and returns focus", async 
 });
 
 test("property enquiry validates and never reports a send without an endpoint", async ({ page }) => {
-  await page.goto("/properties/apm-87357422/");
+  await page.goto("/properties/city-walk-townhouse/");
   const form = page.locator('form[data-form="enquiry"]');
   await form.getByRole("button", { name: /Send enquiry/ }).click();
   await expect(form.locator('[data-error-for="name"]')).toHaveText("Please enter your name.");
   await form.locator("#f-name").fill("Test Visitor");
   await form.locator("#f-email").fill("visitor@example.com");
   await form.getByRole("button", { name: /Send enquiry/ }).click();
-  await expect(form.locator("[data-form-status]")).toContainText("+44 20 7935 5797");
+  await expect(form.locator("[data-form-status]")).toContainText("+971 4 000 0000");
 });
 
 test("newsletter field is honest about its integration state", async ({ page }) => {
@@ -197,7 +197,7 @@ test("every link on the built pages is internal and resolves", async ({ page, re
   test.skip(info.project.name !== "desktop", "crawl once");
   test.setTimeout(120_000);
   const hrefs = new Set<string>();
-  for (const path of ["/", "/destinations/", "/properties/apm-87353841/", "/sell/"]) {
+  for (const path of ["/", "/destinations/", "/properties/emirates-hills-mansion/", "/sell/"]) {
     await page.goto(path);
     for (const h of await page.locator("a[href]").evaluateAll((as) => as.map((a) => a.getAttribute("href")!))) hrefs.add(h);
   }
@@ -212,10 +212,26 @@ test("every link on the built pages is internal and resolves", async ({ page, re
 });
 
 test("coming-soon pages are minimal and lead back into the site", async ({ page }) => {
-  await page.goto("/agencies/");
+  await page.goto("/advisors/");
   await expect(page.getByText("Coming soon")).toBeVisible();
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Find an agency");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Our advisors");
   await noHorizontalOverflow(page);
   await page.getByRole("link", { name: /Back to Home/ }).click();
   await expect(page).toHaveURL(/\/$/);
+});
+
+test("rendered pages carry no French or legacy-brand references (text and metadata)", async ({ page }, info) => {
+  test.skip(info.project.name !== "desktop", "scan once");
+  const forbidden = [/french/i, /france/i, /paris/i, /ch[aâ]teau/i, /1995/, /riviera/i, /provence/i, /europe/i, /barnes-international/i, /€/];
+  for (const path of ["/", "/destinations/", "/properties/emirates-hills-mansion/", "/properties/al-barari-private-estate/", "/sell/", "/advisors/"]) {
+    await page.goto(path);
+    const text = await page.evaluate(() => {
+      const meta = [...document.querySelectorAll("meta[content], [alt], [aria-label], [placeholder], title")].map((e) =>
+        [e.getAttribute("content"), e.getAttribute("alt"), e.getAttribute("aria-label"), e.getAttribute("placeholder"), e.textContent].join(" "),
+      );
+      return document.body.innerText + " " + meta.join(" ");
+    });
+    for (const word of forbidden) expect(text, `${path} ${word}`).not.toMatch(word);
+    expect(text).toMatch(/Dubai|AED|UAE/);
+  }
 });

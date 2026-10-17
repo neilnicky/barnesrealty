@@ -1,5 +1,6 @@
 ---
-/** The BARNES wordmark, inline so it inherits currentColor. Traced from the official raster (see docs). */
+/** Brand wordmark (placeholder: swap public/brand/barnes-wordmark.svg), inline so it inherits currentColor. */
+import { BRAND } from "@/content/barnes-content";
 import raw from "../../public/brand/barnes-wordmark.svg?raw";
 
 interface Props {
@@ -7,10 +8,10 @@ interface Props {
   title?: string;
 }
 
-const { class: className, title = "BARNES" } = Astro.props;
+const { class: className, title = BRAND } = Astro.props;
 const svg = raw
   .replace('fill="#000000"', 'fill="currentColor"')
-  .replace('role="img" aria-label="BARNES"', `role="img" aria-label="${title}" focusable="false"`)
+  .replace(/role="img" aria-label="[^"]*"/, `role="img" aria-label="${title}" focusable="false"`)
   .replace("<svg", `<svg class="${className ?? ""}"`);
 ---
 

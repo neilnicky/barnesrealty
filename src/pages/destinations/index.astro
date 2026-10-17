@@ -1,7 +1,7 @@
 ---
 import Base from "@/layouts/Base.astro";
 import Img from "@/components/Img.astro";
-import { formatPrice, formatSurface, listings, listingSlug, listingsCapturedOn, shot, type Listing } from "@/content/barnes-content";
+import { BRAND, formatPrice, formatSurface, listings, listingSlug, regions, shot, type Listing } from "@/content/barnes-content";
 
 const mosaic = [
   shot("APM-87353841", 0),
@@ -12,32 +12,31 @@ const mosaic = [
   shot("APM-87357422", 0),
 ];
 
-/** Verifiable facts only (see docs/brand-identity-verification.md). */
+/** Counted from the content, so they stay true as residences change. */
+const communities = new Set(listings.map((l) => l.place)).size;
 const stats = [
-  { value: "1995", label: "Founded in Paris" },
-  { value: "26", label: "Countries in the agency directory" },
-  { value: "5", label: "Languages on barnes-international.com" },
-  { value: String(listings.length), label: "Featured addresses" },
+  { value: String(listings.length), label: "Featured residences" },
+  { value: String(communities), label: "Prime communities" },
+  { value: String(new Set(listings.map((l) => l.type)).size), label: "Residence types" },
+  { value: "1", label: "Dedicated advisor for every client" },
 ];
 
-const groups: { name: string; id: string; items: Listing[] }[] = [
-  { name: "France", id: "france", items: listings.filter((l) => l.country === "France") },
-  { name: "International", id: "international", items: listings.filter((l) => l.country !== "France") },
-];
+const groups: { name: string; id: string; items: Listing[] }[] = regions
+  .map((r) => ({ name: r.label, id: r.id, items: listings.filter((l) => l.region === r.id) }))
+  .filter((g) => g.items.length > 0);
 
 const chips = (l: Listing) => [l.type, formatSurface(l.surfaceM2), l.bedrooms ? `${l.bedrooms} bedrooms` : null, formatPrice(l.price)].filter(Boolean) as string[];
-const captured = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(listingsCapturedOn));
 ---
 
-<Base title="Destinations | BARNES" description="Places we love to call home: the destinations behind the current BARNES selection, from Paris and Provence to Ibiza and London.">
+<Base title={`Communities | ${BRAND}`} description="Places we love to call home: villas, penthouses and waterfront estates across Dubai’s prime communities.">
   <section class="dp">
     <div class="wrap">
       <div class="dp__hero">
         <header class="dp__intro">
-          <p class="dp__eyebrow">Destinations</p>
+          <p class="dp__eyebrow">Communities</p>
           <h1 class="dp__title">Places we love to call home.</h1>
-          <p class="dp__lede">BARNES agencies live and work in every destination they serve. These are the places behind our current selection — a short list, not a directory.</p>
-          <a class="dp__btn" href="#france">Explore the destinations ↓</a>
+          <p class="dp__lede">Our advisors live and work in every community we serve. These are the places behind our current collection — a short list, not a directory.</p>
+          <a class="dp__btn" href="#featured">Explore the communities ↓</a>
         </header>
         <div class="dp__mosaic">
           {mosaic.map((image, i) => (
@@ -53,15 +52,15 @@ const captured = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long
       </dl>
 
       <section class="dp__busiest" id="featured" aria-labelledby="featured-title">
-        <h2 class="dp__section-title" id="featured-title">Featured addresses</h2>
-        <p class="dp__section-lede">Live BARNES listings, as published on {captured}.</p>
+        <h2 class="dp__section-title" id="featured-title">Featured residences</h2>
+        <p class="dp__section-lede">A curated selection of residences across Dubai.</p>
         <ul class="dp__row">
           {listings.map((l) => (
             <li>
               <a class="dp__card" href={`/properties/${listingSlug(l.ref)}/`}>
                 <figure class="dp__photo"><Img image={l.cover} sizes="(max-width: 767px) 80vw, 22vw" widths={[400, 700]} /></figure>
                 <span class="dp__card-text">
-                  <span class="dp__market">{l.country}</span>
+                  <span class="dp__market">{l.region === "city" ? "City Living" : l.region === "villas" ? "Villa Community" : "Waterfront"}</span>
                   <span class="dp__name">{l.place}</span>
                   <span class="dp__deals">{formatPrice(l.price)} · {l.type}</span>
                 </span>

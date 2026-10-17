@@ -1,7 +1,8 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { propertyImages } from "@/content/asset-manifest";
-import { brand, comingSoon, findListing, footer, formatPrice, formatSurface, home, links, listings, listingSlug, navigation, officialListingPath, regions } from "@/content/barnes-content";
+import * as content from "@/content/barnes-content";
+import { BRAND, brand, brochurePath, comingSoon, findListing, footer, formatPrice, formatSurface, home, links, listings, listingSlug, navigation, regions } from "@/content/barnes-content";
 
 const asset = (file: string) => new URL(`../../src/assets/${file}`, import.meta.url);
 
@@ -17,8 +18,11 @@ describe("listings", () => {
       expect(l.price.amount).toBeGreaterThan(0);
       expect(l.surfaceM2).toBeGreaterThan(0);
       expect(l.description.length).toBeGreaterThan(0);
-      expect(l.officialUrl).toMatch(new RegExp(`^https://www\\.barnes-international\\.com/en/.+ref-${l.ref}\\.html$`));
-      expect(l.agency.phone.href).toMatch(/^tel:\+\d{8,}$/);
+      expect(l.slug).toMatch(/^[a-z0-9-]+$/);
+      expect(l.code).toMatch(/^DXB-\d{4}$/);
+      expect(l.price.currency).toBe("AED");
+      expect(l.country).toBe("United Arab Emirates");
+      expect(l.agency.phone.href).toMatch(/^tel:\+971\d{7,}$/);
       expect(regions.map((r) => r.id)).toContain(l.region);
       expect(l.gallery.length).toBeGreaterThanOrEqual(6);
     }
@@ -60,9 +64,24 @@ describe("assets", () => {
 });
 
 describe("content integrity", () => {
-  it("values are BARNES's five published values", () => {
-    expect(home.values.items.map((v) => v.name)).toEqual(["Trust", "Excellence", "Elegance", "Vision", "Global support"]);
+  it("has five values", () => {
+    expect(home.values.items).toHaveLength(5);
     expect(home.values.items).toBe(brand.values);
+  });
+
+  it("is a Dubai template: no French or legacy-brand references anywhere in the content", () => {
+    // `source` is internal provenance for interim photos and is never rendered.
+    const text = JSON.stringify(content, (key, value) => (key === "source" ? undefined : value));
+    for (const word of [/french/i, /france/i, /paris/i, /ch[aâ]teau/i, /1995/, /riviera/i, /provence/i, /europe/i, /art de vivre/i, /barnes-international/i, /€/, /\+33/]) {
+      expect(text, String(word)).not.toMatch(word);
+    }
+    expect(text).toMatch(/Dubai/);
+  });
+
+  it("uses the placeholder brand everywhere through BRAND", () => {
+    expect(brand.name).toBe(BRAND);
+    expect(home.why.label).toBe(`Why ${BRAND}`);
+    expect(footer.copyright).toContain(BRAND);
   });
 
   it("every rendered link stays on the site: built pages or a registered coming-soon page", () => {
@@ -78,7 +97,7 @@ describe("content integrity", () => {
       home.network.cta.href,
       home.steps.cta.href,
       home.features.cta.href,
-      ...listings.map(officialListingPath),
+      ...listings.map(brochurePath),
     ];
     const built = (h: string) => h === "/" || h === "/sell/" || h.startsWith("/destinations/") || h.startsWith("/properties/") || h.startsWith("/#") || h in comingSoon;
     hrefs.forEach((h) => {
@@ -87,14 +106,12 @@ describe("content integrity", () => {
     });
   });
 
-  it("coming-soon pages have clean, unique paths and keep their official source", () => {
+  it("coming-soon pages have clean paths and titles", () => {
     for (const [path, page] of Object.entries(comingSoon)) {
       expect(path).toMatch(/^\/[a-z0-9-/]+\/$/);
       expect(page.title.length).toBeGreaterThan(2);
-      expect(page.source ?? "").toMatch(/^https:\/\//);
     }
     expect(Object.keys(comingSoon).length).toBeGreaterThan(30);
-    expect(brand.social.length).toBe(5);
   });
 
   it("service rows map to the lead modal's deal types", () => {
@@ -103,9 +120,8 @@ describe("content integrity", () => {
 });
 
 describe("formatting", () => {
-  it("formats prices in their listing currency", () => {
-    expect(formatPrice({ amount: 4_750_000, currency: "GBP" })).toBe("£4,750,000");
-    expect(formatPrice({ amount: 20_700_000, currency: "EUR" })).toBe("€20,700,000");
-    expect(formatSurface(1200)).toBe("1,200 m²");
+  it("formats prices in AED and areas in sq ft", () => {
+    expect(formatPrice({ amount: 68_000_000, currency: "AED" })).toBe("AED 68,000,000");
+    expect(formatSurface(1250)).toBe("13,450 sq ft");
   });
 });

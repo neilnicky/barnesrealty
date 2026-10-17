@@ -1,32 +1,33 @@
 /**
- * All editorial content for the BARNES site. Sources are recorded in
- * docs/barnes-research.md; listing facts are verbatim from the official
- * listing pages as captured on `listingsCapturedOn`.
+ * All editorial content for the site — a Dubai luxury real estate template.
  *
- * Rule: nothing here may be invented. When a fact is unknown, leave the field
- * out — components render what exists and skip what doesn't.
+ * BRAND is a placeholder: change it here (and swap the logo files in
+ * public/brand/) to rebrand every page, title and label.
+ *
+ * Template content: residences, prices, advisors, insights and contact
+ * details below are sample copy for layout and must be replaced with the
+ * client's verified information before launch.
  */
 import { shot, type ImageAsset, type PropertyRef } from "./asset-manifest";
 
 export type { ImageAsset, PropertyRef };
 export { shot };
 
-const OFFICIAL = "https://www.barnes-international.com/en";
+/** Placeholder brand name — swap later. */
+export const BRAND = "BARNES";
 
 /**
- * Pages that are not built yet. Every link that used to leave the site points
- * at one of these internal paths instead; src/pages/[...soon].astro renders a
- * minimal "Coming soon" page for each. `source` keeps the official page it will mirror.
+ * Pages that are not built yet. Every link points at an internal path;
+ * src/pages/[...soon].astro renders a minimal "Coming soon" page for each.
  */
 export interface SoonPage {
   title: string;
-  source?: string;
 }
 
 export const comingSoon: Record<string, SoonPage> = {};
 
-const soon = (path: string, title: string, source?: string) => {
-  comingSoon[path] = { title, source };
+const soon = (path: string, title: string) => {
+  comingSoon[path] = { title };
   return path;
 };
 
@@ -34,64 +35,64 @@ const soon = (path: string, title: string, source?: string) => {
 // Brand
 // ---------------------------------------------------------------------------
 
+/** Placeholder contact details — replace with the agency's own. */
+const PHONE = { display: "+971 4 000 0000", href: "tel:+97140000000" };
+
 export const brand = {
-  name: "BARNES",
-  legalName: "BARNES International Realty",
-  wordmark: { src: "/brand/barnes-wordmark.svg", ratio: 3189 / 637, alt: "BARNES" },
-  positioning: "The leading player in international luxury real estate",
-  bio: "Exceptional properties & lifestyle worldwide.",
+  name: BRAND,
+  legalName: `${BRAND} Real Estate`,
+  wordmark: { src: "/brand/barnes-wordmark.svg", alt: BRAND },
+  positioning: "Prime UAE luxury real estate",
+  bio: "Villas, penthouses and waterfront estates across Dubai.",
   signature: "Find yours.",
-  founded: { year: 1995, line: "Founded in 1995 by Heidi Barnes, with Thibault de Saint Vincent as president." },
-  officialSite: soon("/services/", "Our services", `${OFFICIAL}/`),
+  servicesPage: soon("/services/", "Our services"),
   globalOffice: {
-    name: "BARNES Global Office",
-    address: ["81 avenue Kléber", "75016 Paris, France"],
-    phone: { display: "+33 1 55 61 92 90", href: "tel:+33155619290" },
+    name: "Head Office",
+    address: ["Office address", "Dubai, United Arab Emirates"],
+    phone: PHONE,
   },
   social: [
-    { label: "Instagram", handle: "@barnesrealty", href: "https://www.instagram.com/barnesrealty/" },
-    { label: "Facebook", href: soon("/social/facebook/", "BARNES on Facebook", "https://www.facebook.com/barnesinternationalrealty") },
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/barnes_realty" },
-    { label: "YouTube", href: "https://www.youtube.com/channel/UC-ow3njRKM7mQ_aQo9ocTHQ" },
-    { label: "Pinterest", href: "https://www.pinterest.fr/barnesluxury/" },
+    { label: "Instagram", href: soon("/social/instagram/", `${BRAND} on Instagram`) },
+    { label: "Facebook", href: soon("/social/facebook/", `${BRAND} on Facebook`) },
+    { label: "Linkedin", href: soon("/social/linkedin/", `${BRAND} on LinkedIn`) },
+    { label: "Youtube", href: soon("/social/youtube/", `${BRAND} on YouTube`) },
   ],
   values: [
-    { name: "Trust", line: "A successful transaction rooted in transparency and discretion relies on trust within a lasting relationship." },
-    { name: "Excellence", line: "Cultivating the art of being the best and providing the best for our clients." },
-    { name: "Elegance", line: "“Without the elegance of the heart, there is no elegance.”" },
-    { name: "Vision", line: "Sharing a vision with our clients to support them sustainably." },
-    { name: "Global support", line: "Both local and international, covering multiple cities, countries, and sectors." },
+    { name: "Trust", line: "Every relationship begins with transparency, and every transaction is handled with complete discretion." },
+    { name: "Expertise", line: "Deep knowledge of Dubai’s prime communities, developers and market cycles, shared openly with every client." },
+    { name: "Discretion", line: "Private viewings, confidential negotiations and a quiet, considered approach to every mandate." },
+    { name: "Vision", line: "We look beyond the next sale to the long-term value of every home and investment we advise on." },
+    { name: "Excellence", line: "An uncompromising standard of service, from the first conversation to the handover of keys." },
   ],
-} as const;
+};
 
 // ---------------------------------------------------------------------------
-// Links & calls to action — every destination is real
+// Links & navigation — every destination is an internal page
 // ---------------------------------------------------------------------------
 
 export const links = {
   selection: "/destinations/#featured",
   destinations: "/destinations/",
   valuation: "/sell/",
-  officialSearch: soon("/search/", "Property search", `${OFFICIAL}/for-sale.html`),
-  officialRent: soon("/rent/", "Rentals", `${OFFICIAL}/for-rent.html`),
-  officialSeasonal: soon("/rent/seasonal/", "Seasonal rentals", `${OFFICIAL}/seasonal-rental.html`),
-  officialValuation: soon("/sell/online-valuation/", "Online valuation", `${OFFICIAL}/sell/get-my-property-valued.html`),
-  commitments: soon("/sell/our-commitments/", "Our commitments", `${OFFICIAL}/sell/our-commitments.html`),
-  findAgency: soon("/agencies/", "Find an agency", `${OFFICIAL}/about-barnes/find-an-agency.html`),
-  contact: soon("/contact/", "Contact", `${OFFICIAL}/contact.html`),
-  news: soon("/news/", "News", `${OFFICIAL}/about-barnes/news.html`),
-  press: soon("/about/press/", "In the press", `${OFFICIAL}/about-barnes/in-the-press.html`),
-  history: soon("/about/history/", "Our history", `${OFFICIAL}/about-barnes/our-history.html`),
-  values: soon("/about/values/", "Our values", `${OFFICIAL}/about-barnes/our-values.html`),
-  join: soon("/careers/join/", "Join the BARNES network", `${OFFICIAL}/about-barnes/join-the-barnes-network.html`),
-  jobs: soon("/careers/", "Job offers", `${OFFICIAL}/about-barnes/job-offers.html`),
-  fees: soon("/about/fees/", "Fees & FAQ", `${OFFICIAL}/about-barnes/frequently-asked-questions.html`),
-} as const;
+  search: soon("/search/", "Property search"),
+  rent: soon("/rent/", "Rentals"),
+  holidayHomes: soon("/rent/holiday-homes/", "Holiday homes"),
+  onlineValuation: soon("/sell/online-valuation/", "Online valuation"),
+  commitments: soon("/sell/our-approach/", "Our approach"),
+  findAgency: soon("/advisors/", "Our advisors"),
+  contact: soon("/contact/", "Contact"),
+  news: soon("/insights/", "Insights"),
+  press: soon("/about/press/", "In the press"),
+  history: soon("/about/story/", "Our story"),
+  values: soon("/about/values/", "Our values"),
+  join: soon("/careers/join/", `Join ${BRAND}`),
+  jobs: soon("/careers/", "Careers"),
+  fees: soon("/about/fees/", "Fees & FAQ"),
+};
 
 export interface NavItem {
   label: string;
   href: string;
-  external?: boolean;
 }
 
 export interface NavGroup {
@@ -101,40 +102,40 @@ export interface NavGroup {
 
 /** Header, in FIND's order: three direct links, then four dropdowns. */
 export const navigation: (NavItem | NavGroup)[] = [
-  { label: "Search", href: links.officialSearch },
-  { label: "Destinations", href: links.destinations },
-  { label: "Agencies", href: links.findAgency },
+  { label: "Search", href: links.search },
+  { label: "Communities", href: links.destinations },
+  { label: "Advisors", href: links.findAgency },
   {
     label: "Buy",
     items: [
-      { label: "Properties for sale", href: links.officialSearch },
-      { label: "New developments", href: soon("/buy/new-developments/", "New developments", `${OFFICIAL}/new-development.html`) },
-      { label: "Properties & castles", href: soon("/buy/properties-and-castles/", "Properties & castles", `${OFFICIAL}/for-sale/type-castle.html`) },
-      { label: "Wine estates", href: soon("/buy/wine-estates/", "Wine estates", `${OFFICIAL}/for-sale/type-vineyard-property.html`) },
+      { label: "Properties for sale", href: links.search },
+      { label: "Off-plan", href: soon("/buy/off-plan/", "Off-plan") },
+      { label: "Penthouses", href: soon("/buy/penthouses/", "Penthouses") },
+      { label: "Waterfront estates", href: soon("/buy/waterfront-estates/", "Waterfront estates") },
     ],
   },
   {
     label: "Sell",
     items: [
       { label: "Request a valuation", href: links.valuation },
-      { label: "Our commitments", href: links.commitments },
+      { label: "Our approach", href: links.commitments },
     ],
   },
   {
     label: "Services",
     items: [
-      { label: "Interior design", href: soon("/services/interior-design/", "Interior design", `${OFFICIAL}/services/interior-design.html`) },
-      { label: "Art & design", href: soon("/services/art-design/", "Art & design", `${OFFICIAL}/services/art-design.html`) },
-      { label: "Rental management", href: soon("/services/rental-management/", "Rental management", `${OFFICIAL}/services/rental-management.html`) },
-      { label: "Fine wines", href: soon("/services/fine-wines/", "Fine wines", `${OFFICIAL}/services/fine-wines.html`) },
+      { label: "Property management", href: soon("/services/property-management/", "Property management") },
+      { label: "Investment advisory", href: soon("/services/investment-advisory/", "Investment advisory") },
+      { label: "Golden Visa advisory", href: soon("/services/golden-visa/", "Golden Visa advisory") },
+      { label: "Interior design", href: soon("/services/interior-design/", "Interior design") },
     ],
   },
   {
     label: "About",
     items: [
-      { label: "Our history", href: links.history },
+      { label: "Our story", href: links.history },
       { label: "Our values", href: links.values },
-      { label: "News", href: links.news },
+      { label: "Insights", href: links.news },
       { label: "In the press", href: links.press },
     ],
   },
@@ -143,36 +144,38 @@ export const navigation: (NavItem | NavGroup)[] = [
 export const headerCta = { label: "Contact", href: links.contact };
 
 // ---------------------------------------------------------------------------
-// Regions & listings
+// Communities & residences (sample data)
 // ---------------------------------------------------------------------------
 
 export const regions = [
-  { id: "paris", label: "Paris & Île-de-France" },
-  { id: "riviera", label: "French Riviera & Provence" },
-  { id: "atlantic", label: "Atlantic Coast" },
-  { id: "international", label: "International" },
+  { id: "waterfront", label: "Waterfront & Islands" },
+  { id: "villas", label: "Villa Communities" },
+  { id: "city", label: "City Living" },
 ] as const;
 
 export type RegionId = (typeof regions)[number]["id"];
 
 export interface Price {
   amount: number;
-  currency: "EUR" | "GBP";
+  currency: "AED";
   note?: string;
 }
 
 export interface Listing {
+  /** Asset key for the photographs (src/assets/properties/{ref}). */
   ref: PropertyRef;
-  /** Short editorial name used on cards. */
+  /** URL slug: /properties/{slug}/ */
+  slug: string;
+  /** Public reference shown on the page. */
+  code: string;
   name: string;
   place: string;
   country: string;
   region: RegionId;
   type: string;
-  /** Headline as published by the agency. */
   headline: string;
   status: "For sale";
-  badge?: "Exclusivity" | "New";
+  badge?: "Exclusive" | "New";
   price: Price;
   surfaceM2: number;
   bedrooms?: number;
@@ -180,7 +183,6 @@ export interface Listing {
   rooms?: number;
   plot?: string;
   built?: number;
-  /** Sentences from the official description: excerpted for length, never reworded. */
   description: string[];
   agency: {
     name: string;
@@ -189,242 +191,211 @@ export interface Listing {
     address: string[];
     phone: { display: string; href: string };
   };
-  officialUrl: string;
   cover: ImageAsset;
   gallery: ImageAsset[];
 }
 
 const gallery = (ref: PropertyRef, indexes: number[]) => indexes.map((i) => shot(ref, i));
 
-export const listingsCapturedOn = "2026-10-15";
+/** Placeholder advisor shown on every residence until real profiles exist. */
+const ADVISOR = {
+  name: `${BRAND} Dubai`,
+  presenter: "Private Client Advisor",
+  address: brand.globalOffice.address,
+  phone: PHONE,
+};
+
+const UAE = "United Arab Emirates";
 
 export const listings: Listing[] = [
   {
+    ref: "APM-87100407",
+    slug: "palm-jumeirah-signature-villa",
+    code: "DXB-1001",
+    name: "A signature villa on the Palm",
+    place: "Palm Jumeirah",
+    country: UAE,
+    region: "waterfront",
+    type: "Villa",
+    headline: "Palm Jumeirah — Signature villa with private pool and landscaped gardens",
+    status: "For sale",
+    badge: "Exclusive",
+    price: { amount: 68_000_000, currency: "AED" },
+    surfaceM2: 1_250,
+    bedrooms: 7,
+    rooms: 12,
+    plot: "16,000 sq ft",
+    description: [
+      "A contemporary signature villa set on one of the Palm’s most private fronds, framed by mature palms and a long reflecting pool.",
+      "Double-height reception rooms open onto shaded terraces, with seven en-suite bedrooms, a principal suite with dressing room and study, and a dedicated guest wing.",
+      "A glazed pool house, wine room and garage for six cars complete a residence designed for entertaining on a grand scale.",
+    ],
+    agency: ADVISOR,
+    cover: shot("APM-87100407", 0),
+    gallery: gallery("APM-87100407", [5, 0, 1, 4, 6, 3, 8, 9]),
+  },
+  {
+    ref: "APM-86116202",
+    slug: "jumeirah-islands-waterfront-estate",
+    code: "DXB-1002",
+    name: "A waterfront estate on the lakes",
+    place: "Jumeirah Islands",
+    country: UAE,
+    region: "waterfront",
+    type: "Estate",
+    headline: "Jumeirah Islands — Waterfront estate with main residence and guest house",
+    status: "For sale",
+    price: { amount: 32_000_000, currency: "AED" },
+    surfaceM2: 1_154,
+    bedrooms: 8,
+    bathrooms: 8,
+    description: [
+      "A private waterfront estate with a main residence and a separate guest house, arranged across terraced gardens that step down to the water.",
+      "The main house is planned around a sociable kitchen and dining room with floor-to-ceiling glazing, opening onto a pergola terrace and an 18-metre pool.",
+      "Every level is designed for sunrise and sunset views, with generous outdoor living throughout.",
+    ],
+    agency: ADVISOR,
+    cover: shot("APM-86116202", 0),
+    gallery: gallery("APM-86116202", [0, 1, 2, 3, 4, 6, 7, 8]),
+  },
+  {
     ref: "APM-87353841",
-    name: "A piano nobile on the Left Bank",
-    place: "Paris 6ème",
-    country: "France",
-    region: "paris",
-    type: "Apartment",
-    headline: "Paris VI — Exceptional apartment with terrace and private garden",
+    slug: "emirates-hills-mansion",
+    code: "DXB-1003",
+    name: "A classic mansion in Emirates Hills",
+    place: "Emirates Hills",
+    country: UAE,
+    region: "villas",
+    type: "Mansion",
+    headline: "Emirates Hills — Classic mansion with private garden and panelled interiors",
     status: "For sale",
     badge: "New",
-    price: { amount: 20_700_000, currency: "EUR" },
-    surfaceM2: 263,
-    bedrooms: 3,
-    bathrooms: 4,
-    rooms: 6,
-    built: 1670,
+    price: { amount: 85_000_000, currency: "AED" },
+    surfaceM2: 1_400,
+    bedrooms: 6,
+    bathrooms: 7,
+    rooms: 14,
     description: [
-      "Set within a 17th-century private mansion just steps from the Seine, this dual-aspect apartment—offering approximately 280 m² of living space (Carrez law)—occupies the piano nobile and opens onto a 40 m² terrace that extends into a private 330 m² garden.",
-      "Restored with respect for its history, the property retains numerous original features, including Versailles parquet flooring, fireplaces, moldings, tiling, and wood panelling. The reception areas boast impressive ceiling heights of 4.50 meters.",
-      "The private quarters comprise a master suite featuring a bathroom and a dressing room with 50 linear meters of storage, along with two additional bedrooms and a study. Two lock-up garages, four staff rooms, and two large cellars complete this rare property, which represents a perfect blend of Parisian heritage and contemporary comfort.",
-      "A rare asset on Paris Left Bank, hidden from view.",
+      "A classically detailed mansion in Dubai’s most established villa community, set behind a mature, densely planted private garden.",
+      "Panelled reception rooms with parquet floors and high ceilings lead to a formal salon, a family kitchen and a garden terrace for alfresco dining.",
+      "A principal suite with dressing room, five further bedrooms, staff accommodation and secure parking complete this rare address.",
     ],
-    agency: {
-      name: "BARNES Private Office",
-      presenter: "Claire Drean",
-      address: ["14 avenue George V", "75008 Paris"],
-      phone: { display: "+33 1 85 34 70 66", href: "tel:+33185347066" },
-    },
-    officialUrl: `${OFFICIAL}/for-sale/france/paris-6eme/ref-APM-87353841.html`,
+    agency: ADVISOR,
     cover: shot("APM-87353841", 0),
     gallery: gallery("APM-87353841", [0, 1, 2, 3, 4, 5, 6, 7]),
   },
   {
     ref: "APM-87067773",
-    name: "A château between forest and Seine",
-    place: "Fontainebleau",
-    country: "France",
-    region: "paris",
-    type: "Château",
-    headline: "Fontainebleau — Château and estate buildings — 30 hectares — exceptional views",
+    slug: "al-barari-private-estate",
+    code: "DXB-1004",
+    name: "A private estate among the gardens",
+    place: "Al Barari",
+    country: UAE,
+    region: "villas",
+    type: "Estate",
+    headline: "Al Barari — Private estate with lake views and extensive grounds",
     status: "For sale",
-    price: { amount: 8_900_000, currency: "EUR" },
-    surfaceM2: 1200,
-    bedrooms: 17,
-    bathrooms: 15,
-    rooms: 25,
-    plot: "30 ha",
-    built: 1650,
+    price: { amount: 46_000_000, currency: "AED" },
+    surfaceM2: 1_200,
+    bedrooms: 9,
+    bathrooms: 10,
+    rooms: 20,
+    plot: "2.5 acres",
     description: [
-      "Just outside Fontainebleau, only one hour from Paris, this historic estate ranks among the region’s rarest properties.",
-      "Set between the state forest and the banks of the Seine, it enjoys an exceptional natural setting where privacy, elegance and the French art of living come together. Sweeping views of the river, gardens and woodland create a landscape of remarkable beauty, free from any visual intrusion.",
-      "Offering approximately 1,200 m² of living space and with origins dating back to the 17th century, the château embodies centuries of history with distinction. Recently restored to exacting standards with meticulous attention to detail, it retains all the authenticity and refinement that define France’s great country residences.",
-      "Surrounding the main residence, the historic outbuildings, former stables and other estate buildings provide nearly 2,000 m² of additional floor space. Approximately 20 hectares of private woodland, directly connected to the Forest of Fontainebleau, form a natural extension of the estate.",
+      "Set within Dubai’s greenest community, this private estate looks out over water, lawns and mature woodland.",
+      "A sequence of formal reception rooms, a library and a family wing are arranged around light-filled bay windows and garden views.",
+      "Ornamental gardens, a pool and a separate guest house offer complete privacy minutes from the city.",
     ],
-    agency: {
-      name: "BARNES Propriétés & Châteaux",
-      presenter: "Marie de Saint Périer",
-      role: "Independent contractor agent",
-      address: ["14 avenue George V", "75008 Paris"],
-      phone: { display: "+33 1 85 34 70 64", href: "tel:+33185347064" },
-    },
-    officialUrl: `${OFFICIAL}/for-sale/france/fontainebleau/ref-APM-87067773.html`,
+    agency: ADVISOR,
     cover: shot("APM-87067773", 0),
     gallery: gallery("APM-87067773", [0, 3, 1, 2, 4, 5, 6, 9]),
   },
   {
-    ref: "APM-87100407",
-    name: "A new villa near the beaches",
-    place: "Saint-Tropez",
-    country: "France",
-    region: "riviera",
-    type: "Villa",
-    headline: "Saint-Tropez — Luxurious new villa — 7 bedrooms",
-    status: "For sale",
-    badge: "Exclusivity",
-    price: { amount: 17_000_000, currency: "EUR" },
-    surfaceM2: 500,
-    bedrooms: 7,
-    rooms: 12,
-    plot: "3,727 m²",
-    description: [
-      "Close to the beaches and the village of Saint-Tropez, this magnificent and luxurious new villa of 500 sqm is located in a closed and secured domain. Set on a 3,727 sqm plot, this modern house is composed as follows:",
-      "On the ground floor, entrance with cloakroom, double reception room opening onto beautiful terraces, fully equipped kitchen with pantry, dining room, 4 bedrooms en suite. On the first floor, a beautiful master bedroom with dressing room, study and shower room. Another bedroom with shower room.",
-      "In the basement, a large bedroom with shower room, a multi-purpose room, a laundry room, a wine cellar, a garage for 6 cars.",
-      "A pool-house of 100 sqm with sauna and shower room, a swimming pool mirror, magnificent landscaped garden complete this beautiful house with high quality services.",
-    ],
-    agency: {
-      name: "BARNES Saint-Tropez",
-      presenter: "Vincent Martel",
-      address: ["7 avenue du 8 mai 1945", "83990 Saint-Tropez"],
-      phone: { display: "+33 4 94 43 32 47", href: "tel:+33494433247" },
-    },
-    officialUrl: `${OFFICIAL}/for-sale/france/saint-tropez/ref-APM-87100407.html`,
-    cover: shot("APM-87100407", 0),
-    gallery: gallery("APM-87100407", [5, 0, 1, 4, 6, 3, 8, 9]),
-  },
-  {
     ref: "APM-87043121",
-    name: "A mas facing the Alpilles",
-    place: "Eygalières",
-    country: "France",
-    region: "riviera",
-    type: "Country house",
-    headline: "Eygalières — Exceptional country house — tennis court — panoramic view of the Alpilles",
+    slug: "jumeirah-golf-estates-villa",
+    code: "DXB-1005",
+    name: "A villa on the fairways",
+    place: "Jumeirah Golf Estates",
+    country: UAE,
+    region: "villas",
+    type: "Villa",
+    headline: "Jumeirah Golf Estates — Stone villa with 20-metre pool and tennis court",
     status: "For sale",
-    price: { amount: 8_800_000, currency: "EUR" },
-    surfaceM2: 355,
-    bedrooms: 7,
+    price: { amount: 24_500_000, currency: "AED" },
+    surfaceM2: 700,
+    bedrooms: 6,
     rooms: 10,
-    plot: "9.6 acres",
-    built: 1800,
+    plot: "2 acres",
     description: [
-      "Set in an unspoiled environment just 0.75 miles from the center of the village of Eygalières, this remarkable Provençal mas enjoys panoramic views over the Alpilles and offers approximately 3,820 sq ft of living space in the heart of 9.6 acres of enclosed grounds.",
-      "Fully renovated and expanded to an exceptional standard, this property elegantly combines the authenticity of traditional Provençal farmhouses with the refinement of high-end contemporary amenities. Stone, wood, and modern finishes blend harmoniously with the original architecture.",
-      "Outside, a 20-metre swimming pool and a tennis court are set within beautifully landscaped grounds planted with Mediterranean species, olive trees, and 300 almond trees.",
-      "An exceptional property distinguished by its location, the quality of its renovation, and its remarkable setting, at the heart of one of Provence’s most iconic landscapes.",
+      "A stone-built villa on generous landscaped grounds, with open views across the fairways.",
+      "Generous living spaces open onto shaded terraces, while six suites are arranged across two floors for privacy.",
+      "Outside, a 20-metre pool, a tennis court and planted gardens create a resort-like setting for family life.",
     ],
-    agency: {
-      name: "BARNES Alpilles – Luberon",
-      presenter: "Séverine Fabre",
-      address: ["15 rue des Écoles", "13810 Eygalières"],
-      phone: { display: "+33 4 90 24 47 35", href: "tel:+33490244735" },
-    },
-    officialUrl: `${OFFICIAL}/for-sale/france/eygalieres/ref-APM-87043121.html`,
+    agency: ADVISOR,
     cover: shot("APM-87043121", 2),
     gallery: gallery("APM-87043121", [1, 2, 3, 4, 5, 6, 8, 9]),
   },
   {
     ref: "APM-82420906",
-    name: "A villa in the Golden Triangle",
-    place: "Cap-Ferret",
-    country: "France",
-    region: "atlantic",
+    slug: "dubai-hills-estate-villa",
+    code: "DXB-1006",
+    name: "A garden villa in Dubai Hills",
+    place: "Dubai Hills Estate",
+    country: UAE,
+    region: "villas",
     type: "Villa",
-    headline: "Exceptional villa with swimming pool and large garden in the Golden Triangle, Cap Ferret",
+    headline: "Dubai Hills Estate — Garden villa with pool and summer kitchen",
     status: "For sale",
-    price: { amount: 5_980_000, currency: "EUR", note: "Includes 4% fees payable by the buyer" },
-    surfaceM2: 305,
+    price: { amount: 18_900_000, currency: "AED" },
+    surfaceM2: 560,
     bedrooms: 5,
     rooms: 11,
-    plot: "1,800 m² garden",
+    plot: "19,800 sq ft",
     description: [
-      "The BARNES Cap Ferret agency presents an exceptional property ideally located in the heart of Cap Ferret, in the highly sought-after Golden Triangle. Set in a quiet and unspoilt environment, this villa of nearly 305 m² offers a unique living environment, just a few minutes from the Bassin d'Arcachon, the ocean beaches and shops.",
-      "The bright and spacious living area comprises a lounge with fireplace and an open-plan kitchen. It opens directly onto the terraces and swimming pool. The sleeping area consists of five bedrooms, several of which overlook the pool, six shower rooms and a study that can also be used as a bedroom.",
-      "The landscaped garden of nearly 1,840 m² features a 13 x 5 metre swimming pool in an ideal location, offering sun from sunrise to sunset, as well as a summer kitchen and a regulation-size pétanque court. A 60 m² garage, which can accommodate several vehicles, completes the property.",
+      "A relaxed family villa set in mature gardens, moments from the park, the golf course and the community’s schools.",
+      "A bright living room with fireplace and an open-plan kitchen lead directly onto the terraces and pool.",
+      "Five bedrooms, a study, a summer kitchen and a garage for several cars complete the home.",
     ],
-    agency: {
-      name: "BARNES Bassin d'Arcachon",
-      presenter: "Maxence Nourric",
-      address: ["44 boulevard Marcel Gounouilhou", "33120 Arcachon"],
-      phone: { display: "+33 5 56 66 73 93", href: "tel:+33556667393" },
-    },
-    officialUrl: `${OFFICIAL}/for-sale/france/cap-ferret/ref-APM-82420906.html`,
+    agency: ADVISOR,
     cover: shot("APM-82420906", 2),
     gallery: gallery("APM-82420906", [2, 1, 0, 4, 5, 6, 8, 9]),
   },
   {
-    ref: "APM-86116202",
-    name: "Ses Calas, above Santa Eulalia",
-    place: "Ibiza",
-    country: "Spain",
-    region: "international",
-    type: "Estate",
-    headline: "Ses Calas, Santa Eulalia",
-    status: "For sale",
-    price: { amount: 12_750_000, currency: "EUR" },
-    surfaceM2: 1154,
-    bedrooms: 8,
-    bathrooms: 8,
-    description: [
-      "Nestled in the hills above Santa Eulalia, Ses Calas is a sprawling estate offering stunning sea and hill views from four panoramic terraces.",
-      "The estate includes a main house, Diego, and a hacienda-style guest house, Frida, both designed by Ibizaliving with a timeless, minimalist aesthetic. The property spans multiple levels, featuring an 18-meter pool with a multi-purpose pool house and landscaped garden. Its southwest-facing position offers ideal sunrise and sunset views.",
-      "The inverted main house maximizes the views, with a sociable kitchen and dining area on the upper floor, featuring granite countertops, chestnut beams and floor-to-ceiling windows that open to a pergola and terrace.",
-      "The guest house blends seamlessly with the landscape, with rock formations in the living room and an open-plan kitchen and dining area leading to a terrace with a circular infinity pool.",
-    ],
-    agency: {
-      name: "BARNES Ibiza in partnership with Domus Nova",
-      presenter: "Sales Ibiza",
-      address: ["TheHUB – Santa Eulària des Riu", "07814 Ibiza"],
-      phone: { display: "+34 518 88 00 78", href: "tel:+34518880078" },
-    },
-    officialUrl: `${OFFICIAL}/for-sale/spain/isla-de-ibiza/ref-APM-86116202.html`,
-    cover: shot("APM-86116202", 0),
-    gallery: gallery("APM-86116202", [0, 1, 2, 3, 4, 6, 7, 8]),
-  },
-  {
     ref: "APM-87357422",
-    name: "A family house on Hammersmith Grove",
-    place: "London",
-    country: "United Kingdom",
-    region: "international",
-    type: "House",
-    headline: "Hammersmith Grove, Hammersmith",
+    slug: "city-walk-townhouse",
+    code: "DXB-1007",
+    name: "A townhouse at City Walk",
+    place: "City Walk",
+    country: UAE,
+    region: "city",
+    type: "Townhouse",
+    headline: "City Walk — Family townhouse with private garden",
     status: "For sale",
     badge: "New",
-    price: { amount: 4_750_000, currency: "GBP", note: "Freehold · Council Tax band H" },
+    price: { amount: 12_750_000, currency: "AED" },
     surfaceM2: 346,
-    bedrooms: 6,
-    bathrooms: 3,
+    bedrooms: 4,
+    bathrooms: 5,
     description: [
-      "There’s a distinctly neighbourly feel to this pocket of west London, balanced by excellent transport links and a cultural scene that rivals more central postcodes. Hammersmith Grove borders Brackenbury Village.",
-      "The Thames is within easy reach, with the iconic River Café and a number of rowing clubs along its banks, while Ravenscourt Park offers tennis courts, football pitches and open green space for longer walks.",
-      "Highly regarded schools, including Godolphin and Latymer, St Paul’s and Latymer Upper, are within easy reach, as is Heathrow Airport via the Piccadilly Line or A4.",
+      "A light-filled townhouse in one of Dubai’s most walkable neighbourhoods, close to boutiques, cafés and Downtown.",
+      "A glazed garden room, a kitchen with skylights and a long reception room give the ground floor an easy, open flow.",
+      "Four bedrooms and a private landscaped garden make this a rare family home in the heart of the city.",
     ],
-    agency: {
-      name: "BARNES London in partnership with Domus Nova",
-      presenter: "Sales London",
-      address: ["113–115 Old Brompton Road", "South Kensington, London SW7 3LE"],
-      phone: { display: "+44 20 7935 5797", href: "tel:+442079355797" },
-    },
-    officialUrl: `${OFFICIAL}/for-sale/united-kingdom/london/ref-APM-87357422.html`,
+    agency: ADVISOR,
     cover: shot("APM-87357422", 0),
     gallery: gallery("APM-87357422", [0, 3, 1, 2, 4, 5, 6, 9]),
   },
 ];
 
-/** "View the official listing" opens an internal coming-soon page for each listing. */
-export const officialListingPath = (l: Listing) =>
-  soon(`/listing/${l.ref.toLowerCase()}/`, `Official listing ${l.ref}`, l.officialUrl);
-listings.forEach(officialListingPath);
+/** "Download Brochure" opens an internal coming-soon page for each residence. */
+export const brochurePath = (l: Listing) => soon(`/brochure/${l.slug}/`, `${l.place} brochure`);
+listings.forEach(brochurePath);
 
 export const listingDisclaimer =
-  "Prices displayed in a currency other than that used for the final transaction may vary depending on the exchange rate at the time of purchase. Only the price in local currency is valid at the time of sale.";
+  "Prices are shown in UAE dirhams (AED) and are indicative. Sample residence: details, imagery and pricing are template content.";
 
 // ---------------------------------------------------------------------------
-// Home page — FIND's section order, BARNES content
+// Home page — FIND's section order
 // ---------------------------------------------------------------------------
 
 /** Rich line: plain words, then the muted ("em") continuation. */
@@ -435,11 +406,11 @@ export interface TwoTone {
 
 export const home = {
   hero: {
-    title: ["Find", "Yours,", "Worldwide"],
-    text: { lead: "Exceptional properties. Lifestyle worldwide.", tail: "The French art of living, since 1995." },
+    title: ["Find", "Yours", "in", "Dubai"],
+    text: { lead: "Villas, penthouses and waterfront estates.", tail: "Prime UAE luxury, curated for you." },
     cta: "Find Properties",
-    lockupLabel: "BARNES International Realty",
-    /** AI-generated illustrative scene, not a BARNES listing (see docs). */
+    lockupLabel: `${BRAND} Dubai Real Estate`,
+    /** AI-generated illustrative scene, not a listed property. */
     art: {
       sky: "hero/sky.jpg",
       house: "hero/house.png",
@@ -448,10 +419,10 @@ export const home = {
     },
   },
   why: {
-    label: "Why BARNES",
+    label: `Why ${BRAND}`,
     statement: {
       lead: "Your next home is more than an address — it’s a way of life.",
-      tail: "We help you find it with discretion, expertise, and one consultant by your side.",
+      tail: "We help you find it with discretion, expertise, and one advisor by your side.",
     } satisfies TwoTone,
     image: shot("APM-87067773", 3),
   },
@@ -459,84 +430,83 @@ export const home = {
     title: { lead: "This isn’t just", tail: "about property." } satisfies TwoTone,
     images: [shot("APM-87353841", 1), shot("APM-87043121", 2), shot("APM-86116202", 4), shot("APM-87067773", 6)],
     text: {
-      lead: "It’s about heritage. Light. The art of living. You’re not just looking for a property.",
+      lead: "It’s about light. Space. The sea on your doorstep. You’re not just looking for a property.",
       tail: "You’re looking for a way of life. That’s what we help you find.",
     } satisfies TwoTone,
   },
   steps: {
     title: { lead: "Real Estate,", tail: "Personal." } satisfies TwoTone,
-    cta: { label: "Start Your Search", href: links.officialSearch },
+    cta: { label: "Start Your Search", href: links.selection },
     label: "Steps:",
     items: [
-      { lead: "Meet a Real Consultant.", tail: "We listen first, to understand exactly what you have in mind." },
-      { lead: "Get a Clear Valuation.", tail: "A comprehensive, written, well-argued assessment of your property." },
-      { lead: "Move Forward Together.", tail: "The consultant you meet on day one stays with you to the deed." },
+      { lead: "Meet Your Advisor.", tail: "We listen first, to understand exactly what you have in mind." },
+      { lead: "Get Clear Advice.", tail: "Honest guidance on communities, pricing and high-yield opportunities." },
+      { lead: "Move Forward Together.", tail: "One advisor stays with you from first viewing to handover." },
     ] satisfies TwoTone[],
   },
   network: {
-    label: "Join BARNES",
-    title: { lead: "Join a Network.", tail: "Built on Trust." } satisfies TwoTone,
+    label: `Join ${BRAND}`,
+    title: { lead: "Join a Team.", tail: "Built on Trust." } satisfies TwoTone,
     smallImage: shot("APM-87357422", 1),
     image: shot("APM-87100407", 0),
     text: {
-      lead: "BARNES consultants are selected for their operational skills as well as their professional and interpersonal backgrounds.",
-      tail: "Join an integrated network of luxury real estate agencies in the world’s most sought-after destinations — a house built on trust, excellence and elegance.",
+      lead: "Our advisors are selected for their market knowledge as well as their professional and personal qualities.",
+      tail: "Join a team dedicated to prime UAE luxury — from waterfront estates to off-plan investments — built on trust, discretion and excellence.",
     } satisfies TwoTone,
-    cta: { label: "Join the Network", href: links.join },
+    cta: { label: "Join the Team", href: links.join },
   },
   values: {
     title: { lead: "Our Values,", tail: "In Our Words." } satisfies TwoTone,
     image: shot("APM-87353841", 2),
-    /** Verbatim from barnes-international.com/en/about-barnes/our-values.html */
     items: brand.values,
   },
   services: {
     caption: "Services",
-    title: { lead: "How BARNES", tail: "Can Help You" } satisfies TwoTone,
+    title: { lead: `How ${BRAND}`, tail: "Can Help You" } satisfies TwoTone,
     items: [
-      { word: "Buy", deal: "Buy", text: "Find an exceptional property with consultants who know their market — apartments, villas, châteaux and estates in the world’s most sought-after destinations.", image: shot("APM-87043121", 1) },
-      { word: "Sell", deal: "Sell", text: "A written, well-argued valuation, a marketing plan designed around your property — BARNES Magazine, private viewings, videos — and one consultant to completion.", image: shot("APM-87353841", 0) },
-      { word: "Rent", deal: "Rent", text: "Long-term and seasonal rentals across the BARNES network, from Paris apartments to villas by the sea.", image: shot("APM-86116202", 1) },
+      { word: "Buy", deal: "Buy", text: "Villas, penthouses and waterfront estates across Dubai’s prime communities, with advisors who know every building and every street.", image: shot("APM-87043121", 1) },
+      { word: "Sell", deal: "Sell", text: "A clear, well-argued valuation, a marketing plan built around your property — private viewings, film, editorial — and one advisor to completion.", image: shot("APM-87353841", 0) },
+      { word: "Rent", deal: "Rent", text: "Long-term rentals and holiday homes across Dubai, from Downtown apartments to villas on the Palm.", image: shot("APM-86116202", 1) },
     ],
-    brief: { lead: "Our consultants guide you through every stage of real estate", tail: "with expert knowledge and dedicated support." } satisfies TwoTone,
-    cta: "Get Started with BARNES",
+    brief: { lead: "Our advisors guide you through every stage of real estate", tail: "with expert knowledge and dedicated support." } satisfies TwoTone,
+    cta: `Get Started with ${BRAND}`,
   },
   features: {
     title: { lead: "Support Beyond", tail: "Buying and Selling" } satisfies TwoTone,
     text: { lead: "Real estate is a human experience — and so is everything around it.", tail: "Our experts offer continued support beyond the sale, helping you make the most of your property." } satisfies TwoTone,
-    cta: { label: "Discover Our Services", href: brand.officialSite },
+    cta: { label: "Discover Our Services", href: brand.servicesPage },
     items: [
-      { title: "Interior Design", text: "Bespoke interior design to make a property truly yours.", href: soon("/services/interior-design/", "Interior design", `${OFFICIAL}/services/interior-design.html`), image: shot("APM-87353841", 2) },
-      { title: "Rental Management", text: "Let us manage your property while you enjoy the rewards.", href: soon("/services/rental-management/", "Rental management", `${OFFICIAL}/services/rental-management.html`), image: shot("APM-87357422", 7) },
-      { title: "Properties and Castles", text: "Châteaux, manors and historic estates, with a dedicated team.", href: soon("/buy/properties-and-castles/", "Properties & castles", `${OFFICIAL}/for-sale/type-castle.html`), image: shot("APM-87067773", 0) },
+      { title: "Investment Advisory", text: "High-yield opportunities across ready and off-plan property in Dubai.", href: soon("/services/investment-advisory/", "Investment advisory"), image: shot("APM-87100407", 4) },
+      { title: "Property Management", text: "Let us manage your property while you enjoy the returns.", href: soon("/services/property-management/", "Property management"), image: shot("APM-87357422", 7) },
+      { title: "Interior Design", text: "Bespoke interiors that make a residence truly yours.", href: soon("/services/interior-design/", "Interior design"), image: shot("APM-87353841", 2) },
     ],
   },
   news: {
-    title: { lead: "News", tail: "& Perspectives" } satisfies TwoTone,
-    text: "Our latest news, BARNES Magazine issues and events — from Paris and around the world.",
-    cta: { label: "Visit Our News", href: links.news },
-    /** Titles, dates and opening lines from the official news pages. */
+    title: { lead: "Insights", tail: "& Perspectives" } satisfies TwoTone,
+    text: "Market perspectives, community guides and advice for buying, selling and investing in Dubai.",
+    cta: { label: "View All Insights", href: links.news },
+    /** Sample editorial — replace with the agency's own articles. */
     items: [
       {
-        date: "2026-05-15",
-        title: "Discover the 39th Issue of BARNES Magazine",
-        text: "In this edition, we open our pages to Constance and Laurent de Gourcuff, whose journey perfectly embodies harmony, emotion, and the art of living well.",
-        href: soon("/news/barnes-magazine-39/", "Discover the 39th Issue of BARNES Magazine", `${OFFICIAL}/about-barnes/news/2026/discover-the-39th-issue-of-barnes-magazine-3179.html`),
-        image: { file: "news/news-1.jpg", alt: "Cover story of the 39th issue of BARNES Magazine", source: "https://www.barnes-international.com/accommodation/21/art_decouvrez-le-39e-numero-du-barnes-magazine_OXE_min.jpg" },
+        date: "2026-09-12",
+        title: "A Guide to Buying Waterfront Property in Dubai",
+        text: "From the Palm to Bluewaters and Jumeirah Bay, what to consider when choosing a home on the water.",
+        href: soon("/insights/waterfront-buying-guide/", "A guide to buying waterfront property in Dubai"),
+        image: shot("APM-87100407", 6),
       },
       {
-        date: "2026-02-04",
-        title: "BARNES Presents the Global Property Handbook 2026 at Plaza Athénée",
-        text: "BARNES gathered around thirty industry journalists for its annual press conference, held in the prestigious setting of the Plaza Athénée in Paris.",
-        href: soon("/news/global-property-handbook-2026/", "Global Property Handbook 2026", `${OFFICIAL}/about-barnes/news/2026/barnes-presents-the-global-property-handbook-2026-at-a-press-conference-at-plaza-athenee-3126.html`),
-        image: { file: "news/news-2.jpg", alt: "BARNES Global Property Handbook 2026 press conference", source: "https://www.barnes-international.com/accommodation/21/art_barnes-presente-le-global-property-handbook-2026-lors-dune-conference-de-presse-au-plaza-athenee_27W_min.jpg" },
+        date: "2026-07-28",
+        title: "Ready or Off-Plan? Choosing the Right Investment",
+        text: "How payment plans, handover timelines and rental yields compare across ready and off-plan property.",
+        href: soon("/insights/ready-or-off-plan/", "Ready or off-plan? Choosing the right investment"),
+        image: shot("APM-86116202", 7),
       },
       {
-        date: "2026-01-14",
-        title: "BARNES Celebrates the End of the Year with an Exceptional Cocktail in Paris",
-        text: "BARNES brought together its clients and partners at its Auteuil office for an event designed as a privileged moment for meetings and exchanges.",
-        href: soon("/news/year-end-cocktail-paris/", "Year-end cocktail in Paris", `${OFFICIAL}/about-barnes/news/2026/barnes-celebrates-the-end-of-the-year-with-an-exceptional-cocktail-in-paris-3112.html`),
-        image: { file: "news/news-3.jpg", alt: "Guests at the BARNES year-end cocktail in Paris", source: "https://www.barnes-international.com/accommodation/21/art_barnes-celebre-la-fin-dannee-lors-dun-cocktail-dexception-a-paris_Axc_min.jpg" },
+        date: "2026-06-03",
+        title: "Living in Dubai’s Prime Villa Communities",
+        text: "Emirates Hills, Dubai Hills Estate and Al Barari: space, privacy and green views close to the city.",
+        href: soon("/insights/prime-villa-communities/", "Living in Dubai’s prime villa communities"),
+        image: shot("APM-87043121", 7),
       },
     ] satisfies { date: string; title: string; text: string; href: string; image: ImageAsset }[],
   },
@@ -546,47 +516,52 @@ export const home = {
     image: shot("APM-86116202", 2),
   },
   destinations: {
-    title: "Featured destinations across Europe",
-    more: { label: "Explore all destinations →", href: links.destinations },
+    title: "Featured communities across Dubai",
+    more: { label: "Explore all communities →", href: links.destinations },
     groups: [
-      { name: "France", links: [["Paris 16ème", "france/paris-16eme"], ["Neuilly-sur-Seine", "france/neuilly-sur-seine"], ["Cannes", "france/cannes"], ["Bordeaux", "france/bordeaux"]] },
-      { name: "Italy", links: [["Roma", "italy/roma"], ["Milano", "italy/milano"], ["Venezia", "italy/venezia"], ["Porto Cervo", "italy/porto-cervo"]] },
-      { name: "Greece", links: [["Mykonos", "greece/mykonos"], ["Paros", "greece/paros"], ["Attica", "greece/attica"]] },
-    ].map((g) => ({ name: g.name, links: g.links.map(([label, path]) => ({ label: label!, href: soon(`/destinations/${path}/`, label!, `${OFFICIAL}/for-sale/${path}.html`) })) })),
+      { name: "Waterfront", links: ["Palm Jumeirah", "Dubai Marina", "Bluewaters Island", "Jumeirah Bay"] },
+      { name: "City", links: ["Downtown Dubai", "Business Bay", "DIFC", "City Walk"] },
+      { name: "Villa Communities", links: ["Emirates Hills", "Dubai Hills Estate", "Al Barari", "Jumeirah Golf Estates"] },
+    ].map((g) => ({
+      name: g.name,
+      links: g.links.map((label) => ({ label, href: soon(`/communities/${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}/`, label) })),
+    })),
   },
 };
 
-/** Lead modal: FIND's two-step "Find properties" form, BARNES wording. */
+/** Lead modal: FIND's two-step "Find properties" form. */
 export const leadModal = {
   title: "Find properties",
-  text: "Buy, sell or rent — our consultants are here to help.",
+  text: "Buy, sell or rent — our advisors are here to help.",
   deals: ["Buy", "Sell", "Rent"],
   next: "Next",
   submit: "Send Request",
   stepTwo: "Tell us a little more",
 };
+
 // ---------------------------------------------------------------------------
 // Forms
 // ---------------------------------------------------------------------------
 
 export const forms = {
   valuation: {
-    label: "Sell with BARNES",
+    label: `Sell with ${BRAND}`,
     title: "Request a",
     titleTail: "valuation.",
-    lead: "Tell us about the property. A BARNES consultant will arrange a first meeting and prepare a written valuation.",
-    propertyTypes: ["Apartment", "House", "Villa", "Château / estate", "Land", "Commercial", "Other"],
+    lead: "Tell us about your property. An advisor will arrange a first meeting and prepare a written valuation.",
+    propertyTypes: ["Apartment", "Penthouse", "Villa", "Townhouse", "Waterfront estate", "Plot", "Other"],
   },
   enquiry: {
     title: "Enquire about",
-    titleTail: "this property.",
+    titleTail: "this residence.",
   },
   /** Shown when PUBLIC_ENQUIRY_ENDPOINT is not configured. Never claims a send. */
   notConnected:
-    "Online submission is not connected yet, so your details have not been sent. Please call the agency directly or use the official BARNES contact page.",
-  sent: "Thank you. Your request has been received by BARNES.",
-  failed: "Your request could not be sent. Please try again, or call the agency directly.",
+    "Online submission is not connected yet, so your details have not been sent. Please call us directly.",
+  sent: `Thank you. Your request has been received by ${BRAND}.`,
+  failed: "Your request could not be sent. Please try again, or call us directly.",
   privacy: "Your details are used only to answer this request.",
+  phoneHint: "With country code, e.g. +971 50 123 4567",
 };
 
 // ---------------------------------------------------------------------------
@@ -596,54 +571,50 @@ export const forms = {
 export const footer = {
   newsletter: "Subscribe to our Newsletter!",
   nav: [
-    { label: "Search", href: links.officialSearch },
-    { label: "Agencies", href: links.findAgency },
-    { label: "Destinations", href: links.destinations },
+    { label: "Search", href: links.search },
+    { label: "Advisors", href: links.findAgency },
+    { label: "Communities", href: links.destinations },
     { label: "About Us", href: links.history },
     { label: "Valuation", href: links.valuation },
   ],
-  social: [
-    { label: "Facebook", href: soon("/social/facebook/", "BARNES on Facebook", "https://www.facebook.com/barnesinternationalrealty") },
-    { label: "Instagram", href: soon("/social/instagram/", "BARNES on Instagram", "https://www.instagram.com/barnesrealty/") },
-    { label: "Youtube", href: soon("/social/youtube/", "BARNES on Youtube", "https://www.youtube.com/channel/UC-ow3njRKM7mQ_aQo9ocTHQ") },
-    { label: "Linkedin", href: soon("/social/linkedin/", "BARNES on Linkedin", "https://www.linkedin.com/company/barnes_realty") },
-  ],
+  social: brand.social,
   legal: [
     { label: "Our Values", href: links.values },
-    { label: "Our History", href: links.history },
+    { label: "Our Story", href: links.history },
     { label: "Fees & FAQ", href: links.fees },
     { label: "In the Press", href: links.press },
-    { label: "Job Offers", href: links.jobs },
+    { label: "Careers", href: links.jobs },
   ],
-  note: "Listings as published on barnes-international.com on 15 October 2026. Hero scene is illustrative.",
-  copyright: "Copyright © BARNES International Realty",
+  note: "Template preview: residences, imagery and copy are sample content.",
+  copyright: `Copyright © ${BRAND} Real Estate`,
 };
 
 export const seo = {
-  siteName: "BARNES",
-  title: "BARNES — Exceptional properties & lifestyle worldwide",
+  siteName: BRAND,
+  title: `${BRAND} — Luxury Real Estate in Dubai`,
   description:
-    "BARNES International Realty: a selection of exceptional properties in Paris, Provence, the Riviera, the Atlantic coast and abroad, and the art of living around them.",
-  ogImage: shot("APM-87043121", 4),
-  locale: "en_GB",
+    "Villas, penthouses and waterfront estates across Dubai. Prime UAE luxury real estate and high-yield investments, with one advisor by your side.",
+  ogImage: shot("APM-87100407", 5),
+  locale: "en_AE",
 };
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-export const listingSlug = (ref: string) => ref.toLowerCase();
+export const listingSlug = (ref: string) => listings.find((l) => l.ref === ref)?.slug ?? ref.toLowerCase();
 
 export function findListing(slug: string): Listing | undefined {
-  return listings.find((l) => listingSlug(l.ref) === slug);
+  return listings.find((l) => l.slug === slug);
 }
 
 export function formatPrice({ amount, currency }: Price): string {
-  return new Intl.NumberFormat("en-GB", { style: "currency", currency, maximumFractionDigits: 0 }).format(amount);
+  return `${currency} ${new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }).format(amount)}`;
 }
 
+/** Dubai convention: square feet. */
 export function formatSurface(m2: number): string {
-  return `${new Intl.NumberFormat("en-GB").format(m2)} m²`;
+  return `${new Intl.NumberFormat("en-GB").format(Math.round((m2 * 10.7639) / 10) * 10)} sq ft`;
 }
 
 export function regionLabel(id: RegionId): string {

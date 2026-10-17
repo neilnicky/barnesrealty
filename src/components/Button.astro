@@ -21,7 +21,7 @@ const classes = ["btn", `btn--${v}`, { "btn--block": block }, className];
   <a class:list={classes} href={href} {...(ext ? { target: "_blank", rel: "noopener" } : {})}>
     <span class="btn__text"><slot /></span>
     <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.315 10.996h16.623l-.884.707-8.084-8.135h2.526l8.261 8.337-8.286 8.337h-2.526l8.11-8.135.883.708H3.315z" /></svg>
-    {ext && <span class="visually-hidden"> (opens barnes-international.com in a new tab)</span>}
+    {ext && <span class="visually-hidden"> (opens in a new tab)</span>}
   </a>
 ) : (
   <button class:list={classes} type={type} data-open-modal={modal === true ? "" : modal}>

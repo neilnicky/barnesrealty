@@ -14,7 +14,7 @@ const endpoint = import.meta.env.PUBLIC_ENQUIRY_ENDPOINT ?? "";
         data-endpoint={endpoint}
         data-msg-sent={forms.sent}
         data-msg-failed={forms.failed}
-        data-msg-not-connected={`Newsletter sign-up is not connected yet, so your address has not been saved. You can subscribe on barnes-international.com.`}
+        data-msg-not-connected={`Newsletter sign-up is not connected yet, so your address has not been saved. Please check back soon.`}
         method="post"
         novalidate
       >
@@ -35,8 +35,8 @@ const endpoint = import.meta.env.PUBLIC_ENQUIRY_ENDPOINT ?? "";
           <dd>{brand.globalOffice.address[0]},<br />{brand.globalOffice.address[1]}</dd>
         </div>
         <div>
-          <dt>Agencies</dt>
-          <dd><a href={links.findAgency}>Find an agency</a></dd>
+          <dt>Advisors</dt>
+          <dd><a href={links.findAgency}>Our advisors</a></dd>
         </div>
         <div>
           <dt>Call Us</dt>

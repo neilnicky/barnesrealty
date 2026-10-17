@@ -1,7 +1,7 @@
 ---
 import Base from "@/layouts/Base.astro";
 import Button from "@/components/Button.astro";
-import { comingSoon } from "@/content/barnes-content";
+import { BRAND, comingSoon } from "@/content/barnes-content";
 
 /** One minimal page per destination that is not built yet (registry in barnes-content.ts). */
 export function getStaticPaths() {
@@ -18,15 +18,15 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<Base title={`${page.title} — Coming soon | BARNES`} description={`${page.title} is coming soon to BARNES.`}>
+<Base title={`${page.title} — Coming soon | ${BRAND}`} description={`${page.title} is coming soon.`}>
   <section class="soon">
     <div class="soon__card" role="status">
       <p class="soon__label">Coming soon</p>
       <h1 class="soon__title">{page.title}</h1>
-      <p class="soon__text">This page is being prepared. In the meantime, explore our current selection.</p>
+      <p class="soon__text">This page is being prepared. In the meantime, explore our current collection.</p>
       <div class="soon__actions">
         <Button href="/">Back to Home</Button>
-        <Button href="/destinations/" variant="outline">Destinations</Button>
+        <Button href="/destinations/" variant="outline">Communities</Button>
       </div>
     </div>
   </section>

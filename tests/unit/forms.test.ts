@@ -11,7 +11,7 @@ describe("validateField", () => {
     expect(validateField("someone@example", { label: "Email", kind: "email" })).toMatch(/valid email/);
     expect(validateField("someone@example.com", { label: "Email", kind: "email" })).toBeNull();
     expect(validateField("abc", { label: "Phone", kind: "tel" })).toMatch(/valid phone/);
-    expect(validateField("+33 1 55 61 92 90", { label: "Phone", kind: "tel" })).toBeNull();
+    expect(validateField("+971 4 000 0000", { label: "Phone", kind: "tel" })).toBeNull();
   });
 
   it("checks numeric bounds and length", () => {
@@ -31,7 +31,7 @@ describe("validateForm", () => {
 
   it("passes a complete valuation request", () => {
     const errors = validateForm(
-      { propertyType: "Villa", city: "Cannes", country: "France", name: "A. Client", email: "a@client.fr", surface: "320" },
+      { propertyType: "Villa", city: "Dubai", country: "United Arab Emirates", name: "A. Client", email: "a@client.ae", surface: "320" },
       schemas.valuation,
     );
     expect(errors).toEqual({});

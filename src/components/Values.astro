@@ -1,7 +1,7 @@
 ---
 import Img from "./Img.astro";
 import TwoTone from "./TwoTone.astro";
-import { home } from "@/content/barnes-content";
+import { brand, home } from "@/content/barnes-content";
 
 const { values } = home;
 ---
@@ -32,7 +32,7 @@ const { values } = home;
                 <figcaption class="val__info">
                   <span class="val__author">{v.name}</span>
                   <span class="val__sep" aria-hidden="true">/</span>
-                  <span class="val__src">BARNES values</span>
+                  <span class="val__src">{brand.name} values</span>
                 </figcaption>
               </figure>
             ))}

@@ -1,8 +1,8 @@
 /**
- * Every property photograph used on the site, in the order of the listing's
- * official gallery. `file` is relative to src/assets; `source` is the original
- * on assets.barnes-international.com (captured 15 Oct 2026, © BARNES and the
- * presenting agency — pitch use only until the client confirms rights).
+ * Every property photograph used on the site. `file` is relative to src/assets.
+ * INTERIM IMAGERY: these photographs are placeholders for the template and
+ * must be replaced with the agency's own Dubai photography before launch.
+ * `source` records where each interim file came from.
  */
 import sources from "./gallery-sources.json";
 
@@ -26,7 +26,7 @@ const gallery = (ref: keyof typeof sources, shots: Shot[]): ImageAsset[] =>
 
 export const propertyImages = {
   "APM-87353841": gallery("APM-87353841", [
-    [0, "Garden façade of the 17th-century hôtel particulier, half hidden by mature trees", "50% 40%"],
+    [0, "Classic garden façade half hidden by mature trees", "50% 40%"],
     [1, "Panelled room with oak doors, a writing table and Versailles parquet"],
     [2, "Salon with fireplace, mouldings and a crystal chandelier"],
     [3, "The private garden seen from above, dense with ferns and shrubs"],
@@ -36,10 +36,10 @@ export const propertyImages = {
     [7, "Terrace with a dining table under the trees of the garden"],
   ]),
   "APM-87067773": gallery("APM-87067773", [
-    [0, "Aerial view of the château between the Seine and the Forest of Fontainebleau", "40% 55%"],
+    [0, "Aerial view of the estate between the water and mature woodland", "40% 55%"],
     [1, "Corner salon with bay windows opening onto the park"],
     [2, "Grand salon under painted beams with chandeliers and antiques"],
-    [3, "Aerial view of the château and its lawns above the river", "45% 50%"],
+    [3, "Aerial view of the estate and its lawns above the water", "45% 50%"],
     [4, "Reception room with a piano and a long view through the enfilade"],
     [5, "Enfilade of reception rooms with chandeliers and parquet"],
     [6, "Library with floor-to-ceiling white bookcases and a library ladder"],
@@ -48,7 +48,7 @@ export const propertyImages = {
     [9, "Salon with a gilt mirror over the fireplace and garden views"],
   ]),
   "APM-87100407": gallery("APM-87100407", [
-    [0, "Aerial view of the Saint-Tropez villa, its pools and red parasols among palms", "50% 55%"],
+    [0, "Aerial view of the villa, its pools and red parasols among palms", "50% 55%"],
     [1, "White villa with a long pool and palms under a clear sky"],
     [3, "Glazed pool house with a billiard table"],
     [4, "Teak deck with sunbeds and parasols beside the pool"],
@@ -59,13 +59,13 @@ export const propertyImages = {
     [9, "Living room opening onto the terrace and pool"],
   ]),
   "APM-87043121": gallery("APM-87043121", [
-    [0, "Aerial view across the estate towards the Alpilles", "50% 60%"],
-    [1, "Aerial view of the mas, its pool and orchards in the Provençal countryside", "50% 55%"],
-    [2, "Stone façade of the mas with cypresses and a fountain basin", "50% 55%"],
+    [0, "Aerial view across the estate towards the hills", "50% 60%"],
+    [1, "Aerial view of the villa, its pool and landscaped grounds", "50% 55%"],
+    [2, "Stone façade of the villa with cypresses and a fountain basin", "50% 55%"],
     [3, "Gravel alley lined with cypresses and Mediterranean planting"],
-    [4, "Twenty-metre pool on the lawn, with the Alpilles beyond", "50% 62%"],
+    [4, "Twenty-metre pool on the lawn, with the hills beyond", "50% 62%"],
     [5, "Garden path under plane trees towards the stone house"],
-    [6, "Glazed extension of the mas along a planted walk"],
+    [6, "Glazed extension of the villa along a planted walk"],
     [7, "The pool in front of the house and its cypresses"],
     [8, "Tennis court set in the grounds"],
     [9, "Aerial view of the olive and almond groves"],
@@ -83,7 +83,7 @@ export const propertyImages = {
     [9, "Bedroom with timber ceiling and white linen"],
   ]),
   "APM-86116202": gallery("APM-86116202", [
-    [0, "Aerial view of Ses Calas on the wooded hills above Santa Eulalia", "50% 55%"],
+    [0, "Aerial view of the estate on its terraced, wooded grounds", "50% 55%"],
     [1, "Long pool between palms with sea views beyond"],
     [2, "Sunset over the hills through palm trees", "60% 50%"],
     [3, "Terrace with parasol and white outdoor sofas"],
@@ -95,7 +95,7 @@ export const propertyImages = {
     [9, "Room with a telescope at a window over the countryside"],
   ]),
   "APM-87357422": gallery("APM-87357422", [
-    [0, "Rear garden and brick façade of the Hammersmith Grove house", "50% 55%"],
+    [0, "Rear garden and brick façade of the townhouse", "50% 55%"],
     [1, "Glazed garden room with plants and armchairs"],
     [2, "Sitting room with bookshelves and artwork"],
     [3, "Street façade behind front garden trees"],

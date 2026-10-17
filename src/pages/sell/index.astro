@@ -8,8 +8,8 @@ const { valuation } = forms;
 ---
 
 <Base
-  title="Request a valuation | BARNES"
-  description="Sell with BARNES: a first meeting, a written valuation and one consultant from mandate to the signing of the deed."
+  title={`Request a valuation | ${brand.name}`}
+  description={`Sell with ${brand.name}: a first meeting, a written valuation and one advisor from listing to handover.`}
   image={home.services.items[1]!.image}
 >
   <section class="val wrap">
@@ -26,7 +26,7 @@ const { valuation } = forms;
         ))}
       </ol>
       <p class="val__alt muted">
-        Prefer the official form? <a href={links.officialValuation}>Get my property valued online</a>.
+        Prefer to start online? <a href={links.onlineValuation}>Get an instant online valuation</a>.
       </p>
     </div>
 
